@@ -61,8 +61,7 @@ if has_head and probe.returncode != 0:
     print("checkpoint: skipped git (nothing committed). Durable copy = backup artifact; files stay in", ROOT)
     sys.exit(0)
 
-if os.path.realpath(ROOT) != os.path.realpath(DST):
-    mirror(ROOT, DST)
+subprocess.run([sys.executable, "-I", os.path.join(HERE, "export_portfolio.py"), REPO], check=True)
 
 def git(*a, check=True):
     return subprocess.run(["git", "-C", REPO, *a], capture_output=True, text=True, check=check)

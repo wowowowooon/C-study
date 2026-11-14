@@ -1,7 +1,17 @@
-# third-party problem statements (copyright) and scratch files are never committed
-problems/
-problems_txt/
-work/
-repos_cache/
-__pycache__/
-*.pyc
+# build outputs
+*.exe
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.out
+a.out
+build/
+# editor
+.vscode/
+.idea/
+*.swp
+# never commit third-party problem statements
+notebook-src/problems/
+notebook-src/problems_txt/

@@ -70,3 +70,9 @@ git에 넣지 않는 것: `problems/`, `problems_txt/`(프로그래머스 문제
 - 새 세션에서 이어 하려면: add_repo(owner "wowowowooon", repo "C-C-study", access "push") → `git clone https://github.com/wowowowooon/c-c-study /home/user/c-c-study` → 그 폴더를 course root로 쓰고(경로 치환 불필요하게 하려면 COURSE=/home/user/c-c-study), `python3 -I tools/build_problem_bank.py`로 문제 원문 재생성.
 - tools/checkpoint.py 기본값: COURSE_REPO_DIR=/home/user/c-c-study, COURSE_BRANCH=main.
 - 이전 저장소(battery-korail/.github)는 GitHub 앱 권한이 없어 쓰지 않는다.
+
+## 8. 포트폴리오 구조 (2026-11-14)
+- 저장소는 사용자 포트폴리오다. 루트의 README.md, STUDY_LOG.md, solutions/, practice/, .gitignore는 저장소 쪽 파일이고 자동 저장이 덮어쓰지 않는다.
+- tools/export_portfolio.py가 course → 저장소로 내보낸다: chapters → notes/chapters, dist/index.html → notes/index.html, docs/curriculum.md·docs/problems.md 생성, 나머지 도구·설계서 → notebook-src/, README의 PROGRESS 블록 갱신. checkpoint.py가 이걸 부른 뒤 커밋·푸시한다.
+- 새 세션에서 course 복원: notebook-src/의 내용을 course 폴더로 복사하고, notes/chapters/*.html을 course/chapters/로 복사한 다음 build_problem_bank.py 실행.
+- solutions/의 코드는 사용자가 직접 쓴다. AI가 대신 채우지 않는다.

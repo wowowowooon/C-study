@@ -1,6 +1,6 @@
 # STATUS — C/C++ 코딩 노트 진행 상황 (자동 생성)
 
-- 마지막 갱신: 2026-11-14 20:57 (KST)
+- 마지막 갱신: 2026-11-14 23:44 (KST)
 - 챕터 34개 중 작성 완료 4개, 검토까지 완료 0개
 - 게시된 노트(artifact): https://claude.ai/artifact/Va8eWowGk6n3oAG4tPhQUN  (slug `e76023af-405b-4651-9d44-e791db641e2f`)
 - 이 표는 tools/status.py가 workflow 기록(journal)과 chapters/ 파일로 만든다. 새 세션에서는 state/progress.json의 마지막 기록을 이어받는다.
