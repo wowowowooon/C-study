@@ -1,0 +1,468 @@
+<section class="lesson" id="start" data-title="시작하기" data-short="시작" hidden>
+<div class="kicker">Chapter 0 · 시작 전에</div>
+<h2>시작하기: 이 노트로 공부하는 법<span class="en-t">How to use this notebook</span></h2>
+<div class="goal"><b>이 챕터를 마치면:</b>
+<ul>
+<li>이 노트의 전체 순서(Part A → B → C)와 챕터마다의 목표 수준을 압니다.</li>
+<li>프로그래머스에서 C++로 문제를 열고 <b>코드 실행</b>, <b>제출 후 채점하기</b>, <b>테스트 케이스 추가하기</b>를 구별해 씁니다.</li>
+<li>함수형 문제와 입출력형 문제를 구별하고, 각각 답을 어떻게 내는지(<code>return</code> / <code>cout</code>) 압니다.</li>
+<li>문제를 푸는 7단계 루틴, 막혔을 때의 규칙, AI(Claude)에게 질문하는 방법을 정해 둡니다.</li>
+</ul></div>
+
+<h3><span class="no">1</span>이 챕터에서 배울 것과 이유</h3>
+<div class="why">
+<p>이 챕터에는 문법이 나오지 않습니다. 대신 앞으로 31개 챕터를 <b>어떤 순서로, 어떤 방법으로</b> 공부할지 정합니다. 같은 노트를 읽어도 고개만 끄덕이며 읽는 공부와, 직접 쓰고 틀려 보는 공부는 몇 달 뒤 결과가 완전히 다릅니다.</p>
+<ul>
+<li><b>코딩테스트:</b> 시간 제한이 있고 AI 없이 혼자 봅니다. 혼자 써 본 양만큼만 실력이 됩니다. 그래서 문제를 푸는 순서(루틴)와 막혔을 때의 규칙을 첫날부터 정해 둡니다.</li>
+<li><b>임베디드 현업:</b> 모터가 갑자기 멈추거나 CAN 통신이 끊기면, 원인은 데이터시트와 디버거 앞에서 직접 찾아야 합니다. 이해하지 못한 채 붙여 넣은 코드는 바로 이런 순간에 고칠 수 없습니다.</li>
+</ul>
+<p>먼저 복습할 챕터는 없습니다. 준비물은 이 노트와 프로그래머스 계정뿐입니다.</p>
+</div>
+
+<h3><span class="no">2</span>이 노트의 목표와 전체 지도</h3>
+<p>출발점은 <b>"코드를 한 줄도 혼자 못 쓴다"</b>입니다. 변수(variable)가 무엇인지도 2장에서 처음부터 설명합니다. AI로 프로젝트를 만들어 봤다면, 코드를 <b>읽으면 대충 아는 것</b>과 <b>빈 화면에서 직접 쓰는 것</b>이 전혀 다르다는 것을 이미 느꼈을 겁니다. 이 노트는 두 번째 능력을 기릅니다.</p>
+<p>도착점은 두 가지입니다.</p>
+<ol>
+<li><b>코딩테스트:</b> 프로그래머스 Lv.3 문제를 C++로 혼자 푸는 실력. 기업 코딩테스트를 통과할 기본기입니다.</li>
+<li><b>임베디드 기본기:</b> 포인터와 메모리 구조, 비트 연산, <code>volatile</code>, 구조체 패딩, 링 버퍼(ring buffer), 상태 머신, PID 제어 코드의 뼈대처럼 로봇·차량 제어 코드를 읽고 쓰는 데 필요한 C/C++.</li>
+</ol>
+<p>전체 지도는 다음과 같고, 순서대로 갑니다.</p>
+<ol class="steps">
+<li><b>Part 0 시작(0장, 이 챕터)</b> — 공부 방법, 프로그래머스 사용법, AI 사용 규칙.</li>
+<li><b>Part A 언어 기초(1–12장)</b> — 출력, 변수, 연산자, 조건문, 반복문, 배열, 문자열, 함수, 포인터, 구조체, STL, 시간 복잡도. 끝나면 Lv.0 대부분과 Lv.1, Lv.2 입문 문제를 풉니다.</li>
+<li><b>Part B 알고리즘(13–28장)</b> — 구현, 정렬, 해시, 스택·큐, 힙, 완전탐색, 그래프 탐색, 이분 탐색, 그리디, DP, 최단 경로. 목표는 Lv.2 대부분과 Lv.3 문제를 혼자 푸는 것입니다.</li>
+<li><b>Part C 임베디드 C/C++(29–31장)</b> — C와 C++의 차이, 비트 연산, 메모리 맵, <code>volatile</code>, 인터럽트, 링 버퍼, 상태 머신, PID, CAN 파싱, ROS 2 쪽 모던 C++.</li>
+<li><b>부록 A·B·C</b> — C++ 치트시트, 에러 메시지와 채점 결과 사전, 전체 문제 목록.</li>
+</ol>
+<div class="box"><span class="lbl">핵심 정리</span> 챕터는 앞에서부터 차례로 쌓입니다. N장의 예제는 N장까지 배운 문법만 씁니다. 아직 안 배운 문법이 꼭 필요할 때는 "지금은 이 줄을 그대로 두세요. ○장에서 설명합니다"라고 적어 두니, 그 줄은 모양만 따라 쓰면 됩니다. 그래서 앞 챕터를 건너뛰지 않는 것이 가장 빠른 길입니다.</div>
+<p>이 노트에는 프로그래머스 문제가 300개 안팎 들어 있습니다(Lv.0 약 100, Lv.1 약 70, Lv.2 약 90, Lv.3 약 50). 다 풀 필요는 없습니다. 챕터마다 <b>필수</b> 문제만 풀어도 다음 챕터로 갈 수 있게 골랐습니다.</p>
+<div class="q">다음 공부거리는 각각 이 노트의 어디에서 다룰까요? (1) <code>if</code>, <code>for</code> 같은 기본 문법 (2) 정렬, DP 같은 알고리즘 (3) 레지스터 비트 조작과 <code>volatile</code> (4) 처음 보는 에러 메시지의 뜻</div>
+<details><summary>답 보기</summary><div><p>(1) Part A(4장 조건문, 5장 반복문) (2) Part B(14장 정렬, 25장 DP) (3) Part C(29장 비트 연산, 30장 <code>volatile</code>) (4) 부록 B 에러 메시지와 채점 결과 사전. 바로 아래 로드맵 표에서 확인할 수 있습니다.</p></div></details>
+
+<h3><span class="no">3</span>로드맵: 모든 챕터를 한 표로</h3>
+<p>제목을 누르면 그 챕터로 이동합니다. 마지막 열은 그 챕터까지 마쳤을 때 할 수 있는 것입니다. 1–28장은 챕터 문제 카드의 레벨을 기준으로 잡은 대략적인 목표 수준입니다. 표에 낯선 용어가 많아도 괜찮습니다. 모두 해당 챕터에서 처음부터 설명합니다.</p>
+<div class="tbl"><table>
+<tr><th>장</th><th>제목</th><th>핵심 내용</th><th>마치면</th></tr>
+<tr><th colspan="4">시작</th></tr>
+<tr><td class="mono">0</td><td><a class="go" href="#start" data-go>시작하기: 이 노트로 공부하는 법</a></td><td>공부 순서, 프로그래머스 사용법, 7단계 루틴, AI 사용 규칙</td><td>공부 준비 완료</td></tr>
+<tr><th colspan="4">Part A 언어 기초 (1–12장)</th></tr>
+<tr><td class="mono">1</td><td><a class="go" href="#c01" data-go>첫 프로그램과 출력</a></td><td>빌드 과정, <code>cout</code> 출력, 줄바꿈과 이스케이프, 컴파일 에러 읽기</td><td>Lv.0 출력 문제</td></tr>
+<tr><td class="mono">2</td><td><a class="go" href="#c02" data-go>변수와 자료형, 입력</a></td><td>변수와 메모리, 자료형과 범위, <code>cin</code> 입력, solution 템플릿 읽기</td><td>Lv.0 입력·계산 문제</td></tr>
+<tr><td class="mono">3</td><td><a class="go" href="#c03" data-go>연산자: 계산하고 비교하기</a></td><td>산술·비교·논리 연산, 몫과 나머지, 오버플로</td><td>Lv.0 계산 문제</td></tr>
+<tr><td class="mono">4</td><td><a class="go" href="#c04" data-go>조건문: if와 switch</a></td><td>if/else, switch, 삼항 연산자, 조건식의 함정</td><td>Lv.0 조건 문제</td></tr>
+<tr><td class="mono">5</td><td><a class="go" href="#c05" data-go>반복문: while과 for</a></td><td>while/for, break/continue, 반복 패턴, 무한 루프</td><td>Lv.0 대부분, 쉬운 Lv.1</td></tr>
+<tr><td class="mono">6</td><td><a class="go" href="#c06" data-go>배열과 vector</a></td><td>C 배열, vector, 순회, 빈도 세기, 2차원 배열</td><td>Lv.0 배열 문제, 쉬운 Lv.1</td></tr>
+<tr><td class="mono">7</td><td><a class="go" href="#c07" data-go>문자와 문자열</a></td><td>char와 ASCII, string 함수, 숫자↔문자열 변환, 문자열 나누기</td><td>Lv.0 문자열 문제, 쉬운 Lv.1</td></tr>
+<tr><td class="mono">8</td><td><a class="go" href="#c08" data-go>함수와 재귀의 기초</a></td><td>함수, 값·참조 전달, 범위와 수명, 재귀, 최대공약수</td><td>Lv.1</td></tr>
+<tr><td class="mono">9</td><td><a class="go" href="#c09" data-go>포인터와 메모리</a></td><td>주소와 포인터, 배열과 포인터, 동적 메모리, C로 풀기</td><td>Lv.0 문제를 C로</td></tr>
+<tr><td class="mono">10</td><td><a class="go" href="#c10" data-go>구조체, 클래스, pair</a></td><td>struct와 class, 생성자, pair, 정렬 맛보기</td><td>Lv.0–Lv.1</td></tr>
+<tr><td class="mono">11</td><td><a class="go" href="#c11" data-go>STL 컨테이너와 알고리즘 함수</a></td><td>반복자, stack·queue·set·map, sort 같은 알고리즘 함수, 람다</td><td>Lv.1</td></tr>
+<tr><td class="mono">12</td><td><a class="go" href="#c12" data-go>시간 복잡도와 문제 풀이 전략</a></td><td>빅오, 제한사항으로 방법 고르기, 디버깅, 에러 원인 찾기</td><td>Lv.2 입문</td></tr>
+<tr><th colspan="4">Part B 알고리즘 (13–28장)</th></tr>
+<tr><td class="mono">13</td><td><a class="go" href="#c13" data-go>구현과 시뮬레이션</a></td><td>격자, 문자열 파싱, 상태 관리, 긴 문제 읽기</td><td>Lv.1–Lv.2</td></tr>
+<tr><td class="mono">14</td><td><a class="go" href="#c14" data-go>정렬</a></td><td>정렬 원리, sort와 비교 함수, 여러 기준 정렬</td><td>Lv.2</td></tr>
+<tr><td class="mono">15</td><td><a class="go" href="#c15" data-go>해시: unordered_map과 unordered_set</a></td><td>빈도 세기, 존재 확인, 이름↔번호 매핑, 조합 개수</td><td>Lv.2, Lv.3 일부</td></tr>
+<tr><td class="mono">16</td><td><a class="go" href="#c16" data-go>스택, 큐, 덱</a></td><td>괄호 검사, 모노토닉 스택, 큐 시뮬레이션</td><td>Lv.2</td></tr>
+<tr><td class="mono">17</td><td><a class="go" href="#c17" data-go>힙과 우선순위 큐</a></td><td>힙 구조, priority_queue, 그리디와 힙, 이벤트 시뮬레이션</td><td>Lv.2, Lv.3 일부</td></tr>
+<tr><td class="mono">18</td><td><a class="go" href="#c18" data-go>완전탐색과 백트래킹</a></td><td>조합·순열 만들기, 비트마스크, 백트래킹</td><td>Lv.2, Lv.3 일부</td></tr>
+<tr><td class="mono">19</td><td><a class="go" href="#c19" data-go>재귀, 분할 정복, 트리</a></td><td>분할 정복, 쿼드트리, 트리와 순회</td><td>Lv.2, Lv.3 일부</td></tr>
+<tr><td class="mono">20</td><td><a class="go" href="#c20" data-go>그래프 탐색 ①: DFS와 BFS</a></td><td>그래프 표현, DFS, BFS, 격자 탐색</td><td>Lv.2</td></tr>
+<tr><td class="mono">21</td><td><a class="go" href="#c21" data-go>그래프 탐색 ②: Lv.3 응용</a></td><td>상태를 정점으로 보는 BFS, 방향·비용이 붙은 상태</td><td>Lv.3</td></tr>
+<tr><td class="mono">22</td><td><a class="go" href="#c22" data-go>이분 탐색과 매개변수 탐색</a></td><td>lower_bound, 답을 이분 탐색하기</td><td>Lv.2–Lv.3</td></tr>
+<tr><td class="mono">23</td><td><a class="go" href="#c23" data-go>투 포인터, 슬라이딩 윈도우, 누적합</a></td><td>누적합, 차분 배열, 투 포인터, 최대 부분합</td><td>Lv.2–Lv.3</td></tr>
+<tr><td class="mono">24</td><td><a class="go" href="#c24" data-go>그리디 알고리즘</a></td><td>그리디가 맞는지 확인하기, 정렬과 그리디, 그리디와 DP 구별</td><td>Lv.2–Lv.3</td></tr>
+<tr><td class="mono">25</td><td><a class="go" href="#c25" data-go>동적 계획법(DP)</a></td><td>점화식 설계, 1·2차원 DP, 배낭 문제, 문자열 DP</td><td>Lv.2–Lv.3</td></tr>
+<tr><td class="mono">26</td><td><a class="go" href="#c26" data-go>최단 경로, 유니온 파인드, 최소 신장 트리</a></td><td>다익스트라, 플로이드-워셜, 유니온 파인드, MST</td><td>Lv.3</td></tr>
+<tr><td class="mono">27</td><td><a class="go" href="#c27" data-go>수학, 진법, 비트 연산</a></td><td>진법 변환, 소수, 모듈러 연산, 조합, 비트 기법</td><td>Lv.2</td></tr>
+<tr><td class="mono">28</td><td><a class="go" href="#c28" data-go>Lv.3 실전 전략과 기출 훈련</a></td><td>패턴 지도, 시험장 루틴, 실수 체크리스트, 기출 훈련</td><td>Lv.3 실전</td></tr>
+<tr><th colspan="4">Part C 임베디드로 가는 C/C++ (29–31장)</th></tr>
+<tr><td class="mono">29</td><td><a class="go" href="#c29" data-go>임베디드 C ①: 정수, 비트, C 라이브러리</a></td><td>C와 C++의 차이, printf/scanf, 고정 폭 정수, 비트 연산, 엔디안, 매크로</td><td>레지스터 비트 조작 코드 읽고 쓰기</td></tr>
+<tr><td class="mono">30</td><td><a class="go" href="#c30" data-go>임베디드 C ②: 메모리, 하드웨어, 구조</a></td><td>메모리 맵, volatile, static, 구조체 패딩, 인터럽트 처리(ISR), 링 버퍼</td><td>임베디드 기술면접 단골 질문에 답하기</td></tr>
+<tr><td class="mono">31</td><td><a class="go" href="#c31" data-go>제어 코드 실전과 모던 C++</a></td><td>상태 머신, 고정소수점, 디지털 필터, PID, CAN 파싱, ROS 2 쪽 C++</td><td>제어 코드의 기본 구조 짜기</td></tr>
+<tr><th colspan="4">부록</th></tr>
+<tr><td class="mono">A</td><td><a class="go" href="#apxA" data-go>부록 A: C++ 코딩테스트 치트시트</a></td><td>헤더, 자료형 범위, string·컨테이너·알고리즘 함수 표, 코드 조각</td><td>문제 풀 때 펴 놓고 참고</td></tr>
+<tr><td class="mono">B</td><td><a class="go" href="#apxB" data-go>부록 B: 에러 메시지와 채점 결과 사전</a></td><td>컴파일·링크·런타임 에러, 채점 결과 해석</td><td>에러를 만났을 때 찾아보기</td></tr>
+<tr><td class="mono">C</td><td><a class="go" href="#apxC" data-go>부록 C: 전체 문제 목록</a></td><td>모든 문제 카드를 한곳에, 풀었어요 체크와 연결</td><td>진도 확인, 안 푼 문제 찾기</td></tr>
+</table></div>
+<div class="q">5장까지 끝낸 상태에서 목록에 있던 Lv.3 문제를 아무거나 골랐다가 한 시간째 막혀 있습니다. 로드맵 표를 보고 어떻게 판단하면 될까요?</div>
+<details><summary>답 보기</summary><div><p>표에서 Lv.3 문제가 처음 나오는 곳은 15장 이후이고, 본격적으로는 21장 이후입니다. 5장까지 배운 도구로는 풀 수 없는 문제일 가능성이 큽니다. 지금은 그 챕터의 필수 문제와 Lv.0–Lv.1에 집중하고, 그 문제는 번호를 적어 두었다가 나중에 다시 도전하세요. 지금 실력에 맞는 문제를 고르는 것도 실력입니다.</p></div></details>
+
+<h3><span class="no">4</span>학습 기간 예시</h3>
+<p>아래는 하루 1–2시간 공부한다고 할 때의 <b>예시</b>입니다. 약속도 아니고 목표 기한도 아닙니다. 사람마다, 시기마다 속도는 다릅니다.</p>
+<div class="tbl narrow"><table>
+<tr><th>구간</th><th>챕터</th><th>예시 기간</th></tr>
+<tr><td>Part 0 시작</td><td>0장</td><td>하루</td></tr>
+<tr><td>Part A 언어 기초</td><td>1–12장</td><td>6–10주</td></tr>
+<tr><td>Part B 알고리즘</td><td>13–28장</td><td>12–16주</td></tr>
+<tr><td>Part C 임베디드 C/C++</td><td>29–31장</td><td>3–4주</td></tr>
+<tr><td colspan="2">합계</td><td>약 5–7개월</td></tr>
+</table></div>
+<ul>
+<li><b>시험 기간에는 쉬어도 됩니다.</b> 돌아오면 마지막으로 끝낸 챕터의 '끝났는지 확인' 목록부터 다시 점검하고, 그 챕터 필수 문제 한두 개를 빈 화면에서 다시 풀어 감을 되찾으세요.</li>
+<li><b>꾸준함이 몰아치기보다 낫습니다.</b> 같은 시간을 여러 날에 나눠 공부하면 하루에 몰아서 할 때보다 오래 기억된다는 것은 학습 연구에서 잘 알려진 결과입니다(분산 학습 효과, spacing effect). 주말 8시간보다 매일 1시간이 낫습니다.</li>
+</ul>
+<div class="tip">코딩테스트 일정이 Part B 중간에 잡히면 28장의 시험장 루틴과 실수 체크리스트를 먼저 읽어 두세요. 임베디드 직무 면접이 먼저라면 Part A를 끝낸 뒤 Part C(29–31장)를 먼저 봐도 됩니다. Part C는 주로 Part A의 문법, 특히 9장 포인터와 10장 구조체 위에 쌓입니다.</div>
+<div class="q">A는 주말에 8시간을 몰아서, B는 평일 매일 1시간과 주말 복습 1시간(합 6시간)을 공부합니다. 석 달 뒤 빈 화면에서 코드를 더 잘 쓸 가능성이 큰 쪽은 누구이고, 왜일까요?</div>
+<details><summary>답 보기</summary><div><p>B입니다. 총 시간은 A가 더 많지만, B는 매일 코드를 직접 치면서 전날 배운 것을 다시 꺼내 씁니다. 나눠서 반복한 공부가 오래 남고(분산 학습), 손으로 쓰는 감각은 자주 써야 유지됩니다. A처럼 몰아서 할 수밖에 없다면, 공부를 시작할 때마다 지난주 내용을 빈 화면에서 다시 써 보는 시간을 꼭 넣으세요.</p></div></details>
+
+<h3><span class="no">5</span>이 노트 읽는 법: 상자 범례</h3>
+<p>모든 챕터는 같은 순서(개념 → 실행 결과 → 빨간펜 → 확인 문제 → 프로그래머스 문제 → 체크리스트)로 되어 있고, 같은 상자를 씁니다. 상자 모양만 봐도 "이건 규칙", "이건 함정"을 알 수 있게 하기 위해서입니다. 아래는 실제 상자이고, 안에 적힌 내용도 이 노트를 쓰는 데 필요한 것이니 읽어 두세요.</p>
+<div class="box"><span class="lbl">핵심 정리</span> 꼭 기억할 규칙을 모은 상자입니다. 복습할 때 챕터마다 이 상자만 다시 읽어도 뼈대가 잡히도록 썼습니다.</div>
+<div class="why">이렇게 생긴 상자는 새 개념을 배우기 전에 <b>왜</b> 필요한지, 코딩테스트와 임베디드 현업에서 어디에 쓰이는지를 먼저 설명합니다. 이유를 알고 배운 것이 오래 남습니다.</div>
+<div class="pen">빨간펜 상자는 초보자가 실제로 자주 틀리는 곳입니다. 이 노트에서 가장 중요한 상자입니다. 예를 하나 들면, 확인 문제의 <b>답 보기</b>를 바로 누르면 '아는 느낌'만 남고 실력은 늘지 않습니다. 답을 소리 내어 말하거나 종이에 쓴 다음에 펼치세요.</div>
+<div class="emb">이 상자는 지금 배우는 내용이 STM32, ESP32, 젯슨 같은 보드 작업과 어떻게 이어지는지 알려 줍니다. 예: 1장에서 배우는 빌드 과정(소스 파일 → 오브젝트 파일 → 실행 파일)은 STM32CubeIDE가 <code>.c</code> 파일들로 <code>.elf</code> 파일을 만들어 보드에 굽는 과정과 같은 원리입니다.</div>
+<div class="tip">팁 상자는 알아 두면 시간을 아끼는 요령입니다. 예: 이 노트는 휴대폰으로도 읽히지만, 코드를 바로 쳐 볼 수 있는 컴퓨터 앞에서 읽을 때 효과가 훨씬 큽니다.</div>
+<p><b>코드 상자와 실행 결과 상자.</b> 코드 상자 바로 다음에 <b>실행 결과</b> 상자가 있으면, 그 코드를 실제로 컴파일하고 실행해서 나온 출력입니다. 아래 코드의 뜻은 1장에서 한 줄씩 해부하니 지금은 모양만 보세요.</p>
+<pre class="code" data-check="compile"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello, C++" &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>Hello, C++</pre></div>
+<p>코드 상자에는 <b>복사</b> 버튼이 있지만, 공부할 때는 누르지 마세요. 직접 쳐야 오타를 내 보고, 에러 메시지를 읽어 보고, 문법이 손에 붙습니다. 복사 버튼은 10절의 질문 템플릿처럼 글을 옮길 때만 씁니다. 이 밖에 이런 상자도 나옵니다.</p>
+<div class="tbl"><table>
+<tr><th>상자</th><th>뜻</th></tr>
+<tr><td>입력</td><td>입력을 받는 프로그램에 넣어 준 값입니다. 코드나 실행 결과 상자 앞에 붙습니다.</td></tr>
+<tr><td>컴파일 에러</td><td>일부러 틀리게 쓴 코드를 g++로 컴파일했을 때 실제로 나온 에러 메시지(줄인 것)입니다. 에러 읽는 법은 1장에서 배웁니다.</td></tr>
+<tr><td>결과가 보장되지 않는 예제</td><td>정의되지 않은 동작(undefined behavior)을 보여 주려고 일부러 잘못 쓴 코드입니다. 출력이 컴퓨터마다, 실행할 때마다 달라질 수 있어서 본문에 따로 표시합니다. 2장에서 처음 나옵니다.</td></tr>
+<tr><td>끝났는지 확인</td><td>챕터를 마쳤는지 스스로 점검하는 체크리스트. 이 챕터 맨 끝에 실제 모습이 있습니다.</td></tr>
+<tr><td>다음 챕터로</td><td>챕터의 마지막 상자. 다음 챕터로 가져갈 것을 정리합니다.</td></tr>
+</table></div>
+<div class="q">이것이 확인 문제 상자입니다. 위에서 본 상자 중 "이렇게 하면 틀린다"를 알려 주는 상자는 무엇일까요? 답을 먼저 말한 다음 펼치세요.</div>
+<details><summary>답 보기</summary><div><p>빨간펜 상자입니다. 확인 문제는 <b>예측한 다음 확인하는</b> 순서가 핵심입니다. 틀려도 괜찮습니다. 틀린 예측을 바로잡는 과정이 그대로 공부가 됩니다.</p></div></details>
+<p><b>프로그래머스 문제 카드</b>는 1장부터 각 챕터 끝에 나옵니다. 카드 하나는 이렇게 구성됩니다.</p>
+<div class="tbl"><table>
+<tr><th>카드의 부분</th><th>뜻</th></tr>
+<tr><td>문제 이름 ↗</td><td>누르면 프로그래머스 문제 페이지가 새 창으로 열립니다.</td></tr>
+<tr><td>Lv.0–Lv.3</td><td>난이도. 2026년 11월에 사이트에서 확인한 값입니다.</td></tr>
+<tr><td>함수형 · 입출력형 · 빈칸채우기(PCCE)</td><td>문제 형식. 7절과 8절에서 설명합니다.</td></tr>
+<tr><td>필수 · 추가 · 도전</td><td>필수는 그 챕터를 끝내려면 꼭 풀 문제, 추가는 더 연습하고 싶을 때 푸는 문제, 도전은 실력을 시험해 보고 싶을 때 푸는 어려운 문제입니다.</td></tr>
+<tr><td>요약 · 연습 포인트</td><td>문제를 한두 문장으로 요약하고, 그 문제로 무엇을 연습하는지 적었습니다. 문제 원문은 저작권 때문에 옮기지 않았으니 반드시 링크를 열어 원문과 제한사항을 읽으세요.</td></tr>
+<tr><td>힌트 1 → 힌트 2 → 풀이 코드와 해설</td><td>접혀 있습니다. 힌트 1은 방향, 힌트 2는 구체적인 방법입니다. 9절의 '막혔을 때 규칙'에 따라 하나씩만 펼칩니다.</td></tr>
+<tr><td>풀었어요</td><td>체크하면 진도에 반영됩니다(12절).</td></tr>
+</table></div>
+<h3><span class="no">6</span>왜 C++로 코딩테스트를 보고, 왜 C도 따로 배우나</h3>
+<p><b>코딩테스트는 C++로 준비합니다.</b> 이유는 두 가지입니다.</p>
+<ul>
+<li><b>STL 덕분에 짧고 빠르게 풉니다.</b> C++에는 표준 라이브러리(standard library), 특히 STL(Standard Template Library)이 들어 있어서 정렬, 크기가 늘어나는 배열(<code>vector</code>), 해시 테이블(<code>unordered_map</code>), 우선순위 큐(<code>priority_queue</code>) 같은 도구를 바로 씁니다. C로 풀면 이런 도구를 직접 만들어야 해서 시험 시간의 상당 부분이 도구 만드는 데 들어갑니다.</li>
+<li><b>실행 속도가 빠릅니다.</b> C++는 기계어로 컴파일(compile)되는 언어라 같은 방법으로 풀어도 대체로 빨리 돌고, 시간 제한에 여유가 있습니다.</li>
+</ul>
+<p>Python도 코딩테스트에 많이 쓰이지만, 임베디드 진로라면 C++로 연습하는 쪽이 이득입니다. 코딩테스트 준비가 그대로 현업 언어 연습이 되기 때문입니다.</p>
+<p><b>C와 C++의 관계.</b> C++는 C에서 출발한 언어입니다. 변수, 연산자, 조건문, 반복문, 함수, 배열, 포인터 같은 기본 문법은 거의 같고, C++는 여기에 클래스, 템플릿, STL 같은 기능을 더했습니다. 정확히는 C++가 C를 100% 포함하지는 않아서 C에서만 되는 문법도 조금 있지만, 지금은 "기본 문법을 공유한다"로 충분합니다. 그래서 이 노트는 다음 순서로 갑니다.</p>
+<ol>
+<li><b>C++ 기초(1–12장):</b> C와 공통인 문법을 C++로 배웁니다. 1–9장에서는 "C에서는 어떻게 쓰는지"를 함께 표시하고, 9장에서는 몇 문제를 C로도 풀어 봅니다.</li>
+<li><b>알고리즘(13–28장):</b> C++ STL을 무기로 코딩테스트 실력을 만듭니다. 정렬, 스택, 큐 같은 것은 원리를 이해하도록 직접 구현도 해 봅니다.</li>
+<li><b>임베디드 C 심화(29–31장):</b> 펌웨어에서 쓰는 C의 깊은 부분(고정 폭 정수, 비트 연산, <code>volatile</code>, 메모리 맵)과 제어 코드를 다룹니다.</li>
+</ol>
+<div class="emb"><p>임베디드 진로에서 언어는 대략 이렇게 나뉩니다. 회사와 제품마다 다르지만 흔한 경우입니다.</p>
+<div class="tbl"><table>
+<tr><th>분야</th><th>주력 언어</th><th>예</th></tr>
+<tr><td>MCU 펌웨어(STM32, ESP32 등)</td><td>C</td><td>STM32 HAL/LL 드라이버, FreeRTOS, ESP-IDF는 C로 된 API입니다. 참고로 아두이노 스케치는 C++로 컴파일됩니다.</td></tr>
+<tr><td>차량 제어기(ECU)</td><td>C</td><td>MISRA C(자동차 업계에서 널리 쓰는 C 코딩 규칙)를 지키는 C가 많습니다. 차량 소프트웨어 표준 구조인 AUTOSAR도 Classic은 C, Adaptive는 C++ 기반입니다.</td></tr>
+<tr><td>로봇·자율주행·리눅스 응용</td><td>C++</td><td>ROS 2의 C++ 클라이언트 라이브러리(rclcpp), 젯슨의 CUDA·TensorRT, 자율주행 소프트웨어 Autoware.</td></tr>
+<tr><td>PC 툴·HMI(사람이 장비를 보고 조작하는 화면)</td><td>C#</td><td>장비 설정 프로그램, 검사 장비 화면, Unity 기반 시뮬레이터.</td></tr>
+<tr><td>분석·자동화</td><td>Python</td><td>로그 분석, 테스트 자동화, 머신러닝, ROS 2 노드 시제품.</td></tr>
+</table></div>
+<p>그래서 이 노트는 C++(코딩테스트, 로봇·리눅스 쪽)와 C(펌웨어 쪽)를 둘 다 다루고, C#이 언제 필요한지는 31장에서 정리합니다.</p></div>
+<div class="q">다음 일에 가장 흔하게 쓰는 언어를 짝지어 보세요. (1) STM32로 모터 드라이버 펌웨어 작성 (2) ROS 2 기반 자율주행 제어 노드 작성 (3) 생산 라인 검사 장비의 Windows 화면 프로그램 (4) 주행 로그 수천 개를 분석해 그래프 그리기</div>
+<details><summary>답 보기</summary><div><p>(1) C (2) C++ (3) C# (4) Python. 정해진 규칙은 아니고 업계에서 흔한 조합입니다. 이 가운데 코딩테스트에도 쓰고 로봇·자율주행 현업에도 쓰는 언어가 C++여서, 이 노트는 코딩테스트를 C++로 준비합니다.</p></div></details>
+
+<h3><span class="no">7</span>프로그래머스 사용법</h3>
+<p>문제는 <a href="https://school.programmers.co.kr/learn/challenges" target="_blank" rel="noopener">프로그래머스 코딩테스트 연습</a> 목록에서 고릅니다. 가입하면 무료로 쓸 수 있습니다. 목록 위쪽의 필터에서 <b>난이도</b>와 <b>언어</b>를 고를 수 있는데, 언어를 C++로 두면 C++로 풀 수 있는 문제만 남습니다(SQL 전용 문제 등이 빠집니다).</p>
+<h4>레벨</h4>
+<p>난이도는 Lv.0(가장 쉬움, 문법 연습용)부터 Lv.5까지 있습니다. 이 노트는 Lv.0–Lv.3을 다룹니다.</p>
+<div class="pen">레벨 숫자는 사이트 사정으로 바뀔 수 있습니다. 이 노트의 레벨은 <b>2026년 11월에 확인한 값</b>이라, 사이트에서 다르게 보이면 사이트 쪽이 최신입니다. 문제 제목도 바뀌곤 합니다(예: 42578번 문제는 예전 제목이 '위장', 지금은 '의상'). 주소 끝의 숫자(문제 번호)는 그대로이니, 같은 문제인지는 번호로 확인하세요.</div>
+<h4>추천 문제 묶음</h4>
+<div class="tbl"><table>
+<tr><th>묶음</th><th>문제 번호</th><th>특징</th><th>이 노트에서</th></tr>
+<tr><td>코딩 기초 트레이닝</td><td class="mono">181xxx</td><td>Lv.0. 출력, 연산, 조건, 반복, 문자열을 하나씩 연습합니다. 입출력형 문제도 섞여 있습니다.</td><td>1–7장 위주</td></tr>
+<tr><td>코딩테스트 입문</td><td class="mono">120xxx</td><td>Lv.0. 쉬운 함수형 문제 100개입니다.</td><td>2–11장</td></tr>
+<tr><td>PCCE 기출문제</td><td class="mono">250xxx, 340xxx</td><td>Lv.0–Lv.1. 주어진 코드의 빈칸 채우기, 한 줄 고치기, 직접 작성하기가 섞여 있습니다.</td><td>1장부터 곳곳</td></tr>
+<tr><td>연습문제, 고득점 Kit, 카카오 등 기업 기출</td><td>여러 가지</td><td>Lv.1–Lv.3. 실전 알고리즘 문제입니다. 고득점 Kit는 해시, 스택/큐, 힙, 정렬, 완전탐색, 탐욕법, 동적계획법, DFS/BFS, 이분탐색, 그래프로 묶여 있습니다.</td><td>11장 이후, Part B</td></tr>
+</table></div>
+<h4>문제 화면 구성</h4>
+<p>컴퓨터 화면 기준으로 문제를 열면 왼쪽에 문제, 오른쪽에 코드 편집기가 있습니다.</p>
+<ul>
+<li><b>왼쪽:</b> 문제 설명 → 제한사항(입력값의 범위와 조건) → 입출력 예(예제 입력과 기대하는 답) → 입출력 예 설명(예제의 답이 왜 그렇게 나오는지).</li>
+<li><b>오른쪽:</b> 편집기의 언어 선택 메뉴에서 <b>C++</b>를 고르면 C++ <b>초기 코드</b>(미리 주어지는 뼈대 코드)가 나옵니다. 언어를 바꾸면 초기 코드도 바뀝니다. 그 아래에 실행 결과 창이 있습니다.</li>
+</ul>
+<p>아래쪽 버튼은 이렇게 씁니다.</p>
+<div class="tbl"><table>
+<tr><th>버튼</th><th>하는 일</th><th>언제</th></tr>
+<tr><td>코드 실행</td><td>문제에 보이는 입출력 예와 내가 추가한 테스트 케이스로만 실행합니다. 예제마다 통과 여부가 나오고, <code>cout</code>으로 찍은 내용도 결과 창에 보입니다.</td><td>제출 전에 여러 번</td></tr>
+<tr><td>제출 후 채점하기</td><td>보이지 않는 테스트 케이스로 채점합니다. 테스트마다 통과·실패와 점수가 나옵니다.</td><td>예제와 내 엣지 케이스를 확인한 뒤</td></tr>
+<tr><td>테스트 케이스 추가하기</td><td>내가 만든 입력과 기댓값을 추가합니다. 코드 실행 때 함께 돌아갑니다.</td><td>특이한 입력을 시험할 때</td></tr>
+<tr><td>초기화</td><td>편집기를 초기 코드로 되돌립니다. 내가 쓴 코드는 사라집니다.</td><td>처음부터 다시 풀 때(남길 코드는 먼저 복사)</td></tr>
+<tr><td>다른 사람의 풀이</td><td>이미 푼 사람들의 코드를 봅니다.</td><td>정답을 맞힌 뒤. 먼저 보면 스스로 풀 기회가 사라집니다</td></tr>
+<tr><td>질문하기</td><td>문제별 질문 게시판입니다. 반례(내 코드가 틀리는 입력)를 알려 주는 글이 많습니다.</td><td>오래 막혔을 때. 정답 코드가 통째로 적힌 글은 피하기</td></tr>
+</table></div>
+<div class="pen"><b>코드 실행</b>을 통과해도 정답이 아닐 수 있습니다. 코드 실행은 문제에 보이는 예제 몇 개(와 내가 추가한 테스트 케이스)만 돌려 봅니다. <b>제출 후 채점하기</b>는 숨은 테스트 케이스(hidden test case) 여러 개로 채점하는데, 여기에는 가장 작은 입력, 가장 큰 입력, 예제에 없던 특이한 경우가 들어 있습니다. 예제에 양수만 나왔다고 0이나 음수가 안 들어온다는 보장은 없습니다. 제한사항이 허용하는 입력은 모두 들어올 수 있다고 생각하세요.</div>
+<p>제출하면 테스트마다 통과·실패가 나오고, 실패에는 시간 초과나 런타임 에러 같은 이유가 붙기도 합니다. 일부 문제는 정확성 테스트와 따로 큰 입력으로 속도를 재는 <b>효율성 테스트</b>가 있어서, 느린 방법은 정확성은 통과해도 효율성에서 시간 초과가 납니다. 속도를 따지는 법은 <a class="go" href="#c12" data-go>12장</a>, 채점 결과별 원인은 <a class="go" href="#apxB" data-go>부록 B</a>에서 다룹니다.</p>
+<div class="q">어떤 문제에서 <b>코드 실행</b>을 눌렀더니 예제 2개가 모두 통과했습니다. 바로 제출하면 100점일까요? 제출하기 전에 무엇을 더 해 보면 좋을까요?</div>
+<details><summary>답 보기</summary><div><p>알 수 없습니다. 예제 2개는 채점에 쓰이는 테스트의 극히 일부일 뿐입니다. 제출 전에 제한사항을 다시 읽고, 가장 작은 입력(예: 길이 1, 값 0), 가장 큰 입력, 예제에 없던 경우를 <b>테스트 케이스 추가하기</b>로 넣어 코드 실행을 한 번 더 해 보세요. 9절 루틴의 6단계가 바로 이것입니다.</p></div></details>
+
+<h3><span class="no">8</span>두 가지 문제 형식: 함수형과 입출력형</h3>
+<p>프로그래머스 문제는 답을 내는 방식에 따라 두 가지로 나뉩니다. 문법을 몰라도 모양으로 구별할 수 있습니다.</p>
+<h4>함수형: solution 함수만 완성한다</h4>
+<p>프로그래머스 문제 대부분이 이 형식입니다. 예를 들어 2장의 첫 함수형 문제 <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120802" target="_blank" rel="noopener">두 수의 합</a>에서 C++를 고르면 이런 초기 코드가 나옵니다.</p>
+<pre class="code" data-check="none"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    int answer = 0;
+    return answer;
+}</code></pre>
+<ul>
+<li><code>solution</code>: 내가 완성할 함수(function)입니다. 이름 뒤 괄호 속 내용은 문제마다 다릅니다.</li>
+<li><code>int num1, int num2</code>: 매개변수(parameter). 채점기가 넣어 주는 입력입니다. 입력을 직접 읽을 필요가 없습니다.</li>
+<li><code>return answer;</code>: 반환(return). <code>return</code> 뒤의 값이 내 답으로 채점됩니다.</li>
+<li><code>main</code>이 없습니다. 프로그램의 시작점인 <code>main</code>은 채점기가 가지고 있습니다.</li>
+</ul>
+<p>채점기는 대략 이렇게 움직입니다(이 문제의 입출력 예 기준).</p>
+<div class="tbl"><table class="trace">
+<tr><th>순서</th><th>채점기(main)</th><th>내 solution</th></tr>
+<tr><td class="mono">1</td><td>예제 1의 입력 2, 3을 넣어 solution을 부릅니다</td><td></td></tr>
+<tr><td class="mono">2</td><td></td><td>num1이 2, num2가 3인 상태로 중괄호 안을 실행합니다</td></tr>
+<tr><td class="mono">3</td><td></td><td><code>return</code>으로 값 하나를 돌려줍니다</td></tr>
+<tr><td class="mono">4</td><td>돌려받은 값이 기댓값 5와 같으면 통과, 다르면 실패</td><td></td></tr>
+<tr><td class="mono">5</td><td>예제 2의 입력 100, 2로 다시 부릅니다 …</td><td></td></tr>
+</table></div>
+<p>함수 문법 자체는 <a class="go" href="#c08" data-go>8장</a>에서 배웁니다. 그 전인 2장부터 함수형 문제를 풀 수 있도록, 이 템플릿은 <b>모양 그대로</b> 두고 중괄호 <code>{ }</code> 안만 채우는 법을 그때그때 알려 드립니다.</p>
+<h4>입출력형: main을 직접 쓰고 cin으로 읽고 cout으로 출력한다</h4>
+<p>코딩 기초 트레이닝의 일부 문제와 일부 PCCE 기출이 이 형식입니다. 예를 들어 단어 하나를 입력받는 문제라면 초기 코드가 이런 모양입니다. 문제마다 조금씩 다르고, <code>//</code> 뒤의 설명은 이해를 돕기 위해 붙인 메모(주석)입니다.</p>
+<pre class="code" data-check="compile"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main(void) {
+    string str;
+    cin &gt;&gt; str;
+    // 여기에 답을 출력하는 코드를 씁니다
+    return 0;
+}</code></pre>
+<ul>
+<li><code>main</code>: 프로그램의 시작점입니다. 입출력형에서는 프로그램 전체가 내 몫입니다(뼈대는 대개 초기 코드에 있습니다).</li>
+<li><code>cin &gt;&gt; str;</code>: 입력을 읽습니다. 채점기는 입력 데이터를 표준 입력(standard input, 원래 키보드가 연결되는 자리)으로 넣어 줍니다.</li>
+<li>답은 <code>cout</code>으로 표준 출력(standard output, 원래 화면 자리)에 씁니다. 채점기는 출력된 <b>글자 전체</b>를 기댓값과 비교합니다.</li>
+</ul>
+<p>입출력형은 백준(BOJ)이나 삼성 SW 역량테스트 같은 곳에서는 기본 형식이니 익숙해져야 합니다. <code>cout</code>은 1장, <code>cin</code>은 1–2장에서 배웁니다.</p>
+<div class="tbl"><table>
+<tr><th>구분</th><th>함수형</th><th>입출력형</th></tr>
+<tr><td>내가 쓰는 것</td><td><code>solution</code> 함수의 중괄호 안</td><td><code>main</code>을 포함한 프로그램 전체</td></tr>
+<tr><td>입력</td><td>매개변수로 이미 들어와 있음</td><td><code>cin</code>으로 직접 읽음</td></tr>
+<tr><td>답을 내는 법</td><td><code>return</code>으로 돌려줌</td><td><code>cout</code>으로 출력</td></tr>
+<tr><td><code>main</code></td><td>채점기에 있음. 내가 쓰면 안 됨</td><td>내가 씀</td></tr>
+<tr><td>채점 기준</td><td>반환값이 기댓값과 같은가</td><td>출력된 글자가 기댓값과 같은가</td></tr>
+<tr><td><code>cout</code>의 역할</td><td>디버깅용 메모. 채점에 쓰이지 않음</td><td>답 그 자체</td></tr>
+<tr><td>흔한 곳</td><td>프로그래머스 대부분, 프로그래머스에서 보는 기업 시험</td><td>코딩 기초 트레이닝 일부, 백준, 삼성 SW 역량테스트</td></tr>
+</table></div>
+<div class="pen">함수형 문제에서 답을 <code>cout</code>으로 출력하면 오답입니다. 아래 '오답' 코드는 컴파일도 되고, 코드 실행 결과 창에 합이 찍혀 보이기까지 해서 맞은 것처럼 착각하기 쉽습니다. 하지만 채점기가 받는 값은 <code>return</code> 뒤의 <code>answer</code>, 즉 처음에 넣어 둔 0 그대로입니다. '정답' 코드처럼 답을 <code>return</code>해야 합니다. 문법은 아직 몰라도 되니 <b>답이 어디로 나가는지</b>만 보세요.</div>
+<div class="two"><div>
+<p><b>오답</b>: 화면에만 찍힘</p>
+<pre class="code" data-check="compile"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    int answer = 0;
+    cout &lt;&lt; num1 + num2;   // 화면에 보이기만 함
+    return answer;         // 채점기가 받는 값: 0
+}</code></pre>
+</div><div>
+<p><b>정답</b>: <code>return</code>으로 돌려줌</p>
+<pre class="code" data-check="compile"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    int answer = num1 + num2;
+    return answer;         // 채점기가 받는 값: 두 수의 합
+}</code></pre>
+</div></div>
+<p>디버깅하려고 찍은 <code>cout</code>은 반환값과 상관이 없어서, 남아 있어도 채점 결과는 보통 바뀌지 않습니다. 다만 출력이 아주 많으면 느려질 수 있으니 제출 전에 지우는 습관을 들이세요.</p>
+<div class="pen"><p>입출력형 문제는 출력 형식이 한 글자라도 다르면 오답입니다. 채점기는 뜻을 이해하지 않고 글자를 하나하나 비교합니다. 예를 들어 기댓값이 <code>a = 4</code>라면:</p>
+<div class="tbl narrow"><table>
+<tr><th>내 출력</th><th>결과</th><th>이유</th></tr>
+<tr><td class="mono">a = 4</td><td>통과</td><td>똑같음</td></tr>
+<tr><td class="mono">a=4</td><td>실패</td><td>공백이 없음</td></tr>
+<tr><td class="mono">A = 4</td><td>실패</td><td>대소문자가 다름</td></tr>
+<tr><td class="mono">답: a = 4</td><td>실패</td><td>필요 없는 글자가 붙음</td></tr>
+</table></div>
+<p>교재 예제처럼 "숫자를 입력하세요:" 같은 안내 문구를 출력하는 것도 같은 이유로 오답입니다. 어디서 줄을 바꾸는지도 형식에 들어갑니다. 줄 끝 공백이나 마지막 줄바꿈 정도는 봐주는 채점기도 있지만, 그것을 믿지 말고 출력 예와 똑같이 맞추세요. 1장의 <a href="https://school.programmers.co.kr/learn/courses/30/lessons/181951" target="_blank" rel="noopener">a와 b 출력하기</a>가 바로 이 함정을 연습하는 문제입니다.</p></div>
+<div class="tip">나중에 함수형 문제를 내 컴퓨터에서 시험하려고 <code>main</code>을 직접 붙여 쓰게 됩니다. 그 코드를 프로그래머스에 낼 때는 <code>main</code>을 빼고 <code>solution</code> 부분만 붙여 넣으세요. 채점기의 <code>main</code>과 겹쳐서 에러가 납니다.</div>
+<div class="q">아래 두 초기 코드는 각각 함수형일까요, 입출력형일까요? 문법은 몰라도 됩니다. 모양으로 판단하세요.</div>
+<p>(가)</p>
+<pre class="code" data-check="none"><code class="language-cpp">int main(void) {
+    int n;
+    cin &gt;&gt; n;
+    return 0;
+}</code></pre>
+<p>(나)</p>
+<pre class="code" data-check="none"><code class="language-cpp">vector&lt;int&gt; solution(vector&lt;int&gt; numbers) {
+    vector&lt;int&gt; answer;
+    return answer;
+}</code></pre>
+<details><summary>답 보기</summary><div><p>(가)는 입출력형입니다. <code>main</code>이 있고 <code>cin</code>으로 입력을 읽으니, 답은 <code>cout</code>으로 출력해야 합니다. (나)는 함수형입니다. <code>main</code>이 없고 <code>solution</code>이 있으며, 입력은 <code>numbers</code>라는 매개변수로 들어오니 답은 <code>return</code>으로 돌려줘야 합니다. <code>vector</code>는 값 여러 개를 담는 배열로, 6장에서 배웁니다.</p></div></details>
+
+<h3><span class="no">9</span>문제 푸는 7단계 루틴</h3>
+<p>모든 문제를 같은 순서로 풉니다. 처음엔 번거롭게 느껴져도, 순서가 몸에 붙으면 처음 보는 문제 앞에서 막막함이 줄어듭니다.</p>
+<ol class="steps">
+<li><b>문제를 끝까지 읽고 밑줄 긋기.</b> 입력(무엇이 주어지나), 출력(무엇을 돌려주거나 출력하나), 제한사항(값의 범위, 길이)을 종이나 메모장에 세 줄로 옮겨 적습니다.</li>
+<li><b>입출력 예를 손으로 따라가기.</b> 예제 하나를 코드 없이 종이에서 직접 계산해 기댓값이 나오는지 확인합니다. 여기서 답이 안 나오면 문제를 잘못 이해한 것이니 '입출력 예 설명'을 다시 읽습니다.</li>
+<li><b>제한사항으로 방법 정하기.</b> 입력이 클수록 빠른 방법이 필요합니다. 입력 크기를 보고 어떤 방법이 시간 안에 도는지 판단하는 법은 12장에서 배웁니다. 그 전에는 "입력이 최대 얼마인지"만 적어 둡니다.</li>
+<li><b>한국어로 의사코드 쓰기.</b> 의사코드(pseudocode)는 프로그래밍 언어 대신 우리말로 쓴 풀이 순서입니다. 아래 예처럼 몇 줄이면 충분합니다.</li>
+<li><b>코드 작성.</b> 의사코드 한 줄을 코드 몇 줄로 옮깁니다. 복사·붙여넣기와 AI 자동완성 없이 직접 칩니다.</li>
+<li><b>예제와 내가 만든 엣지 케이스로 코드 실행.</b> 엣지 케이스(edge case)는 제한사항의 끝에 있는 특이한 입력입니다. 가장 작은 값, 가장 큰 값, 길이 1, 모두 같은 값, 0이나 음수 같은 것을 <b>테스트 케이스 추가하기</b>로 넣어 봅니다.</li>
+<li><b>제출하고, 틀리면 디버깅.</b> 디버깅(debugging)은 틀린 원인을 찾아 고치는 일입니다. 2단계의 손 계산과 코드의 중간 값을 비교하세요. 함수형 문제에서도 <code>cout</code>으로 찍은 값은 코드 실행 결과 창에 보이므로, 어느 줄에서 손 계산과 달라지는지 찾을 수 있습니다.</li>
+</ol>
+<p>4단계 의사코드의 예입니다. '정수 배열에서 짝수가 몇 개인지 돌려주기' 같은 문제라면 이렇게 씁니다.</p>
+<pre class="code" data-check="none"><code class="language-plaintext">개수를 0으로 둔다
+배열의 수를 하나씩 꺼내서:
+    그 수를 2로 나눈 나머지가 0이면(짝수면) 개수를 1 늘린다
+개수를 돌려준다(return)</code></pre>
+<p>이 네 줄을 C++로 옮기는 데 필요한 나머지 연산, 반복문, 배열은 3장, 5장, 6장에서 배웁니다.</p>
+<h4>정답을 맞힌 뒤에</h4>
+<ul>
+<li><b>다른 사람의 풀이</b> 2–3개를 읽고 내 풀이와 비교합니다. 더 짧은 방법, 처음 보는 함수, 더 빠른 방법을 하나라도 찾아 메모합니다.</li>
+<li><b>3일 뒤 빈 화면에서 다시 풉니다.</b> 내 코드를 따로 저장해 둔 다음 <b>초기화</b>를 누르고 처음부터 씁니다. 막힘없이 써지면 그 문제는 내 것입니다.</li>
+</ul>
+<h4>막혔을 때 규칙</h4>
+<div class="tbl narrow"><table>
+<tr><th>언제</th><th>할 일</th></tr>
+<tr><td>처음 15–30분</td><td>혼자 고민합니다. 1–4단계를 다시 해 봅니다.</td></tr>
+<tr><td>그래도 진전이 없으면</td><td><b>힌트 1</b>(방향)을 펼칩니다.</td></tr>
+<tr><td>10분 더 고민한 뒤</td><td><b>힌트 2</b>(구체적인 방법)를 펼칩니다.</td></tr>
+<tr><td>그래도 막히면</td><td>풀이를 읽고 이해합니다. 그다음 풀이를 <b>덮고</b> 빈 화면에서 다시 씁니다.</td></tr>
+<tr><td>3일 뒤</td><td>그 문제를 처음부터 다시 풉니다.</td></tr>
+</table></div>
+<div class="box"><span class="lbl">핵심 정리</span> 읽기 → 손으로 따라가기 → 방법 정하기 → 의사코드 → 직접 코드 → 예제와 엣지 케이스로 실행 → 제출. 막히면 15–30분 → 힌트 1 → 10분 → 힌트 2 → 풀이 → 덮고 다시 쓰기. 그리고 3일 뒤 다시.</div>
+<div class="tip">푼 문제마다 '번호 · 날짜 · 걸린 시간 · 막힌 곳 한 줄'을 기록해 두세요. 막힌 곳만 모아 읽어도 내 약점이 보입니다. 제대로 된 오답 노트 양식은 28장에 있습니다.</div>
+<div class="q">문제를 붙잡은 지 20분이 지났는데 어디서부터 손대야 할지 모르겠습니다. 이 노트의 규칙대로라면 지금 할 일과, 결국 풀이를 읽게 됐을 때 그 뒤에 할 일은 무엇일까요?</div>
+<details><summary>답 보기</summary><div><p>지금은 1–4단계(밑줄, 예제를 손으로 따라가기, 의사코드)를 한 번 더 해 보고, 그래도 진전이 없으면 힌트 1을 펼칩니다. 풀이를 읽었다면 이해한 뒤 풀이를 덮고 빈 화면에서 다시 쓰고, 3일 뒤 처음부터 한 번 더 풉니다. 풀이를 읽고 '이해했다'에서 멈추면 다음에 같은 문제를 만나도 쓰지 못합니다.</p></div></details>
+
+<h3><span class="no">10</span>AI와 공부하는 규칙: 바이브코딩 탈출</h3>
+<p>AI가 짜 준 코드를 읽으면 '대충 알 것 같은' 상태가 됩니다. 하지만 코딩테스트, 기술면접, 현장 디버깅에서 필요한 것은 빈 화면에서 직접 쓰는 능력이고, 이 능력은 직접 써 본 양으로만 늘어납니다. 그래서 다음 규칙을 정합니다. 이 노트로 공부하다가 궁금한 점이 생기면 언제든 Claude에게 가져오세요. 다만 이 규칙대로 물어보세요.</p>
+<ol>
+<li><b>문제를 풀 때는 AI 자동완성과 코드 생성을 끕니다.</b> 내 컴퓨터의 편집기에 Copilot 같은 AI 기능이 있다면 공부할 때는 꺼 둡니다.</li>
+<li><b>Claude는 선생님으로만 씁니다.</b> 쓰임은 네 가지입니다. (a) 개념 질문: 예제와 함께 설명을 듣기 (b) 내 코드 리뷰: 정답 코드가 아니라 틀린 이유를 힌트로 받기 (c) 반례(counterexample, 내 코드가 틀리는 입력) 요청 (d) 정답을 맞힌 뒤 더 나은 방법과 비교.</li>
+<li><b>받은 설명은 직접 실행해서 확인합니다.</b> AI의 설명도 틀릴 수 있습니다. 작은 코드를 써서 돌려 보는 것이 가장 확실한 확인입니다.</li>
+<li><b>급해서 정답 코드를 봤다면</b> 그 문제는 '못 푼 문제'로 두고, 3일 뒤 빈 화면에서 다시 풉니다.</li>
+</ol>
+<p>질문할 때는 아래 템플릿을 복사해서 칸을 채우세요. 특히 <b>[원하는 도움]</b> 칸이 중요합니다.</p>
+<div class="box"><span class="lbl">질문 템플릿 1 · 막혔을 때(힌트 받기)</span>
+<pre class="code" data-check="none"><code class="language-plaintext">[문제] 문제 이름과 링크
+[내가 이해한 문제] 입력은 …, 출력은 …, 제한사항은 …
+[내가 생각한 방법] 의사코드 몇 줄
+[막힌 곳] 어디서, 왜 막혔는지
+[원하는 도움] 힌트 1단계(방향)만 주세요. 코드는 쓰지 말아 주세요.</code></pre></div>
+<div class="box"><span class="lbl">질문 템플릿 2 · 제출했는데 틀렸을 때(리뷰와 반례)</span>
+<pre class="code" data-check="none"><code class="language-plaintext">[문제] 문제 이름과 링크
+[내 코드] 코드 전체를 붙여 넣기
+[결과] 코드 실행: 예제 모두 통과 / 제출: 테스트 3, 7 실패
+[내가 의심하는 곳] 예: 반복 범위, 입력에 0이 있을 때
+[원하는 도움] 고친 코드는 주지 말고, 내 코드가 틀리는 입력(반례)
+              하나와 다시 볼 부분만 알려 주세요.</code></pre></div>
+<div class="box"><span class="lbl">질문 템플릿 3 · 개념 질문, 또는 정답 후 비교</span>
+<pre class="code" data-check="none"><code class="language-plaintext">[질문할 개념] 예: 정수 나눗셈, 참조 전달
+[지금 내가 아는 것] 내 말로 한두 줄
+[헷갈리는 점] 구체적으로
+[원하는 도움] 아주 작은 예제 코드와 실행 결과로 설명하고,
+              초보자가 자주 하는 실수와 확인 문제 하나를 주세요.
+
+(정답을 맞힌 뒤 비교할 때)
+[문제] 문제 이름과 링크
+[내 풀이] 통과한 코드
+[원하는 도움] 더 빠르거나 더 읽기 쉬운 방법이 있으면 비교해 주세요.
+              코드보다 아이디어를 먼저 말해 주세요.</code></pre></div>
+<div class="pen">"이 코드 고쳐 줘", "이 문제 풀어 줘"처럼만 물으면 고친 코드나 정답 코드가 통째로 돌아오기 쉽고, 그 문제로 배울 기회가 사라집니다. 원하는 도움의 수준(힌트만, 반례만, 어느 부분인지만)을 항상 적으세요.</div>
+<div class="q">다음 중 이 노트의 AI 규칙에 맞는 질문을 모두 고르세요. (가) "이 문제 C++ 정답 코드 줘." (나) "제출하면 테스트 4가 틀려. 고친 코드 말고 틀리는 입력 하나만 알려 줘." (다) "참조 전달이 헷갈려. 작은 예제와 실행 결과로 설명해 줘." (라) "통과했는데, 내 풀이보다 빠른 방법이 있으면 아이디어부터 비교해 줘."</div>
+<details><summary>답 보기</summary><div><p>(나), (다), (라)입니다. (나)는 반례 요청, (다)는 개념 질문, (라)는 정답 후 비교입니다. (가)는 배울 기회를 없애는 질문입니다. 같은 문제라도 템플릿 1처럼 "힌트 1단계만 주세요"라고 바꾸면 규칙에 맞습니다.</p></div></details>
+<h3><span class="no">11</span>개발 환경: 처음엔 프로그래머스만으로 충분</h3>
+<p>1–7장은 프로그래머스 편집기만으로 충분합니다. 설치 없이 C++ 코드를 쓰고, 실행하고, 채점받을 수 있습니다. 내 컴퓨터에 개발 환경을 만드는 것은 <b>선택</b>이지만, 함수가 여럿인 코드를 시험하거나 Part C의 C 코드를 실습할 때는 있는 편이 편합니다.</p>
+<div class="tbl"><table>
+<tr><th>운영체제</th><th>추천 방법</th></tr>
+<tr><td>Windows</td><td>(1) MSYS2를 설치하고 MinGW-w64용 g++를 받는 방법, 또는 (2) WSL(Windows 안에서 돌아가는 리눅스)을 켜고 Ubuntu에서 g++를 설치하는 방법. 젯슨이나 라즈베리파이 같은 리눅스 보드를 다룰 거라면 WSL로 리눅스 터미널에 익숙해 두는 것도 도움이 됩니다.</td></tr>
+<tr><td>macOS</td><td>터미널에서 <code>xcode-select --install</code>로 개발 도구를 설치합니다. 이때 <code>g++</code> 명령은 실제로는 Apple의 clang 컴파일러를 부릅니다.</td></tr>
+<tr><td>Linux</td><td><code>sudo apt install g++</code> (Ubuntu 기준)</td></tr>
+</table></div>
+<p>편집기는 VS Code에 Microsoft의 C/C++ 확장을 설치해 쓰면 됩니다. 설치 순서는 VS Code 공식 안내(<a href="https://code.visualstudio.com/docs/cpp/config-mingw" target="_blank" rel="noopener">MinGW</a>, <a href="https://code.visualstudio.com/docs/cpp/config-wsl" target="_blank" rel="noopener">WSL</a>)를 따라가세요. 설치가 끝나면 터미널에서 이렇게 컴파일하고 실행합니다.</p>
+<div class="two"><div><pre class="code" data-check="none" data-os="linux"><code class="language-bash">g++ -std=c++17 -Wall -Wextra main.cpp -o main
+./main</code></pre></div><div><pre class="code" data-check="none" data-os="win"><code class="language-powershell">g++ -std=c++17 -Wall -Wextra main.cpp -o main
+.\main</code></pre></div></div>
+<p>명령어 블록 왼쪽 위의 <b>Linux</b> / <b>Windows</b> 표시를 보고 지금 쓰는 쪽을 따라 하세요. 컴파일 줄은 같고 실행 줄만 다릅니다(<code>./main</code> vs <code>.\main</code>). <code>wc</code>, <code>file</code>처럼 리눅스에만 있는 명령은 1장에 PowerShell 대체 명령을 적어 두었습니다.</p>
+<div class="tbl narrow"><table>
+<tr><th>부분</th><th>뜻</th></tr>
+<tr><td class="mono">g++</td><td>C++ 컴파일러(compiler)</td></tr>
+<tr><td class="mono">-std=c++17</td><td>C++17 표준 문법으로 컴파일</td></tr>
+<tr><td class="mono">-Wall -Wextra</td><td>실수일 가능성이 큰 코드에 경고(warning)를 많이 켭니다. 경고가 있어도 실행 파일은 만들어지지만, 경고는 버그의 단서입니다.</td></tr>
+<tr><td class="mono">main.cpp</td><td>내가 쓴 소스 파일</td></tr>
+<tr><td class="mono">-o main</td><td>만들어질 실행 파일의 이름을 main으로</td></tr>
+<tr><td class="mono">./main</td><td>현재 폴더의 main을 실행 (Linux). Windows PowerShell에서는 <code>.\main</code></td></tr>
+</table></div>
+<p>소스 코드가 실행 파일이 되는 과정은 1장에서 설명합니다. 이 노트에서 실행 결과가 붙은 예제는 모두 64비트 리눅스의 g++(C 예제는 gcc)로 실제로 컴파일하고 실행해서 출력까지 확인했습니다. 컴파일러나 운영체제가 다르면 자료형 크기처럼 일부 결과가 달라질 수 있는데, 그런 곳은 본문에 따로 적었습니다.</p>
+<div class="tip">설치가 부담스러우면 브라우저에서 쓰는 <a href="https://godbolt.org" target="_blank" rel="noopener">Compiler Explorer</a>도 있습니다. 코드가 어떤 기계어(어셈블리)로 바뀌는지 보여 주고 ARM용 컴파일러도 고를 수 있어서, 나중에 임베디드 공부에도 쓸모가 있습니다.</div>
+<div class="q"><code>g++ -std=c++17 -Wall -Wextra hello.cpp -o hello</code>로 컴파일한 뒤 프로그램을 실행하려면 무엇을 입력해야 할까요(리눅스·WSL·macOS 터미널 기준)? 그리고 <code>-Wall -Wextra</code>를 빼면 무엇을 잃을까요?</div>
+<details><summary>답 보기</summary><div><p><code>./hello</code>입니다. <code>-o hello</code>가 실행 파일 이름을 hello로 정했기 때문입니다. <code>-Wall -Wextra</code>를 빼도 컴파일은 되지만, 실수일 가능성이 큰 코드에 대한 경고를 받지 못합니다. 예를 들어 값을 넣지 않은 변수를 출력하는 코드는 이 옵션이 있으면 g++가 <code>is used uninitialized</code>라고 경고하지만, 옵션이 없으면 아무 말 없이 컴파일됩니다. 경고는 항상 켜 두세요.</p></div></details>
+
+<h3><span class="no">12</span>진도 관리</h3>
+<ul>
+<li><b>위쪽 챕터 버튼:</b> 화면 위에 붙어 있는 줄에서 번호와 짧은 이름을 누르면 그 챕터로 갑니다. 옆의 목록 상자에서 골라도 됩니다.</li>
+<li><b>이 챕터 끝냈어요:</b> 챕터 맨 아래 <b>← 이전</b>과 <b>다음 →</b> 버튼 사이에 있는 체크 상자입니다. 체크하면 위쪽 챕터 버튼에 ✓가 붙고, 맨 위 요약의 챕터 숫자가 올라갑니다.</li>
+<li><b>풀었어요:</b> 문제 카드마다 붙는 체크 상자입니다. 체크하면 맨 위의 '문제 … 풀었음' 숫자와 진행 막대에 반영됩니다.</li>
+<li><b>부록 C 전체 문제 목록:</b> 모든 챕터의 문제를 한 표에 모았습니다. 레벨로 거르거나 안 푼 문제만 볼 수 있고, 여기서 체크해도 챕터의 카드에 똑같이 반영됩니다.</li>
+<li><b>끝났는지 확인:</b> 챕터 끝 체크리스트의 체크도 저장됩니다.</li>
+</ul>
+<div class="pen">이 체크들은 <b>지금 쓰는 브라우저 안에만</b> 저장됩니다. 다른 기기나 다른 브라우저와는 동기화되지 않고, 브라우저 데이터를 지우거나 시크릿 창을 쓰면 사라질 수 있습니다. 브라우저 설정에 따라서는 저장 자체가 안 될 수도 있습니다. 주로 공부할 기기와 브라우저를 하나 정해 두고, 중요한 기록(푼 문제, 막힌 곳)은 공책이나 메모 앱에도 남기세요.</div>
+<div class="tip">'이 챕터 끝냈어요'는 그 챕터의 '끝났는지 확인' 항목을 모두 자신 있게 체크할 수 있고 필수 문제를 다 풀었을 때 누르세요. 읽기만 끝난 상태는 아직 끝난 것이 아닙니다.</div>
+<div class="q">학교 컴퓨터에서 3장까지 '이 챕터 끝냈어요'를 체크했는데, 집 노트북으로 이 노트를 열었더니 체크가 하나도 없습니다. 노트가 고장 난 걸까요?</div>
+<details><summary>답 보기</summary><div><p>아닙니다. 체크는 그 브라우저 안에만 저장되기 때문에 다른 기기에서는 보이지 않습니다. 집에서도 3장까지 다시 체크하거나, 공부할 기기를 하나로 정하세요. 여러 기기를 오가며 공부한다면 진도는 공책이나 메모 앱에 따로 적어 두는 편이 안전합니다.</p></div></details>
+
+<h3><span class="no">13</span>처음 질문했던 문제 이야기</h3>
+<p>이 노트는 질문 하나에서 시작했습니다. 처음 Claude에게 가져온 문제는 <a href="https://school.programmers.co.kr/learn/courses/30/lessons/340207" target="_blank" rel="noopener">[PCCE 기출문제] 1번 / 문자 출력</a>이었습니다. 주어진 코드의 빈칸을 채워 정해진 몇 줄을 출력하는 문제입니다.</p>
+<p>그 문제는 1장의 필수 문제로 들어 있습니다. 1장을 마치면 빈칸에 무엇이 들어가는지뿐 아니라 <b>왜</b> 그렇게 써야 하는지 설명할 수 있고, 같은 프로그램을 빈 화면에서 처음부터 직접 쓸 수 있게 됩니다. 답을 물어보던 문제를 스스로 푸는 것이 이 노트의 첫 번째 이정표입니다.</p>
+<div class="q">1장에서 이 문제를 풀고 나면, 이 노트의 루틴대로라면 며칠 뒤에 무엇을 해야 할까요?</div>
+<details><summary>답 보기</summary><div><p>3일 뒤 <b>초기화</b>를 눌러 빈칸이 있는 처음 상태로 되돌리고, 힌트나 1장 본문을 보지 않고 다시 풉니다. 여유가 있으면 빈 메모장에 프로그램 전체를 처음부터 써 보세요. 막힘없이 써지면 그 문제는 정말 내 것입니다.</p></div></details>
+
+<h3><span class="no">14</span>확인 문제 모음</h3>
+<div class="q">다음 상황에서 누를 버튼(또는 쓸 기능)은 무엇일까요? (1) 제한사항의 최솟값을 넣었을 때도 맞는지 시험하고 싶다. (2) 코드를 너무 고쳐서 엉망이 됐다. 처음부터 다시 쓰고 싶다. (3) 정답을 맞혔고, 다른 방법이 궁금하다. (4) 제출하면 테스트 몇 개가 틀리는데, 한 시간째 이유를 모르겠다.</div>
+<details><summary>답 보기</summary><div><p>(1) <b>테스트 케이스 추가하기</b>로 입력과 기댓값을 넣고 <b>코드 실행</b>. (2) <b>초기화</b>. 내가 쓴 코드가 지워지니 남길 부분은 먼저 복사해 둡니다. (3) <b>다른 사람의 풀이</b>에서 2–3개를 비교합니다. (4) <b>질문하기</b> 게시판에서 반례 글을 찾아보거나, 질문 템플릿 2로 Claude에게 반례를 요청합니다. 정답 코드는 요청하지 않습니다.</p></div></details>
+<div class="q">이 노트의 문제 카드에는 Lv.1로 적혀 있는데, 사이트에서는 같은 번호의 문제가 Lv.2로 보입니다. 어떻게 된 걸까요? 그 문제를 그대로 풀어도 될까요?</div>
+<details><summary>답 보기</summary><div><p>레벨은 사이트 사정으로 바뀔 수 있고, 이 노트의 레벨은 2026년 11월 기준입니다. 번호가 같으면 같은 문제이니 그대로 풀면 됩니다. 레벨 숫자보다 그 챕터에서 배운 도구로 풀 수 있는지가 중요합니다.</p></div></details>
+<div class="q">다음 중 제출했을 때 실패(틀린 답)가 나오는 경우를 모두 고르세요. (가) 함수형 문제에서 답을 <code>cout</code>으로 출력하고 <code>return answer;</code>는 초기 코드 그대로 둠 (나) 입출력형 문제의 기댓값이 <code>a = 4</code>인데 <code>a=4</code>를 출력함 (다) 함수형 문제에서 답은 올바르게 <code>return</code>하고, 디버깅용 <code>cout</code> 한 줄이 남아 있음 (라) 입출력형 문제에서 답을 출력하기 전에 "입력: "이라는 안내 문구를 출력함</div>
+<details><summary>답 보기</summary><div><p>(가), (나), (라)입니다. (가)는 채점기가 반환값 0을 받아서, (나)와 (라)는 출력 글자가 기댓값과 달라서 틀립니다. (다)는 채점이 반환값으로만 이루어지므로 보통 통과합니다. 그래도 제출 전에는 디버깅용 출력을 지우는 습관을 들이세요.</p></div></details>
+<div class="q">다음 일을 7단계 루틴의 순서대로 놓아 보세요. ㉠ 우리말로 풀이 순서 적기 ㉡ 제한사항의 최솟값을 넣어 코드 실행 ㉢ 입력·출력·제한사항 옮겨 적기 ㉣ 예제 1을 종이에 손으로 계산 ㉤ 제출 ㉥ 코드 직접 타이핑 ㉦ 입력 크기를 보고 방법 정하기</div>
+<details><summary>답 보기</summary><div><p>㉢ → ㉣ → ㉦ → ㉠ → ㉥ → ㉡ → ㉤. 코드를 치는 일(㉥)은 다섯 번째입니다. 코드부터 치기 시작하면 문제를 잘못 이해한 채로 오래 헤매기 쉽습니다.</p></div></details>
+
+<h3><span class="no">15</span>프로그래머스 연습 문제</h3>
+<p>이 챕터에는 문제 카드가 없습니다. 문제 카드는 1장부터 나옵니다. 카드가 나오면 이렇게 쓰세요: 먼저 15–30분 혼자 풀고 → 힌트 1 → 10분 더 → 힌트 2 → 풀이를 읽고 이해 → 풀이를 덮고 다시 쓰기 → 3일 뒤 다시 풀기.</p>
+<p>대신 10–15분짜리 준비 실습을 하세요. 아직 아무것도 풀지 않습니다. 화면에 익숙해지는 것이 목표입니다.</p>
+<ol class="steps">
+<li><a href="https://school.programmers.co.kr/learn/challenges" target="_blank" rel="noopener">코딩테스트 연습</a> 목록을 열고 가입하거나 로그인합니다. 필터에서 난이도 Lv.0, 언어 C++를 골라 봅니다.</li>
+<li>2장의 첫 함수형 문제 <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120802" target="_blank" rel="noopener">두 수의 합</a>을 엽니다. 왼쪽에서 문제 설명, 제한사항, 입출력 예, 입출력 예 설명을 찾고, 편집기의 언어가 C++인지 확인합니다. 초기 코드에서 <code>solution</code>과 <code>return</code>을 찾고, <code>main</code>이 없다는 것도 확인합니다.</li>
+<li>코드를 고치지 말고 <b>코드 실행</b>을 눌러 봅니다. 초기 코드는 0을 돌려주므로 예제가 실패로 나옵니다. 결과 창에 무엇이 표시되는지만 봅니다.</li>
+<li><b>테스트 케이스 추가하기</b>를 눌러 어떤 칸이 있는지 봅니다. 아무것도 추가하지 않고 닫아도 됩니다.</li>
+<li>1장의 입출력형 문제 <a href="https://school.programmers.co.kr/learn/courses/30/lessons/181952" target="_blank" rel="noopener">문자열 출력하기</a>를 엽니다. 초기 코드에 <code>main</code>과 <code>cin</code>이 있는 것을 확인하고, 8절의 두 템플릿과 비교합니다.</li>
+<li>두 문제 모두 아직 제출하지 않습니다. 1장과 2장에서 7단계 루틴으로 풉니다.</li>
+</ol>
+
+<h3><span class="no">16</span>끝났는지 확인</h3>
+<ul class="chk">
+<li><label><input type="checkbox" id="start-chk-1"><span>프로그래머스에 가입했고, 문제 화면에서 언어를 C++로 바꿔 초기 코드를 확인했다</span></label></li>
+<li><label><input type="checkbox" id="start-chk-2"><span>'코드 실행'과 '제출 후 채점하기'의 차이를 숨은 테스트 케이스라는 말을 넣어 설명할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="start-chk-3"><span>초기 코드를 보고 함수형인지 입출력형인지 구별하고, 답을 <code>return</code>으로 낼지 <code>cout</code>으로 낼지 말할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="start-chk-4"><span>7단계 루틴과 막혔을 때 규칙(15–30분 → 힌트 1 → 10분 → 힌트 2 → 풀이 → 덮고 다시 쓰기)을 보지 않고 말할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="start-chk-5"><span>AI 규칙에 동의했다: 문제를 풀 때는 AI 자동완성과 코드 생성을 끄고, Claude에게는 질문 템플릿으로 힌트·반례·리뷰를 요청한다</span></label></li>
+<li><label><input type="checkbox" id="start-chk-6"><span>진도 체크가 이 브라우저에만 저장된다는 것을 알고, 주로 공부할 기기를 정했다</span></label></li>
+<li><label><input type="checkbox" id="start-chk-7"><span>(선택) 내 컴퓨터에서 <code>g++ -std=c++17 -Wall -Wextra</code>로 프로그램 하나를 컴파일하고 실행해 봤다</span></label></li>
+</ul>
+
+<div class="out"><span class="lbl">다음 챕터로</span> <a class="go" href="#c01" data-go>1장</a>에서 드디어 첫 프로그램을 씁니다. 소스 코드가 실행 파일이 되는 과정, <code>cout</code>으로 출력하는 법, 컴파일 에러 읽는 법을 배우고, 처음 질문했던 [PCCE 기출문제] 1번 / 문자 출력을 직접 풉니다. 이 챕터에서 가져갈 것은 세 가지입니다: 7단계 루틴, 막혔을 때 규칙, AI 규칙. 1장의 첫 코드부터 복사하지 말고 직접 치세요.</div>
+</section>

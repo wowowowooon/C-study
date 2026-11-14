@@ -1,0 +1,688 @@
+# id	title(current)	level	level_source	statement	category	old_title
+1829	카카오프렌즈 컬러링북	2	bjh	problems/1829.md	코딩테스트 연습 > 2017 카카오코드 예선	
+1830	브라이언의 고민	3	bjh	problems/1830.md	코딩테스트 연습 > 2017 카카오코드 예선	
+1831	4단 고음	4	bjh	problems/1831.md	코딩테스트 연습 > 2017 카카오코드 예선	
+1832	보행자 천국	3	bjh	problems/1832.md	코딩테스트 연습 > 2017 카카오코드 예선	
+1833	캠핑	3	bjh	problems/1833.md	코딩테스트 연습 > 2017 카카오코드 예선	
+1834	신비로운 유적 탐험	5	bjh	problems/1834.md	코딩테스트 연습 > 2017 카카오코드 예선	
+1835	단체사진 찍기	2	bjh	problems/1835.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1836	리틀 프렌즈 사천성	3	bjh	problems/1836.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1837	GPS	3	bjh	problems/1837.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1838	몸짱 트레이너 라이언의 고민	3	bjh	problems/1838.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1839	튜브의 소개팅	4	bjh	problems/1839.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1840	스마트한 프로도	5	bjh	problems/1840.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1841	IU와 콘의 보드게임	5	bjh	problems/1841.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1842	네오의 귀걸이	5	bjh	problems/1842.md	코딩테스트 연습 > 2017 카카오코드 본선	
+1843	사칙연산	4	bjh	problems/1843.md	코딩테스트 연습 > 동적계획법（Dynamic Programming）	
+1844	게임 맵 최단거리	2	bjh	problems/1844.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+1845	폰켓몬	1	bjh	problems/1845.md	코딩테스트 연습 > 해시	
+12899	124 나라의 숫자	2	bjh	problems/12899.md	코딩테스트 연습 > 연습문제	
+12900	2 x n 타일링	2	bjh	problems/12900.md	코딩테스트 연습 > 연습문제	
+12901	2016년	1	bjh	problems/12901.md	코딩테스트 연습 > 연습문제	
+12902	3 x n 타일링	2	bjh	problems/12902.md	코딩테스트 연습 > 연습문제	
+12903	가운데 글자 가져오기	1	bjh	problems/12903.md	코딩테스트 연습 > 연습문제	
+12904	가장 긴 팰린드롬	3	bjh	problems/12904.md	코딩테스트 연습 > 연습문제	
+12905	가장 큰 정사각형 찾기	2	bjh	problems/12905.md	코딩테스트 연습 > 연습문제	
+12906	같은 숫자는 싫어	1	bjh	problems/12906.md	코딩테스트 연습 > 스택／큐	
+12907	거스름돈	3	bjh	problems/12907.md	코딩테스트 연습 > 연습문제	
+12909	올바른 괄호	2	bjh	problems/12909.md	코딩테스트 연습 > 스택／큐	
+12910	나누어 떨어지는 숫자 배열	1	bjh	problems/12910.md	코딩테스트 연습 > 연습문제	
+12911	다음 큰 숫자	2	bjh	problems/12911.md	코딩테스트 연습 > 연습문제	
+12912	두 정수 사이의 합	1	bjh	problems/12912.md	코딩테스트 연습 > 연습문제	
+12913	땅따먹기	2	bjh	problems/12913.md	코딩테스트 연습 > 연습문제	
+12914	멀리 뛰기	2	bjh	problems/12914.md	코딩테스트 연습 > 연습문제	
+12915	문자열 내 마음대로 정렬하기	1	bjh	problems/12915.md	코딩테스트 연습 > 연습문제	
+12916	문자열 내 p와 y의 개수	1	bjh	problems/12916.md	코딩테스트 연습 > 연습문제	
+12917	문자열 내림차순으로 배치하기	1	bjh	problems/12917.md	코딩테스트 연습 > 연습문제	
+12918	문자열 다루기 기본	1	bjh	problems/12918.md	코딩테스트 연습 > 연습문제	
+12919	서울에서 김서방 찾기	1	bjh	problems/12919.md	코딩테스트 연습 > 연습문제	
+12920	선입 선출 스케줄링	3	bjh	problems/12920.md	코딩테스트 연습 > 연습문제	
+12921	소수 찾기	1	bjh	problems/12921.md	코딩테스트 연습 > 연습문제	
+12922	수박수박수박수박수박수?	1	bjh	problems/12922.md	코딩테스트 연습 > 연습문제	
+12923	숫자 블록	2	bjh	problems/12923.md	코딩테스트 연습 > 연습문제	
+12924	숫자의 표현	2	bjh	problems/12924.md	코딩테스트 연습 > 연습문제	
+12925	문자열을 정수로 바꾸기	1	bjh	problems/12925.md	코딩테스트 연습 > 연습문제	
+12926	시저 암호	1	bjh	problems/12926.md	코딩테스트 연습 > 연습문제	
+12927	야근 지수	3	bjh	problems/12927.md	코딩테스트 연습 > 연습문제	
+12928	약수의 합	1	bjh	problems/12928.md	코딩테스트 연습 > 연습문제	
+12929	올바른 괄호의 갯수	4	bjh	problems/12929.md	코딩테스트 연습 > 연습문제	
+12930	이상한 문자 만들기	1	bjh	problems/12930.md	코딩테스트 연습 > 연습문제	
+12931	자릿수 더하기	1	bjh	problems/12931.md	코딩테스트 연습 > 연습문제	
+12932	자연수 뒤집어 배열로 만들기	1	bjh	problems/12932.md	코딩테스트 연습 > 연습문제	
+12933	정수 내림차순으로 배치하기	1	bjh	problems/12933.md	코딩테스트 연습 > 연습문제	
+12934	정수 제곱근 판별	1	bjh	problems/12934.md	코딩테스트 연습 > 연습문제	
+12935	제일 작은 수 제거하기	1	bjh	problems/12935.md	코딩테스트 연습 > 연습문제	
+12936	줄 서는 방법	2	bjh	problems/12936.md	코딩테스트 연습 > 연습문제	
+12937	짝수와 홀수	1	bjh	problems/12937.md	코딩테스트 연습 > 연습문제	
+12938	최고의 집합	3	bjh	problems/12938.md	코딩테스트 연습 > 연습문제	
+12939	최댓값과 최솟값	2	bjh	problems/12939.md	코딩테스트 연습 > 연습문제	
+12940	최대공약수와 최소공배수	1	bjh	problems/12940.md	코딩테스트 연습 > 연습문제	
+12941	최솟값 만들기	2	bjh	problems/12941.md	코딩테스트 연습 > 연습문제	
+12942	최적의 행렬 곱셈	3	bjh	problems/12942.md	코딩테스트 연습 > 연습문제	
+12943	콜라츠 추측	1	bjh	problems/12943.md	코딩테스트 연습 > 연습문제	
+12944	평균 구하기	1	bjh	problems/12944.md	코딩테스트 연습 > 연습문제	
+12945	피보나치 수	2	bjh	problems/12945.md	코딩테스트 연습 > 연습문제	
+12946	하노이의 탑	2	bjh	problems/12946.md	코딩테스트 연습 > 연습문제	
+12947	하샤드 수	1	bjh	problems/12947.md	코딩테스트 연습 > 연습문제	
+12948	핸드폰 번호 가리기	1	bjh	problems/12948.md	코딩테스트 연습 > 연습문제	
+12949	행렬의 곱셈	2	bjh	problems/12949.md	코딩테스트 연습 > 연습문제	
+12950	행렬의 덧셈	1	bjh	problems/12950.md	코딩테스트 연습 > 연습문제	
+12951	JadenCase 문자열 만들기	2	bjh	problems/12951.md	코딩테스트 연습 > 연습문제	
+12952	N-Queen	2	bjh	problems/12952.md	코딩테스트 연습 > 연습문제	
+12953	N개의 최소공배수	2	bjh	problems/12953.md	코딩테스트 연습 > 연습문제	
+12954	x만큼 간격이 있는 n개의 숫자	1	bjh	problems/12954.md	코딩테스트 연습 > 연습문제	
+12969	직사각형 별찍기	1	bjh	problems/12969.md	코딩테스트 연습 > 연습문제	
+12971	스티커 모으기(2)	3	bjh	problems/12971.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12973	짝지어 제거하기	2	bjh	problems/12973.md	코딩테스트 연습 > 2017 팁스타운	
+12974	직사각형의 넓이	5	bjh	problems/12974.md	코딩테스트 연습 > 연습문제	
+12977	소수 만들기	1	bjh	problems/12977.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12978	배달	2	bjh	problems/12978.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12979	기지국 설치	3	bjh	problems/12979.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12980	점프와 순간 이동	2	bjh	problems/12980.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12981	영어 끝말잇기	2	bjh	problems/12981.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12982	예산	1	bjh	problems/12982.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12983	단어 퍼즐	4	bjh	problems/12983.md	코딩테스트 연습 > 2017 팁스타운	
+12984	지형 편집	4	bjh	problems/12984.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+12985	예상 대진표	2	bjh	problems/12985.md	코딩테스트 연습 > 2017 팁스타운	
+12987	숫자 게임	3	bjh	problems/12987.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+17676	[1차] 추석 트래픽	3	bjh	problems/17676.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17677	[1차] 뉴스 클러스터링	2	bjh	problems/17677.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17678	[1차] 셔틀버스	3	bjh	problems/17678.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17679	[1차] 프렌즈4블록	2	bjh	problems/17679.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17680	[1차] 캐시	2	bjh	problems/17680.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17681	[1차] 비밀지도	1	bjh	problems/17681.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17682	[1차] 다트 게임	1	bjh	problems/17682.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17683	[3차] 방금그곡	2	bjh	problems/17683.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17684	[3차] 압축	2	bjh	problems/17684.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17685	[3차] 자동완성	4	bjh	problems/17685.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17686	[3차] 파일명 정렬	2	bjh	problems/17686.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+17687	[3차] n진수 게임	2	bjh	problems/17687.md	코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT	
+42576	완주하지 못한 선수	1	bjh	problems/42576.md	코딩테스트 연습 > 해시	
+42577	전화번호 목록	2	bjh	problems/42577.md	코딩테스트 연습 > 해시	
+42578	의상	2	bjh	problems/42578.md	코딩테스트 연습 > 해시	위장
+42579	베스트앨범	3	bjh	problems/42579.md	코딩테스트 연습 > 해시	
+42583	다리를 지나는 트럭	2	bjh	problems/42583.md	코딩테스트 연습 > 스택／큐	
+42584	주식가격	2	bjh	problems/42584.md	코딩테스트 연습 > 스택／큐	
+42586	기능개발	2	bjh	problems/42586.md	코딩테스트 연습 > 스택／큐	
+42587	프로세스	2	bjh	problems/42587.md	코딩테스트 연습 > 스택／큐	프린터
+42626	더 맵게	2	bjh	problems/42626.md	코딩테스트 연습 > 힙（Heap）	
+42627	디스크 컨트롤러	3	bjh	problems/42627.md	코딩테스트 연습 > 힙（Heap）	
+42628	이중우선순위큐	3	bjh	problems/42628.md	코딩테스트 연습 > 힙（Heap）	
+42746	가장 큰 수	2	bjh	problems/42746.md	코딩테스트 연습 > 정렬	
+42747	H-Index	2	bjh	problems/42747.md	코딩테스트 연습 > 정렬	
+42748	K번째수	1	bjh	problems/42748.md	코딩테스트 연습 > 정렬	
+42839	소수 찾기	2	bjh	problems/42839.md	코딩테스트 연습 > 완전탐색	
+42840	모의고사	1	bjh	problems/42840.md	코딩테스트 연습 > 완전탐색	
+42842	카펫	2	bjh	problems/42842.md	코딩테스트 연습 > 완전탐색	
+42860	조이스틱	2	bjh	problems/42860.md	코딩테스트 연습 > 탐욕법（Greedy）	
+42861	섬 연결하기	3	bjh	problems/42861.md	코딩테스트 연습 > 탐욕법（Greedy）	
+42862	체육복	1	bjh	problems/42862.md	코딩테스트 연습 > 탐욕법（Greedy）	
+42883	큰 수 만들기	2	bjh	problems/42883.md	코딩테스트 연습 > 탐욕법（Greedy）	
+42884	단속카메라	3	bjh	problems/42884.md	코딩테스트 연습 > 탐욕법（Greedy）	
+42885	구명보트	2	bjh	problems/42885.md	코딩테스트 연습 > 탐욕법（Greedy）	
+42888	오픈채팅방	2	bjh	problems/42888.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42889	실패율	1	bjh	problems/42889.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42890	후보키	2	bjh	problems/42890.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42891	무지의 먹방 라이브	4	bjh	problems/42891.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42892	길 찾기 게임	3	bjh	problems/42892.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42893	매칭 점수	3	bjh	problems/42893.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42894	블록 게임	4	bjh	problems/42894.md	코딩테스트 연습 > 2019 KAKAO BLIND RECRUITMENT	
+42895	N으로 표현	3	bjh	problems/42895.md	코딩테스트 연습 > 동적계획법（Dynamic Programming）	
+42897	도둑질	4	bjh	problems/42897.md	코딩테스트 연습 > 동적계획법（Dynamic Programming）	
+42898	등굣길	3	bjh	problems/42898.md	코딩테스트 연습 > 동적계획법（Dynamic Programming）	
+43105	정수 삼각형	3	bjh	problems/43105.md	코딩테스트 연습 > 동적계획법（Dynamic Programming）	
+43162	네트워크	3	bjh	problems/43162.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+43163	단어 변환	3	bjh	problems/43163.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+43164	여행경로	3	bjh	problems/43164.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+43165	타겟 넘버	2	bjh	problems/43165.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+43236	징검다리	4	bjh	problems/43236.md	코딩테스트 연습 > 이분탐색	
+43238	입국심사	3	bjh	problems/43238.md	코딩테스트 연습 > 이분탐색	
+49189	가장 먼 노드	3	bjh	problems/49189.md	코딩테스트 연습 > 그래프	
+49190	방의 개수	5	bjh	problems/49190.md	코딩테스트 연습 > 그래프	
+49191	순위	3	bjh	problems/49191.md	코딩테스트 연습 > 그래프	
+49993	스킬트리	2	bjh	problems/49993.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+49994	방문 길이	2	bjh	problems/49994.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+49995	쿠키 구입	4	bjh	problems/49995.md	코딩테스트 연습 > Summer／Winter Coding（～2018）	
+59034	모든 레코드 조회하기	1	bjh	problems/59034.md	코딩테스트 연습 > SELECT	
+59035	역순 정렬하기	1	bjh	problems/59035.md	코딩테스트 연습 > SELECT	
+59036	아픈 동물 찾기	1	bjh	problems/59036.md	코딩테스트 연습 > SELECT	
+59037	어린 동물 찾기	1	bjh	problems/59037.md	코딩테스트 연습 > SELECT	
+59038	최솟값 구하기	2	bjh	problems/59038.md	코딩테스트 연습 > SUM， MAX， MIN	
+59039	이름이 없는 동물의 아이디	1	bjh	problems/59039.md	코딩테스트 연습 > IS NULL	
+59040	고양이와 개는 몇 마리 있을까	2	bjh	problems/59040.md	코딩테스트 연습 > GROUP BY	
+59041	동명 동물 수 찾기	2	bjh	problems/59041.md	코딩테스트 연습 > GROUP BY	
+59042	없어진 기록 찾기	3	bjh	problems/59042.md	코딩테스트 연습 > JOIN	
+59043	있었는데요 없었습니다	3	bjh	problems/59043.md	코딩테스트 연습 > JOIN	
+59044	오랜 기간 보호한 동물(1)	3	bjh	problems/59044.md	코딩테스트 연습 > JOIN	
+59045	보호소에서 중성화한 동물	4	bjh	problems/59045.md	코딩테스트 연습 > JOIN	
+59046	루시와 엘라 찾기	2	bjh	problems/59046.md	코딩테스트 연습 > String， Date	
+59047	이름에 el이 들어가는 동물 찾기	2	bjh	problems/59047.md	코딩테스트 연습 > String， Date	
+59403	동물의 아이디와 이름	1	bjh	problems/59403.md	코딩테스트 연습 > SELECT	
+59404	여러 기준으로 정렬하기	1	bjh	problems/59404.md	코딩테스트 연습 > SELECT	
+59405	상위 n개 레코드	1	bjh	problems/59405.md	코딩테스트 연습 > SELECT	
+59406	동물 수 구하기	2	bjh	problems/59406.md	코딩테스트 연습 > SUM， MAX， MIN	
+59407	이름이 있는 동물의 아이디	1	bjh	problems/59407.md	코딩테스트 연습 > IS NULL	
+59408	중복 제거하기	2	bjh	problems/59408.md	코딩테스트 연습 > SUM， MAX， MIN	
+59409	중성화 여부 파악하기	2	bjh	problems/59409.md	코딩테스트 연습 > String， Date	
+59410	NULL 처리하기	2	bjh	problems/59410.md	코딩테스트 연습 > IS NULL	
+59411	오랜 기간 보호한 동물(2)	3	bjh	problems/59411.md	코딩테스트 연습 > String， Date	
+59412	입양 시각 구하기(1)	2	bjh	problems/59412.md	코딩테스트 연습 > GROUP BY	
+59413	입양 시각 구하기(2)	4	bjh	problems/59413.md	코딩테스트 연습 > GROUP BY	
+59414	DATETIME에서 DATE로 형 변환	2	bjh	problems/59414.md	코딩테스트 연습 > String， Date	
+59415	최댓값 구하기	1	bjh	problems/59415.md	코딩테스트 연습 > SUM， MAX， MIN	
+60057	문자열 압축	2	bjh	problems/60057.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+60058	괄호 변환	2	bjh	problems/60058.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+60059	자물쇠와 열쇠	3	bjh	problems/60059.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+60060	가사 검색	4	bjh	problems/60060.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+60061	기둥과 보 설치	3	bjh	problems/60061.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+60062	외벽 점검	3	bjh	problems/60062.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+60063	블록 이동하기	3	bjh	problems/60063.md	코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT	
+62048	멀쩡한 사각형	2	bjh	problems/62048.md	코딩테스트 연습 > Summer／Winter Coding（2019）	
+62050	지형 이동	4	bjh	problems/62050.md	코딩테스트 연습 > Summer／Winter Coding（2019）	
+62284	우유와 요거트가 담긴 장바구니	4	bjh	problems/62284.md	코딩테스트 연습 > Summer／Winter Coding（2019）	
+64061	크레인 인형뽑기 게임	1	bjh	problems/64061.md	코딩테스트 연습 > 2019 카카오 개발자 겨울 인턴십	
+64062	징검다리 건너기	3	bjh	problems/64062.md	코딩테스트 연습 > 2019 카카오 개발자 겨울 인턴십	
+64063	호텔 방 배정	4	bjh	problems/64063.md	코딩테스트 연습 > 2019 카카오 개발자 겨울 인턴십	
+64064	불량 사용자	3	bjh	problems/64064.md	코딩테스트 연습 > 2019 카카오 개발자 겨울 인턴십	
+64065	튜플	2	bjh	problems/64065.md	코딩테스트 연습 > 2019 카카오 개발자 겨울 인턴십	
+67256	[카카오 인턴] 키패드 누르기	1	bjh	problems/67256.md	코딩테스트 연습 > 2020 카카오 인턴십	키패드 누르기
+67257	[카카오 인턴] 수식 최대화	2	bjh	problems/67257.md	코딩테스트 연습 > 2020 카카오 인턴십	수식 최대화
+67258	[카카오 인턴] 보석 쇼핑	3	bjh	problems/67258.md	코딩테스트 연습 > 2020 카카오 인턴십	보석 쇼핑
+67259	[카카오 인턴] 경주로 건설	3	bjh	problems/67259.md	코딩테스트 연습 > 2020 카카오 인턴십	경주로 건설
+67260	[카카오 인턴] 동굴 탐험	4	bjh	problems/67260.md	코딩테스트 연습 > 2020 카카오 인턴십	동굴 탐험
+68644	두 개 뽑아서 더하기	1	bjh	problems/68644.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+68645	삼각 달팽이	2	bjh	problems/68645.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+68646	풍선 터트리기	3	bjh	problems/68646.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+68647	짝수 행 세기	4	bjh	problems/68647.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+68935	3진법 뒤집기	1	bjh	problems/68935.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+68936	쿼드압축 후 개수 세기	2	bjh	problems/68936.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+68937	트리 트리오 중간값		none			
+68938	문자열의 아름다움	5	bjh	problems/68938.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+70128	내적	1	bjh	problems/70128.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+70129	이진 변환 반복하기	2	bjh	problems/70129.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+70130	스타 수열	3	bjh	problems/70130.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+70132	가짜 해밀토니안	5	bjh	problems/70132.md	코딩테스트 연습 > 월간 코드 챌린지 시즌1	
+72410	신규 아이디 추천	1	bjh	problems/72410.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+72411	메뉴 리뉴얼	2	bjh	problems/72411.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+72412	순위 검색	2	bjh	problems/72412.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+72413	합승 택시 요금	3	bjh	problems/72413.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+72414	광고 삽입	3	bjh	problems/72414.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+72415	카드 짝 맞추기	3	bjh	problems/72415.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+72416	매출 하락 최소화	4	bjh	problems/72416.md	코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT	
+76501	음양 더하기	1	bjh	problems/76501.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+76502	괄호 회전하기	2	bjh	problems/76502.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+76503	모두 0으로 만들기	3	bjh	problems/76503.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+76504	RPG와 쿼리	5	bjh	problems/76504.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+77484	로또의 최고 순위와 최저 순위	1	bjh	problems/77484.md	코딩테스트 연습 > 2021 Dev－Matching： 웹 백엔드 개발자（상반기）	
+77485	행렬 테두리 회전하기	2	bjh	problems/77485.md	코딩테스트 연습 > 2021 Dev－Matching： 웹 백엔드 개발자（상반기）	
+77486	다단계 칫솔 판매	3	bjh	problems/77486.md	코딩테스트 연습 > 2021 Dev－Matching： 웹 백엔드 개발자（상반기）	
+77487	헤비 유저가 소유한 장소	3	bjh	problems/77487.md	코딩테스트 연습 > 2021 Dev－Matching： 웹 백엔드 개발자（상반기）	
+77884	약수의 개수와 덧셈	1	bjh	problems/77884.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+77885	2개 이하로 다른 비트	2	bjh	problems/77885.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+77886	110 옮기기	3	bjh	problems/77886.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+77887	중력 작용	5	bjh	problems/77887.md	코딩테스트 연습 > 월간 코드 챌린지 시즌2	
+81301	숫자 문자열과 영단어	1	bjh	problems/81301.md	코딩테스트 연습 > 2021 카카오 채용연계형 인턴십	
+81302	거리두기 확인하기	2	bjh	problems/81302.md	코딩테스트 연습 > 2021 카카오 채용연계형 인턴십	
+81303	표 편집	3	bjh	problems/81303.md	코딩테스트 연습 > 2021 카카오 채용연계형 인턴십	
+81304	미로 탈출	4	bjh	problems/81304.md	코딩테스트 연습 > 2021 카카오 채용연계형 인턴십	
+81305	시험장 나누기	5	bjh	problems/81305.md	코딩테스트 연습 > 2021 카카오 채용연계형 인턴십	
+82612	부족한 금액 계산하기	1	bjh	problems/82612.md	코딩테스트 연습 > 위클리 챌린지	
+84021	퍼즐 조각 채우기	3	bjh	problems/84021.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+84512	모음 사전	2	bjh	problems/84512.md	코딩테스트 연습 > 완전탐색	모음사전
+86051	없는 숫자 더하기	1	bjh	problems/86051.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	
+86052	빛의 경로 사이클	2	bjh	problems/86052.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	
+86053	금과 은 운반하기	3	bjh	problems/86053.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	
+86054	안티 세포	4	bjh	problems/86054.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	안티세포
+86491	최소직사각형	1	bjh	problems/86491.md	코딩테스트 연습 > 완전탐색	
+86971	전력망을 둘로 나누기	2	bjh	problems/86971.md	코딩테스트 연습 > 완전탐색	
+87377	교점에 별 만들기	2	bjh	problems/87377.md	코딩테스트 연습 > 위클리 챌린지	
+87389	나머지가 1이 되는 수 찾기	1	bjh	problems/87389.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	
+87390	n^2 배열 자르기	2	bjh	problems/87390.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	
+87391	공 이동 시뮬레이션	3	bjh	problems/87391.md	코딩테스트 연습 > 월간 코드 챌린지 시즌3	
+87394	쿼리의 모음의 개수		none			
+87694	아이템 줍기	3	bjh	problems/87694.md	코딩테스트 연습 > 깊이／너비 우선 탐색（DFS／BFS）	
+87946	피로도	2	bjh	problems/87946.md	코딩테스트 연습 > 완전탐색	
+92334	신고 결과 받기	1	bjh	problems/92334.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+92335	k진수에서 소수 개수 구하기	2	bjh	problems/92335.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+92341	주차 요금 계산	2	bjh	problems/92341.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+92342	양궁대회	2	bjh	problems/92342.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+92343	양과 늑대	3	bjh	problems/92343.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+92344	파괴되지 않은 건물	3	bjh	problems/92344.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+92345	사라지는 발판	3	bjh	problems/92345.md	코딩테스트 연습 > 2022 KAKAO BLIND RECRUITMENT	
+118666	성격 유형 검사하기	1	bjh	problems/118666.md	코딩테스트 연습 > 2022 KAKAO TECH INTERNSHIP	
+118667	두 큐 합 같게 만들기	2	bjh	problems/118667.md	코딩테스트 연습 > 2022 KAKAO TECH INTERNSHIP	
+118668	코딩 테스트 공부	3	bjh	problems/118668.md	코딩테스트 연습 > 2022 KAKAO TECH INTERNSHIP	
+118669	등산코스 정하기	3	bjh	problems/118669.md	코딩테스트 연습 > 2022 KAKAO TECH INTERNSHIP	
+118670	행렬과 연산	4	bjh	problems/118670.md	코딩테스트 연습 > 2022 KAKAO TECH INTERNSHIP	
+120583	중복된 숫자 개수	0	bjh	problems/120583.md	코딩테스트 연습 > 코딩테스트 입문	
+120585	머쓱이보다 키 큰 사람	0	bjh	problems/120585.md	코딩테스트 연습 > 코딩테스트 입문	
+120802	두 수의 합	0	bjh	problems/120802.md	코딩테스트 연습 > 코딩테스트 입문	
+120803	두 수의 차	0	bjh	problems/120803.md	코딩테스트 연습 > 코딩테스트 입문	
+120804	두 수의 곱	0	bjh	problems/120804.md	코딩테스트 연습 > 코딩테스트 입문	
+120805	몫 구하기	0	bjh	problems/120805.md	코딩테스트 연습 > 코딩테스트 입문	
+120806	두 수의 나눗셈	0	bjh	problems/120806.md	코딩테스트 연습 > 코딩테스트 입문	
+120807	숫자 비교하기	0	bjh	problems/120807.md	코딩테스트 연습 > 코딩테스트 입문	
+120808	분수의 덧셈	0	bjh	problems/120808.md	코딩테스트 연습 > 코딩테스트 입문	
+120809	배열 두배 만들기	0	bjh	problems/120809.md	코딩테스트 연습 > 코딩테스트 입문	배열 두 배 만들기
+120810	나머지 구하기	0	bjh	problems/120810.md	코딩테스트 연습 > 코딩테스트 입문	
+120811	중앙값 구하기	0	bjh	problems/120811.md	코딩테스트 연습 > 코딩테스트 입문	
+120812	최빈값 구하기	0	bjh	problems/120812.md	코딩테스트 연습 > 코딩테스트 입문	
+120813	짝수는 싫어요	0	bjh	problems/120813.md	코딩테스트 연습 > 코딩테스트 입문	
+120814	피자 나눠 먹기 (1)	0	bjh	problems/120814.md	코딩테스트 연습 > 코딩테스트 입문	
+120815	피자 나눠 먹기 (2)	0	bjh	problems/120815.md	코딩테스트 연습 > 코딩테스트 입문	
+120816	피자 나눠 먹기 (3)	0	bjh	problems/120816.md	코딩테스트 연습 > 코딩테스트 입문	
+120817	배열의 평균값	0	bjh	problems/120817.md	코딩테스트 연습 > 코딩테스트 입문	
+120818	옷가게 할인 받기	0	bjh	problems/120818.md	코딩테스트 연습 > 코딩테스트 입문	
+120819	아이스 아메리카노	0	bjh	problems/120819.md	코딩테스트 연습 > 코딩테스트 입문	
+120820	나이 출력	0	bjh	problems/120820.md	코딩테스트 연습 > 코딩테스트 입문	
+120821	배열 뒤집기	0	bjh	problems/120821.md	코딩테스트 연습 > 코딩테스트 입문	
+120822	문자열 뒤집기	0	bjh	problems/120822.md	코딩테스트 연습 > 코딩테스트 입문	
+120823	직각삼각형 출력하기	0	bjh	problems/120823.md	코딩테스트 연습 > 코딩테스트 입문	
+120824	짝수 홀수 개수	0	bjh	problems/120824.md	코딩테스트 연습 > 코딩테스트 입문	
+120825	문자 반복 출력하기	0	bjh	problems/120825.md	코딩테스트 연습 > 코딩테스트 입문	
+120826	특정 문자 제거하기	0	bjh	problems/120826.md	코딩테스트 연습 > 코딩테스트 입문	
+120829	각도기	0	bjh	problems/120829.md	코딩테스트 연습 > 코딩테스트 입문	
+120830	양꼬치	0	bjh	problems/120830.md	코딩테스트 연습 > 코딩테스트 입문	
+120831	짝수의 합	0	bjh	problems/120831.md	코딩테스트 연습 > 코딩테스트 입문	
+120833	배열 자르기	0	bjh	problems/120833.md	코딩테스트 연습 > 코딩테스트 입문	
+120834	외계행성의 나이	0	bjh	problems/120834.md	코딩테스트 연습 > 코딩테스트 입문	
+120835	진료 순서 정하기	0	bjh	problems/120835.md	코딩테스트 연습 > 코딩테스트 입문	진료순서 정하기
+120836	순서쌍의 개수	0	bjh	problems/120836.md	코딩테스트 연습 > 코딩테스트 입문	
+120837	개미 군단	0	bjh	problems/120837.md	코딩테스트 연습 > 코딩테스트 입문	
+120838	모스부호 (1)	0	bjh	problems/120838.md	코딩테스트 연습 > 코딩테스트 입문	
+120839	가위 바위 보	0	bjh	problems/120839.md	코딩테스트 연습 > 코딩테스트 입문	
+120840	구슬을 나누는 경우의 수	0	bjh	problems/120840.md	코딩테스트 연습 > 코딩테스트 입문	
+120841	점의 위치 구하기	0	bjh	problems/120841.md	코딩테스트 연습 > 코딩테스트 입문	
+120842	2차원으로 만들기	0	bjh	problems/120842.md	코딩테스트 연습 > 코딩테스트 입문	
+120843	공 던지기	0	bjh	problems/120843.md	코딩테스트 연습 > 코딩테스트 입문	
+120844	배열 회전시키기	0	bjh	problems/120844.md	코딩테스트 연습 > 코딩테스트 입문	
+120845	주사위의 개수	0	bjh	problems/120845.md	코딩테스트 연습 > 코딩테스트 입문	
+120846	합성수 찾기	0	bjh	problems/120846.md	코딩테스트 연습 > 코딩테스트 입문	
+120847	최댓값 만들기 (1)	0	bjh	problems/120847.md	코딩테스트 연습 > 코딩테스트 입문	최댓값 만들기(1)
+120848	팩토리얼	0	bjh	problems/120848.md	코딩테스트 연습 > 코딩테스트 입문	
+120849	모음 제거	0	bjh	problems/120849.md	코딩테스트 연습 > 코딩테스트 입문	
+120850	문자열 정렬하기 (1)	0	bjh	problems/120850.md	코딩테스트 연습 > 코딩테스트 입문	
+120851	숨어있는 숫자의 덧셈 (1)	0	bjh	problems/120851.md	코딩테스트 연습 > 코딩테스트 입문	
+120852	소인수분해	0	bjh	problems/120852.md	코딩테스트 연습 > 코딩테스트 입문	
+120853	컨트롤 제트	0	bjh	problems/120853.md	코딩테스트 연습 > 코딩테스트 입문	
+120854	배열 원소의 길이	0	bjh	problems/120854.md	코딩테스트 연습 > 코딩테스트 입문	
+120860	직사각형 넓이 구하기	0	bjh	problems/120860.md	코딩테스트 연습 > 코딩테스트 입문	
+120861	캐릭터의 좌표	0	bjh	problems/120861.md	코딩테스트 연습 > 코딩테스트 입문	
+120862	최댓값 만들기 (2)	0	bjh	problems/120862.md	코딩테스트 연습 > 코딩테스트 입문	
+120863	다항식 더하기	0	bjh	problems/120863.md	코딩테스트 연습 > 코딩테스트 입문	
+120864	숨어있는 숫자의 덧셈 (2)	0	bjh	problems/120864.md	코딩테스트 연습 > 코딩테스트 입문	
+120866	안전지대	0	bjh	problems/120866.md	코딩테스트 연습 > 코딩테스트 입문	
+120868	삼각형의 완성조건 (2)	0	bjh	problems/120868.md	코딩테스트 연습 > 코딩테스트 입문	
+120869	외계어 사전	0	bjh	problems/120869.md	코딩테스트 연습 > 코딩테스트 입문	
+120871	저주의 숫자 3	0	bjh	problems/120871.md	코딩테스트 연습 > 코딩테스트 입문	
+120875	평행	0	bjh	problems/120875.md	코딩테스트 연습 > 코딩테스트 입문	
+120876	겹치는 선분의 길이	0	bjh	problems/120876.md	코딩테스트 연습 > 코딩테스트 입문	
+120878	유한소수 판별하기	0	bjh	problems/120878.md	코딩테스트 연습 > 코딩테스트 입문	
+120880	특이한 정렬	0	bjh	problems/120880.md	코딩테스트 연습 > 코딩테스트 입문	
+120882	등수 매기기	0	bjh	problems/120882.md	코딩테스트 연습 > 코딩테스트 입문	
+120883	로그인 성공?	0	bjh	problems/120883.md	코딩테스트 연습 > 코딩테스트 입문	
+120884	치킨 쿠폰	0	bjh	problems/120884.md	코딩테스트 연습 > 코딩테스트 입문	
+120885	이진수 더하기	0	bjh	problems/120885.md	코딩테스트 연습 > 코딩테스트 입문	
+120886	A로 B 만들기	0	bjh	problems/120886.md	코딩테스트 연습 > 코딩테스트 입문	
+120887	k의 개수	0	bjh	problems/120887.md	코딩테스트 연습 > 코딩테스트 입문	
+120888	중복된 문자 제거	0	bjh	problems/120888.md	코딩테스트 연습 > 코딩테스트 입문	
+120889	삼각형의 완성조건 (1)	0	bjh	problems/120889.md	코딩테스트 연습 > 코딩테스트 입문	
+120890	가까운 수	0	bjh	problems/120890.md	코딩테스트 연습 > 코딩테스트 입문	
+120891	369게임	0	bjh	problems/120891.md	코딩테스트 연습 > 코딩테스트 입문	
+120892	암호 해독	0	bjh	problems/120892.md	코딩테스트 연습 > 코딩테스트 입문	
+120893	대문자와 소문자	0	bjh	problems/120893.md	코딩테스트 연습 > 코딩테스트 입문	
+120894	영어가 싫어요	0	bjh	problems/120894.md	코딩테스트 연습 > 코딩테스트 입문	
+120895	인덱스 바꾸기	0	bjh	problems/120895.md	코딩테스트 연습 > 코딩테스트 입문	
+120896	한 번만 등장한 문자	0	bjh	problems/120896.md	코딩테스트 연습 > 코딩테스트 입문	
+120897	약수 구하기	0	bjh	problems/120897.md	코딩테스트 연습 > 코딩테스트 입문	
+120898	편지	0	bjh	problems/120898.md	코딩테스트 연습 > 코딩테스트 입문	
+120899	가장 큰 수 찾기	0	bjh	problems/120899.md	코딩테스트 연습 > 코딩테스트 입문	
+120902	문자열 계산하기	0	bjh	problems/120902.md	코딩테스트 연습 > 코딩테스트 입문	
+120903	배열의 유사도	0	bjh	problems/120903.md	코딩테스트 연습 > 코딩테스트 입문	
+120904	숫자 찾기	0	bjh	problems/120904.md	코딩테스트 연습 > 코딩테스트 입문	
+120905	n의 배수 고르기	0	bjh	problems/120905.md	코딩테스트 연습 > 코딩테스트 입문	
+120906	자릿수 더하기	0	bjh	problems/120906.md	코딩테스트 연습 > 코딩테스트 입문	
+120907	OX퀴즈	0	bjh	problems/120907.md	코딩테스트 연습 > 코딩테스트 입문	
+120908	문자열안에 문자열	0	bjh	problems/120908.md	코딩테스트 연습 > 코딩테스트 입문	
+120909	제곱수 판별하기	0	bjh	problems/120909.md	코딩테스트 연습 > 코딩테스트 입문	
+120910	세균 증식	0	bjh	problems/120910.md	코딩테스트 연습 > 코딩테스트 입문	
+120911	문자열 정렬하기 (2)	0	bjh	problems/120911.md	코딩테스트 연습 > 코딩테스트 입문	
+120912	7의 개수	0	bjh	problems/120912.md	코딩테스트 연습 > 코딩테스트 입문	
+120913	잘라서 배열로 저장하기	0	bjh	problems/120913.md	코딩테스트 연습 > 코딩테스트 입문	
+120921	문자열 밀기	0	bjh	problems/120921.md	코딩테스트 연습 > 코딩테스트 입문	
+120922	종이 자르기	0	bjh	problems/120922.md	코딩테스트 연습 > 코딩테스트 입문	
+120923	연속된 수의 합	0	bjh	problems/120923.md	코딩테스트 연습 > 코딩테스트 입문	
+120924	다음에 올 숫자	0	bjh	problems/120924.md	코딩테스트 연습 > 코딩테스트 입문	
+120956	옹알이 (1)	0	bjh	problems/120956.md	코딩테스트 연습 > 코딩테스트 입문	
+131112	강원도에 위치한 생산공장 목록 출력하기	1	bjh	problems/131112.md	코딩테스트 연습 > SELECT	
+131113	조건별로 분류하여 주문상태 출력하기	3	bjh	problems/131113.md	코딩테스트 연습 > String， Date	
+131114	경기도에 위치한 식품창고 목록 출력하기	1	bjh	problems/131114.md	코딩테스트 연습 > IS NULL	
+131115	가격이 제일 비싼 식품의 정보 출력하기	2	bjh	problems/131115.md	코딩테스트 연습 > SUM， MAX， MIN	
+131116	식품분류별 가장 비싼 식품의 정보 조회하기	4	bjh	problems/131116.md	코딩테스트 연습 > GROUP BY	
+131117	5월 식품들의 총매출 조회하기	4	bjh	problems/131117.md	코딩테스트 연습 > JOIN	
+131118	서울에 위치한 식당 목록 출력하기	4	bjh	problems/131118.md	코딩테스트 연습 > SELECT	
+131120	3월에 태어난 여성 회원 목록 출력하기	2	bjh	problems/131120.md	코딩테스트 연습 > SELECT	
+131123	즐겨찾기가 가장 많은 식당 정보 출력하기	3	bjh	problems/131123.md	코딩테스트 연습 > GROUP BY	
+131124	그룹별 조건에 맞는 식당 목록 출력하기	4	bjh	problems/131124.md	코딩테스트 연습 > JOIN	
+131127	할인 행사	2	bjh	problems/131127.md	코딩테스트 연습 > 연습문제	
+131128	숫자 짝꿍	1	bjh	problems/131128.md	코딩테스트 연습 > 연습문제	
+131129	카운트 다운	3	bjh	problems/131129.md	코딩테스트 연습 > 연습문제	
+131130	혼자 놀기의 달인	2	bjh	problems/131130.md	코딩테스트 연습 > 연습문제	
+131528	나이 정보가 없는 회원 수 구하기	1	bjh	problems/131528.md	코딩테스트 연습 > IS NULL	
+131529	카테고리 별 상품 개수 구하기	2	bjh	problems/131529.md	코딩테스트 연습 > String， Date	
+131530	가격대 별 상품 개수 구하기	2	bjh	problems/131530.md	코딩테스트 연습 > GROUP BY	
+131532	년, 월, 성별 별 상품 구매 회원 수 구하기	4	bjh	problems/131532.md	코딩테스트 연습 > GROUP BY	
+131533	상품 별 오프라인 매출 구하기	2	bjh	problems/131533.md	코딩테스트 연습 > JOIN	
+131534	상품을 구매한 회원 비율 구하기	5	bjh	problems/131534.md	코딩테스트 연습 > JOIN	
+131535	조건에 맞는 회원수 구하기	1	bjh	problems/131535.md	코딩테스트 연습 > SELECT	
+131536	재구매가 일어난 상품과 회원 리스트 구하기	2	bjh	problems/131536.md	코딩테스트 연습 > SELECT	
+131537	오프라인/온라인 판매 데이터 통합하기	4	bjh	problems/131537.md	코딩테스트 연습 > SELECT	
+131697	가장 비싼 상품 구하기	1	bjh	problems/131697.md	코딩테스트 연습 > SUM， MAX， MIN	
+131701	연속 부분 수열 합의 개수	2	bjh	problems/131701.md	코딩테스트 연습 > 연습문제	
+131702	고고학 최고의 발견	3	bjh	problems/131702.md	코딩테스트 연습 > 연습문제	
+131703	2차원 동전 뒤집기	3	bjh	problems/131703.md	코딩테스트 연습 > 연습문제	
+131704	택배상자	2	bjh	problems/131704.md	코딩테스트 연습 > 연습문제	
+131705	삼총사	1	bjh	problems/131705.md	코딩테스트 연습 > 연습문제	
+132201	12세 이하인 여자 환자 목록 출력하기	1	bjh	problems/132201.md	코딩테스트 연습 > SELECT	
+132202	진료과별 총 예약 횟수 출력하기	2	bjh	problems/132202.md	코딩테스트 연습 > GROUP BY	
+132203	흉부외과 또는 일반외과 의사 목록 출력하기	1	bjh	problems/132203.md	코딩테스트 연습 > SELECT	
+132204	취소되지 않은 진료 예약 조회하기	4	bjh	problems/132204.md	코딩테스트 연습 > String， Date	
+132265	롤케이크 자르기	2	bjh	problems/132265.md	코딩테스트 연습 > 연습문제	
+132266	부대복귀	3	bjh	problems/132266.md	코딩테스트 연습 > 연습문제	
+132267	콜라 문제	1	bjh	problems/132267.md	코딩테스트 연습 > 연습문제	
+133024	인기있는 아이스크림	1	bjh	problems/133024.md	코딩테스트 연습 > SELECT	
+133025	과일로 만든 아이스크림 고르기	1	bjh	problems/133025.md	코딩테스트 연습 > SELECT	
+133026	성분으로 구분한 아이스크림 총 주문량	2	bjh	problems/133026.md	코딩테스트 연습 > GROUP BY	
+133027	주문량이 많은 아이스크림들 조회하기	4	bjh	problems/133027.md	코딩테스트 연습 > JOIN	
+133499	옹알이 (2)	1	bjh	problems/133499.md	코딩테스트 연습 > 연습문제	
+133500	등대	3	bjh	problems/133500.md	코딩테스트 연습 > 연습문제	
+133502	햄버거 만들기	1	bjh	problems/133502.md	코딩테스트 연습 > 연습문제	
+134239	우박수열 정적분	2	bjh	problems/134239.md	코딩테스트 연습 > 연습문제	
+134240	푸드 파이트 대회	1	bjh	problems/134240.md	코딩테스트 연습 > 연습문제	
+135807	숫자 카드 나누기	2	bjh	problems/135807.md	코딩테스트 연습 > 연습문제	
+135808	과일 장수	1	bjh	problems/135808.md	코딩테스트 연습 > 연습문제	
+136797	숫자 타자 대회	3	bjh	problems/136797.md	코딩테스트 연습 > 연습문제	
+136798	기사단원의 무기	1	bjh	problems/136798.md	코딩테스트 연습 > 연습문제	
+138475	억억단을 외우자	3	bjh	problems/138475.md	코딩테스트 연습 > 연습문제	
+138476	귤 고르기	2	bjh	problems/138476.md	코딩테스트 연습 > 연습문제	
+138477	명예의 전당 (1)	1	bjh	problems/138477.md	코딩테스트 연습 > 연습문제	
+140105	쌍둥이 빌딩 숲	4	bjh	problems/140105.md	코딩테스트 연습 > 연습문제	
+140107	점 찍기	2	bjh	problems/140107.md	코딩테스트 연습 > 연습문제	
+140108	문자열 나누기	1	bjh	problems/140108.md	코딩테스트 연습 > 연습문제	
+142085	디펜스 게임	2	bjh	problems/142085.md	코딩테스트 연습 > 연습문제	
+142086	가장 가까운 같은 글자	1	bjh	problems/142086.md	코딩테스트 연습 > 연습문제	
+144853	조건에 맞는 도서 리스트 출력하기	1	bjh	problems/144853.md	코딩테스트 연습 > SELECT	
+144854	조건에 맞는 도서와 저자 리스트 출력하기	2	bjh	problems/144854.md	코딩테스트 연습 > JOIN	
+144855	카테고리 별 도서 판매량 집계하기	3	bjh	problems/144855.md	코딩테스트 연습 > GROUP BY	
+144856	저자 별 카테고리 별 매출액 집계하기	4	bjh	problems/144856.md	코딩테스트 연습 > GROUP BY	
+147354	테이블 해시 함수	2	bjh	problems/147354.md	코딩테스트 연습 > 연습문제	
+147355	크기가 작은 부분문자열	1	bjh	problems/147355.md	코딩테스트 연습 > 연습문제	크기가 작은 부분 문자열
+148652	유사 칸토어 비트열	2	bjh	problems/148652.md	코딩테스트 연습 > 연습문제	
+148653	마법의 엘리베이터	2	bjh	problems/148653.md	코딩테스트 연습 > 연습문제	
+150364	1,2,3 떨어트리기	4	bjh	problems/150364.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+150365	미로 탈출 명령어	3	bjh	problems/150365.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+150366	표 병합	3	bjh	problems/150366.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+150367	표현 가능한 이진트리	3	bjh	problems/150367.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+150368	이모티콘 할인행사	2	bjh	problems/150368.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+150369	택배 배달과 수거하기	2	bjh	problems/150369.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+150370	개인정보 수집 유효기간	1	bjh	problems/150370.md	코딩테스트 연습 > 2023 KAKAO BLIND RECRUITMENT	
+151136	평균 일일 대여 요금 구하기	1	bjh	problems/151136.md	코딩테스트 연습 > SELECT	
+151137	자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기	2	bjh	problems/151137.md	코딩테스트 연습 > GROUP BY	
+151138	자동차 대여 기록에서 장기/단기 대여 구분하기	1	bjh	problems/151138.md	코딩테스트 연습 > String， Date	
+151139	대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기	3	bjh	problems/151139.md	코딩테스트 연습 > GROUP BY	
+151141	자동차 대여 기록 별 대여 금액 구하기	4	bjh	problems/151141.md	코딩테스트 연습 > String， Date	
+152995	인사고과	3	bjh	problems/152995.md	코딩테스트 연습 > 연습문제	
+152996	시소 짝꿍	2	bjh	problems/152996.md	코딩테스트 연습 > 연습문제	
+154538	숫자 변환하기	2	bjh	problems/154538.md	코딩테스트 연습 > 연습문제	
+154539	뒤에 있는 큰 수 찾기	2	bjh	problems/154539.md	코딩테스트 연습 > 연습문제	
+154540	무인도 여행	2	bjh	problems/154540.md	코딩테스트 연습 > 연습문제	
+155651	호텔 대실	2	bjh	problems/155651.md	코딩테스트 연습 > 연습문제	
+155652	둘만의 암호	1	bjh	problems/155652.md	코딩테스트 연습 > 연습문제	
+157339	특정 기간동안 대여 가능한 자동차들의 대여비용 구하기	4	bjh	problems/157339.md	코딩테스트 연습 > JOIN	
+157340	자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기	3	bjh	problems/157340.md	코딩테스트 연습 > GROUP BY	
+157341	대여 기록이 존재하는 자동차 리스트 구하기	3	bjh	problems/157341.md	코딩테스트 연습 > String， Date	
+157342	자동차 평균 대여 기간 구하기	2	bjh	problems/157342.md	코딩테스트 연습 > String， Date	
+157343	특정 옵션이 포함된 자동차 리스트 구하기	1	bjh	problems/157343.md	코딩테스트 연습 > String， Date	
+159993	미로 탈출	2	bjh	problems/159993.md	코딩테스트 연습 > 연습문제	
+159994	카드 뭉치	1	bjh	problems/159994.md	코딩테스트 연습 > 연습문제	
+160585	혼자서 하는 틱택토	2	bjh	problems/160585.md	코딩테스트 연습 > 연습문제	
+160586	대충 만든 자판	1	bjh	problems/160586.md	코딩테스트 연습 > 연습문제	
+161988	연속 펄스 부분 수열의 합	3	bjh	problems/161988.md	코딩테스트 연습 > 연습문제	
+161989	덧칠하기	1	bjh	problems/161989.md	코딩테스트 연습 > 연습문제	
+161990	바탕화면 정리	1	bjh	problems/161990.md	코딩테스트 연습 > 연습문제	
+164668	조건에 맞는 사용자와 총 거래금액 조회하기	3	bjh	problems/164668.md	코딩테스트 연습 > GROUP BY	
+164670	조건에 맞는 사용자 정보 조회하기	3	bjh	problems/164670.md	코딩테스트 연습 > String， Date	
+164671	조회수가 가장 많은 중고거래 게시판의 첨부파일 조회하기	3	bjh	problems/164671.md	코딩테스트 연습 > String， Date	
+164672	조건에 부합하는 중고거래 상태 조회하기	2	bjh	problems/164672.md	코딩테스트 연습 > String， Date	
+164673	조건에 부합하는 중고거래 댓글 조회하기	1	bjh	problems/164673.md	코딩테스트 연습 > SELECT	
+169198	당구 연습	2	bjh	problems/169198.md	코딩테스트 연습 > 연습문제	
+169199	리코쳇 로봇	2	bjh	problems/169199.md	코딩테스트 연습 > 연습문제	
+172927	광물 캐기	2	bjh	problems/172927.md	코딩테스트 연습 > 연습문제	광물 캐기
+172928	공원 산책	1	bjh	problems/172928.md	코딩테스트 연습 > 연습문제	공원 산책
+176962	과제 진행하기	2	bjh	problems/176962.md	코딩테스트 연습 > 연습문제	
+176963	추억 점수	1	bjh	problems/176963.md	코딩테스트 연습 > 연습문제	추억 점수
+178870	연속된 부분 수열의 합	2	bjh	problems/178870.md	코딩테스트 연습 > 연습문제	연속된 부분 수열의 합
+178871	달리기 경주	1	bjh	problems/178871.md	코딩테스트 연습 > 연습문제	달리기 경주
+181186	아방가르드 타일링	3	bjh	problems/181186.md	코딩테스트 연습 > 연습문제	
+181187	두 원 사이의 정수 쌍	2	bjh	problems/181187.md	코딩테스트 연습 > 연습문제	
+181188	요격 시스템	2	bjh	problems/181188.md	코딩테스트 연습 > 연습문제	
+181829	이차원 배열 대각선 순회하기	0	bjh	problems/181829.md	코딩테스트 연습 > 코딩 기초 트레이닝	이차원 배열 대각선 순회하기
+181830	정사각형으로 만들기	0	bjh	problems/181830.md	코딩테스트 연습 > 코딩 기초 트레이닝	정사각형으로 만들기
+181831	특별한 이차원 배열 2	0	bjh	problems/181831.md	코딩테스트 연습 > 코딩 기초 트레이닝	특별한 이차원 배열 2
+181832	정수를 나선형으로 배치하기	0	bjh	problems/181832.md	코딩테스트 연습 > 코딩 기초 트레이닝	정수를 나선형으로 배치하기
+181833	특별한 이차원 배열 1	0	bjh	problems/181833.md	코딩테스트 연습 > 코딩 기초 트레이닝	특별한 이차원 배열 1
+181834	l로 만들기	0	bjh	problems/181834.md	코딩테스트 연습 > 코딩 기초 트레이닝	l로 만들기
+181835	조건에 맞게 수열 변환하기 3	0	bjh	problems/181835.md	코딩테스트 연습 > 코딩 기초 트레이닝	조건에 맞게 수열 변환하기 3
+181836	그림 확대	0	bjh	problems/181836.md	코딩테스트 연습 > 코딩 기초 트레이닝	그림 확대
+181837	커피 심부름	0	bjh	problems/181837.md	코딩테스트 연습 > 코딩 기초 트레이닝	커피 심부름
+181838	날짜 비교하기	0	bjh	problems/181838.md	코딩테스트 연습 > 코딩 기초 트레이닝	날짜 비교하기
+181839	주사위 게임 1	0	bjh	problems/181839.md	코딩테스트 연습 > 코딩 기초 트레이닝	주사위 게임 1
+181840	정수 찾기	0	bjh	problems/181840.md	코딩테스트 연습 > 코딩 기초 트레이닝	정수 찾기
+181841	꼬리 문자열	0	bjh	problems/181841.md	코딩테스트 연습 > 코딩 기초 트레이닝	꼬리 문자열
+181842	부분 문자열	0	bjh	problems/181842.md	코딩테스트 연습 > 코딩 기초 트레이닝	부분 문자열
+181843	부분 문자열인지 확인하기	0	bjh	problems/181843.md	코딩테스트 연습 > 코딩 기초 트레이닝	부분 문자열인지 확인하기
+181844	배열의 원소 삭제하기	0	bjh	problems/181844.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열의 원소 삭제하기
+181845	문자열로 변환	0	bjh	problems/181845.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열로 변환
+181846	두 수의 합	0	bjh	problems/181846.md	코딩테스트 연습 > 코딩 기초 트레이닝	두 수의 합
+181847	0 떼기	0	bjh	problems/181847.md	코딩테스트 연습 > 코딩 기초 트레이닝	0 떼기
+181848	문자열을 정수로 변환하기	0	bjh	problems/181848.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열을 정수로 변환하기
+181849	문자열 정수의 합	0	bjh	problems/181849.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 정수의 합
+181850	정수 부분	0	bjh	problems/181850.md	코딩테스트 연습 > 코딩 기초 트레이닝	정수 부분
+181851	전국 대회 선발 고사	0	bjh	problems/181851.md	코딩테스트 연습 > 코딩 기초 트레이닝	전국 대회 선발 고사
+181852	뒤에서 5등 위로	0	bjh	problems/181852.md	코딩테스트 연습 > 코딩 기초 트레이닝	뒤에서 5등 위로
+181853	뒤에서 5등까지	0	bjh	problems/181853.md	코딩테스트 연습 > 코딩 기초 트레이닝	뒤에서 5등까지
+181854	배열의 길이에 따라 다른 연산하기	0	bjh	problems/181854.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열의 길이에 따라 다른 연산하기
+181855	문자열 묶기	0	bjh	problems/181855.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 묶기
+181856	배열 비교하기	0	bjh	problems/181856.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 비교하기
+181857	배열의 길이를 2의 거듭제곱으로 만들기	0	bjh	problems/181857.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열의 길이를 2의 거듭제곱으로 만들기
+181858	무작위로 K개의 수 뽑기	0	bjh	problems/181858.md	코딩테스트 연습 > 코딩 기초 트레이닝	무작위로 K개의 수 뽑기
+181859	배열 만들기 6	0	bjh	problems/181859.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 만들기 6
+181860	빈 배열에 추가, 삭제하기	0	bjh	problems/181860.md	코딩테스트 연습 > 코딩 기초 트레이닝	빈 배열에 추가， 삭제하기
+181861	배열의 원소만큼 추가하기	0	bjh	problems/181861.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열의 원소만큼 추가하기
+181862	세 개의 구분자	0	bjh	problems/181862.md	코딩테스트 연습 > 코딩 기초 트레이닝	세 개의 구분자
+181863	rny_string	0	bjh	problems/181863.md	코딩테스트 연습 > 코딩 기초 트레이닝	rny＿string
+181864	문자열 바꿔서 찾기	0	bjh	problems/181864.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 바꿔서 찾기
+181865	간단한 식 계산하기	0	bjh	problems/181865.md	코딩테스트 연습 > 코딩 기초 트레이닝	간단한 식 계산하기
+181866	문자열 잘라서 정렬하기	0	bjh	problems/181866.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 잘라서 정렬하기
+181867	x 사이의 개수	0	bjh	problems/181867.md	코딩테스트 연습 > 코딩 기초 트레이닝	x 사이의 개수
+181868	공백으로 구분하기 2	0	bjh	problems/181868.md	코딩테스트 연습 > 코딩 기초 트레이닝	공백으로 구분하기 2
+181869	공백으로 구분하기 1	0	bjh	problems/181869.md	코딩테스트 연습 > 코딩 기초 트레이닝	공백으로 구분하기 1
+181870	ad 제거하기	0	bjh	problems/181870.md	코딩테스트 연습 > 코딩 기초 트레이닝	ad 제거하기
+181871	문자열이 몇 번 등장하는지 세기	0	bjh	problems/181871.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열이 몇 번 등장하는지 세기
+181872	특정 문자열로 끝나는 가장 긴 부분 문자열 찾기	0	bjh	problems/181872.md	코딩테스트 연습 > 코딩 기초 트레이닝	특정 문자열로 끝나는 가장 긴 부분 문자열 찾기
+181873	특정한 문자를 대문자로 바꾸기	0	bjh	problems/181873.md	코딩테스트 연습 > 코딩 기초 트레이닝	특정한 문자를 대문자로 바꾸기
+181874	A 강조하기	0	bjh	problems/181874.md	코딩테스트 연습 > 코딩 기초 트레이닝	A 강조하기
+181875	배열에서 문자열 대소문자 변환하기	0	bjh	problems/181875.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열에서 문자열 대소문자 변환하기
+181876	소문자로 바꾸기	0	bjh	problems/181876.md	코딩테스트 연습 > 코딩 기초 트레이닝	소문자로 바꾸기
+181877	대문자로 바꾸기	0	bjh	problems/181877.md	코딩테스트 연습 > 코딩 기초 트레이닝	대문자로 바꾸기
+181878	원하는 문자열 찾기	0	bjh	problems/181878.md	코딩테스트 연습 > 코딩 기초 트레이닝	원하는 문자열 찾기
+181879	길이에 따른 연산	0	bjh	problems/181879.md	코딩테스트 연습 > 코딩 기초 트레이닝	길이에 따른 연산
+181880	1로 만들기	0	bjh	problems/181880.md	코딩테스트 연습 > 코딩 기초 트레이닝	1로 만들기
+181881	조건에 맞게 수열 변환하기 2	0	bjh	problems/181881.md	코딩테스트 연습 > 코딩 기초 트레이닝	조건에 맞게 수열 변환하기 2
+181882	조건에 맞게 수열 변환하기 1	0	bjh	problems/181882.md	코딩테스트 연습 > 코딩 기초 트레이닝	조건에 맞게 수열 변환하기 1
+181883	수열과 구간 쿼리 1	0	bjh	problems/181883.md	코딩테스트 연습 > 코딩 기초 트레이닝	수열과 구간 쿼리 1
+181884	n보다 커질 때까지 더하기	0	bjh	problems/181884.md	코딩테스트 연습 > 코딩 기초 트레이닝	n보다 커질 때까지 더하기
+181885	할 일 목록	0	bjh	problems/181885.md	코딩테스트 연습 > 코딩 기초 트레이닝	할 일 목록
+181886	5명씩	0	bjh	problems/181886.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+181887	홀수 vs 짝수	0	bjh	problems/181887.md	코딩테스트 연습 > 코딩 기초 트레이닝	홀수 vs 짝수
+181888	n개 간격의 원소들	0	bjh	problems/181888.md	코딩테스트 연습 > 코딩 기초 트레이닝	n개 간격의 원소들
+181889	n 번째 원소까지	0	bjh	problems/181889.md	코딩테스트 연습 > 코딩 기초 트레이닝	n 번째 원소까지
+181890	왼쪽 오른쪽	0	bjh	problems/181890.md	코딩테스트 연습 > 코딩 기초 트레이닝	왼쪽 오른쪽
+181891	순서 바꾸기	0	bjh	problems/181891.md	코딩테스트 연습 > 코딩 기초 트레이닝	순서 바꾸기
+181892	n 번째 원소부터	0	bjh	problems/181892.md	코딩테스트 연습 > 코딩 기초 트레이닝	n 번째 원소부터
+181893	배열 조각하기	0	bjh	problems/181893.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 조각하기
+181894	2의 영역	0	bjh	problems/181894.md	코딩테스트 연습 > 코딩 기초 트레이닝	2의 영역
+181895	배열 만들기 3	0	bjh	problems/181895.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 만들기 3
+181896	첫 번째로 나오는 음수	0	bjh	problems/181896.md	코딩테스트 연습 > 코딩 기초 트레이닝	첫 번째로 나오는 음수
+181897	리스트 자르기	0	bjh	problems/181897.md	코딩테스트 연습 > 코딩 기초 트레이닝	리스트 자르기
+181898	가까운 1 찾기	0	bjh	problems/181898.md	코딩테스트 연습 > 코딩 기초 트레이닝	가까운 1 찾기
+181899	카운트 다운	0	bjh	problems/181899.md	코딩테스트 연습 > 코딩 기초 트레이닝	카운트 다운
+181900	글자 지우기	0	bjh	problems/181900.md	코딩테스트 연습 > 코딩 기초 트레이닝	글자 지우기
+181901	배열 만들기 1	0	bjh	problems/181901.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 만들기 1
+181902	문자 개수 세기	0	bjh	problems/181902.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자 개수 세기
+181903	qr code	0	bjh	problems/181903.md	코딩테스트 연습 > 코딩 기초 트레이닝	qr code
+181904	세로 읽기	0	bjh	problems/181904.md	코딩테스트 연습 > 코딩 기초 트레이닝	세로 읽기
+181905	문자열 뒤집기	0	bjh	problems/181905.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 뒤집기
+181906	접두사인지 확인하기	0	bjh	problems/181906.md	코딩테스트 연습 > 코딩 기초 트레이닝	접두사인지 확인하기
+181907	문자열의 앞의 n글자	0	bjh	problems/181907.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열의 앞의 n글자
+181908	접미사인지 확인하기	0	bjh	problems/181908.md	코딩테스트 연습 > 코딩 기초 트레이닝	접미사인지 확인하기
+181909	접미사 배열	0	bjh	problems/181909.md	코딩테스트 연습 > 코딩 기초 트레이닝	접미사 배열
+181910	문자열의 뒤의 n글자	0	bjh	problems/181910.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열의 뒤의 n글자
+181911	부분 문자열 이어 붙여 문자열 만들기	0	bjh	problems/181911.md	코딩테스트 연습 > 코딩 기초 트레이닝	부분 문자열 이어 붙여 문자열 만들기
+181912	배열 만들기 5	0	bjh	problems/181912.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 만들기 5
+181913	문자열 여러 번 뒤집기	0	bjh	problems/181913.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 여러 번 뒤집기
+181914	9로 나눈 나머지	0	bjh	problems/181914.md	코딩테스트 연습 > 코딩 기초 트레이닝	9로 나눈 나머지
+181915	글자 이어 붙여 문자열 만들기	0	bjh	problems/181915.md	코딩테스트 연습 > 코딩 기초 트레이닝	글자 이어 붙여 문자열 만들기
+181916	주사위 게임 3	0	bjh	problems/181916.md	코딩테스트 연습 > 코딩 기초 트레이닝	주사위 게임 3
+181917	간단한 논리 연산	0	bjh	problems/181917.md	코딩테스트 연습 > 코딩 기초 트레이닝	간단한 논리 연산
+181918	배열 만들기 4	0	bjh	problems/181918.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 만들기 4
+181919	콜라츠 수열 만들기	0	bjh	problems/181919.md	코딩테스트 연습 > 코딩 기초 트레이닝	콜라츠 수열 만들기
+181920	카운트 업	0	bjh	problems/181920.md	코딩테스트 연습 > 코딩 기초 트레이닝	카운트 업
+181921	배열 만들기 2	0	bjh	problems/181921.md	코딩테스트 연습 > 코딩 기초 트레이닝	배열 만들기 2
+181922	수열과 구간 쿼리 4	0	bjh	problems/181922.md	코딩테스트 연습 > 코딩 기초 트레이닝	수열과 구간 쿼리 4
+181923	수열과 구간 쿼리 2	0	bjh	problems/181923.md	코딩테스트 연습 > 코딩 기초 트레이닝	수열과 구간 쿼리 2
+181924	수열과 구간 쿼리 3	0	bjh	problems/181924.md	코딩테스트 연습 > 코딩 기초 트레이닝	수열과 구간 쿼리 3
+181925	수 조작하기 2	0	bjh	problems/181925.md	코딩테스트 연습 > 코딩 기초 트레이닝	수 조작하기 2
+181926	수 조작하기 1	0	bjh	problems/181926.md	코딩테스트 연습 > 코딩 기초 트레이닝	수 조작하기 1
+181927	마지막 두 원소	0	bjh	problems/181927.md	코딩테스트 연습 > 코딩 기초 트레이닝	마지막 두 원소
+181928	이어 붙인 수	0	bjh	problems/181928.md	코딩테스트 연습 > 코딩 기초 트레이닝	이어 붙인 수
+181929	원소들의 곱과 합	0	bjh	problems/181929.md	코딩테스트 연습 > 코딩 기초 트레이닝	원소들의 곱과 합
+181930	주사위 게임 2	0	bjh	problems/181930.md	코딩테스트 연습 > 코딩 기초 트레이닝	주사위 게임 2
+181931	등차수열의 특정한 항만 더하기	0	bjh	problems/181931.md	코딩테스트 연습 > 코딩 기초 트레이닝	등차수열의 특정한 항만 더하기
+181932	코드 처리하기	0	bjh	problems/181932.md	코딩테스트 연습 > 코딩 기초 트레이닝	코드 처리하기
+181933	flag에 따라 다른 값 반환하기	0	bjh	problems/181933.md	코딩테스트 연습 > 코딩 기초 트레이닝	flag에 따라 다른 값 반환하기
+181934	조건 문자열	0	bjh	problems/181934.md	코딩테스트 연습 > 코딩 기초 트레이닝	조건 문자열
+181935	홀짝에 따라 다른 값 반환하기	0	bjh	problems/181935.md	코딩테스트 연습 > 코딩 기초 트레이닝	홀짝에 따라 다른 값 반환하기
+181936	공배수	0	bjh	problems/181936.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+181937	n의 배수	0	bjh	problems/181937.md	코딩테스트 연습 > 코딩 기초 트레이닝	n의 배수
+181938	두 수의 연산값 비교하기	0	bjh	problems/181938.md	코딩테스트 연습 > 코딩 기초 트레이닝	두 수의 연산값 비교하기
+181939	더 크게 합치기	0	bjh	problems/181939.md	코딩테스트 연습 > 코딩 기초 트레이닝	더 크게 합치기
+181940	문자열 곱하기	0	bjh	problems/181940.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 곱하기
+181941	문자 리스트를 문자열로 변환하기	0	bjh	problems/181941.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자 리스트를 문자열로 변환하기
+181942	문자열 섞기	0	bjh	problems/181942.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 섞기
+181943	문자열 겹쳐쓰기	0	bjh	problems/181943.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 겹쳐쓰기
+181944	홀짝 구분하기	0	bjh	problems/181944.md	코딩테스트 연습 > 코딩 기초 트레이닝	홀짝 구분하기
+181945	문자열 돌리기	0	bjh	problems/181945.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 돌리기
+181946	문자열 붙여서 출력하기	0	bjh	problems/181946.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 붙여서 출력하기
+181947	덧셈식 출력하기	0	bjh	problems/181947.md	코딩테스트 연습 > 코딩 기초 트레이닝	덧셈식 출력하기
+181948	특수문자 출력하기	0	bjh	problems/181948.md	코딩테스트 연습 > 코딩 기초 트레이닝	특수문자 출력하기
+181949	대소문자 바꿔서 출력하기	0	bjh	problems/181949.md	코딩테스트 연습 > 코딩 기초 트레이닝	대소문자 바꿔서 출력하기
+181950	문자열 반복해서 출력하기	0	bjh	problems/181950.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 반복해서 출력하기
+181951	a와 b 출력하기	0	bjh	problems/181951.md	코딩테스트 연습 > 코딩 기초 트레이닝	a와 b 출력하기
+181952	문자열 출력하기	0	bjh	problems/181952.md	코딩테스트 연습 > 코딩 기초 트레이닝	문자열 출력하기
+214288	상담원 인원	3	bjh	problems/214288.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 예선	
+214289	에어컨	3	bjh	problems/214289.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 예선	
+214290	경사로의 개수	4	bjh	problems/214290.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 예선	
+214291	집합과 쿼리	5	bjh	problems/214291.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 예선	
+214292	재밌는 레이싱 경기장 설계하기	5	bjh	problems/214292.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 본선	
+214293	중요한 도로	5	bjh	problems/214293.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 본선	
+214294	빠른 이동	5	bjh	problems/214294.md	코딩테스트 연습 > 2023 현대모비스 알고리즘 경진대회 본선	
+250121	[PCCE 기출문제] 10번 / 데이터 분석	1	bjh	problems/250121.md	코딩테스트 연습 > PCCE 기출문제	［PCCE 기출문제］ 10번 ／ 데이터 분석
+250125	[PCCE 기출문제] 9번 / 이웃한 칸	1	bjh	problems/250125.md	코딩테스트 연습 > PCCE 기출문제	［PCCE 기출문제］ 9번 ／ 이웃한 칸
+250126	[PCCE 기출문제] 8번 / 창고 정리	0	bjh	problems/250126.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 8번 ／ 창고 정리
+250127	[PCCE 기출문제] 7번 / 가습기	0	bjh	problems/250127.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+250128	[PCCE 기출문제] 6번 / 가채점	0	bjh	problems/250128.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 6번 ／ 가채점
+250129	[PCCE 기출문제] 5번 / 산책	0	bjh	problems/250129.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+250130	[PCCE 기출문제] 4번 / 저축	0	bjh	problems/250130.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+250131	[PCCE 기출문제] 3번 / 나이 계산	0	bjh	problems/250131.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+250132	[PCCE 기출문제] 2번 / 피타고라스의 정리	0	bjh	problems/250132.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 2번 ／ 피타고라스의 정리
+250133	[PCCE 기출문제] 1번 / 출력	0	bjh	problems/250133.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+250134	[PCCP 기출문제] 4번 / 수레 움직이기	3	bjh	problems/250134.md	코딩테스트 연습 > PCCP 기출문제	
+250135	[PCCP 기출문제] 3번 / 아날로그 시계	2	bjh	problems/250135.md	코딩테스트 연습 > PCCP 기출문제	
+250136	[PCCP 기출문제] 2번 / 석유 시추	2	bjh	problems/250136.md	코딩테스트 연습 > PCCP 기출문제	［PCCP 기출문제］ 2번 ／ 석유 시추
+250137	[PCCP 기출문제] 1번 / 붕대 감기	1	bjh	problems/250137.md	코딩테스트 연습 > PCCP 기출문제	［PCCP 기출문제］ 1번 ／ 붕대 감기
+258705	산 모양 타일링	3	bjh	problems/258705.md	코딩테스트 연습 > 2024 KAKAO WINTER INTERNSHIP	
+258707	n + 1 카드게임	3	bjh	problems/258707.md	코딩테스트 연습 > 2024 KAKAO WINTER INTERNSHIP	
+258709	주사위 고르기	3	bjh	problems/258709.md	코딩테스트 연습 > 2024 KAKAO WINTER INTERNSHIP	
+258711	도넛과 막대 그래프	2	bjh	problems/258711.md	코딩테스트 연습 > 2024 KAKAO WINTER INTERNSHIP	
+258712	가장 많이 받은 선물	1	bjh	problems/258712.md	코딩테스트 연습 > 2024 KAKAO WINTER INTERNSHIP	가장 많이 받은 선물
+273709	조건에 맞는 아이템들의 가격의 총합 구하기	2	bjh	problems/273709.md	코딩테스트 연습 > SUM， MAX， MIN	조건에 맞는 아이템들의 가격의 총합 구하기
+273710	ROOT 아이템 구하기	2	bjh	problems/273710.md	코딩테스트 연습 > IS NULL	ROOT 아이템 구하기
+273711	업그레이드 된 아이템 구하기	2	bjh	problems/273711.md	코딩테스트 연습 > SELECT	업그레이드 된 아이템 구하기
+273712	업그레이드 할 수 없는 아이템 구하기	3	bjh	problems/273712.md	코딩테스트 연습 > IS NULL	
+276013	Python 개발자 찾기	1	bjh	problems/276013.md	코딩테스트 연습 > SELECT	Python 개발자 찾기
+276034	조건에 맞는 개발자 찾기	2	bjh	problems/276034.md	코딩테스트 연습 > SELECT	조건에 맞는 개발자 찾기
+276035	FrontEnd 개발자 찾기	4	bjh	problems/276035.md	코딩테스트 연습 > JOIN	
+276036	언어별 개발자 분류하기	4	bjh	problems/276036.md	코딩테스트 연습 > GROUP BY	
+284527	조건에 맞는 사원 정보 조회하기	2	bjh	problems/284527.md	코딩테스트 연습 > GROUP BY	조건에 맞는 사원 정보 조회하기
+284528	연간 평가점수에 해당하는 평가 등급 및 성과금 조회하기	4	bjh	problems/284528.md	코딩테스트 연습 > GROUP BY	
+284529	부서별 평균 연봉 조회하기	3	bjh	problems/284529.md	코딩테스트 연습 > GROUP BY	부서별 평균 연봉 조회하기
+284530	연도 별 평균 미세먼지 농도 조회하기	2	bjh	problems/284530.md	코딩테스트 연습 > String， Date	연도 별 평균 미세먼지 농도 조회하기
+284531	노선별 평균 역 사이 거리 조회하기	2	bjh	problems/284531.md	코딩테스트 연습 > GROUP BY	노선별 평균 역 사이 거리 조회하기
+293257	물고기 종류 별 잡은 수 구하기	2	bjh	problems/293257.md	코딩테스트 연습 > GROUP BY	물고기 종류 별 잡은 수 구하기
+293258	잔챙이 잡은 수 구하기	1	bjh	problems/293258.md	코딩테스트 연습 > SELECT	잔챙이 잡은 수 구하기
+293259	잡은 물고기의 평균 길이 구하기	1	bjh	problems/293259.md	코딩테스트 연습 > IS NULL	잡은 물고기의 평균 길이 구하기
+293260	월별 잡은 물고기 수 구하기	2	bjh	problems/293260.md	코딩테스트 연습 > GROUP BY	월별 잡은 물고기 수 구하기
+293261	물고기 종류 별 대어 찾기	3	bjh	problems/293261.md	코딩테스트 연습 > SUM， MAX， MIN	
+298515	잡은 물고기 중 가장 큰 물고기의 길이 구하기	1	bjh	problems/298515.md	코딩테스트 연습 > SUM， MAX， MIN	잡은 물고기 중 가장 큰 물고기의 길이 구하기
+298516	한 해에 잡은 물고기 수 구하기	1	bjh	problems/298516.md	코딩테스트 연습 > String， Date	한 해에 잡은 물고기 수 구하기
+298517	가장 큰 물고기 10마리 구하기	1	bjh	problems/298517.md	코딩테스트 연습 > SELECT	가장 큰 물고기 10마리 구하기
+298518	특정 물고기를 잡은 총 수 구하기	2	bjh	problems/298518.md	코딩테스트 연습 > SELECT	특정 물고기를 잡은 총 수 구하기
+298519	특정 조건을 만족하는 물고기별 수와 최대 길이 구하기	3	bjh	problems/298519.md	코딩테스트 연습 > GROUP BY	
+299305	대장균들의 자식의 수 구하기	3	bjh	problems/299305.md	코딩테스트 연습 > SELECT	
+299307	대장균의 크기에 따라 분류하기 1	3	bjh	problems/299307.md	코딩테스트 연습 > SELECT	대장균의 크기에 따라 분류하기 1
+299308	분기별 분화된 대장균의 개체 수 구하기	2	bjh	problems/299308.md	코딩테스트 연습 > String， Date	분기별 분화된 대장균의 개체 수 구하기
+299310	연도별 대장균 크기의 편차 구하기	2	bjh	problems/299310.md	코딩테스트 연습 > SUM， MAX， MIN	연도별 대장균 크기의 편차 구하기
+301646	특정 형질을 가지는 대장균 찾기	1	bjh	problems/301646.md	코딩테스트 연습 > SELECT	특정 형질을 가지는 대장균 찾기
+301647	부모의 형질을 모두 가지는 대장균 찾기	2	bjh	problems/301647.md	코딩테스트 연습 > SELECT	부모의 형질을 모두 가지는 대장균 찾기
+301649	대장균의 크기에 따라 분류하기 2	3	bjh	problems/301649.md	코딩테스트 연습 > SELECT	
+301650	특정 세대의 대장균 찾기	4	bjh	problems/301650.md	코딩테스트 연습 > SELECT	
+301651	멸종위기의 대장균 찾기	5	bjh	problems/301651.md	코딩테스트 연습 > SELECT	
+340198	[PCCE 기출문제] 10번 / 공원	1	bjh	problems/340198.md	코딩테스트 연습 > PCCE 기출문제	［PCCE 기출문제］ 10번 ／ 공원
+340199	[PCCE 기출문제] 9번 / 지폐 접기	1	bjh	problems/340199.md	코딩테스트 연습 > PCCE 기출문제	［PCCE 기출문제］ 9번 ／ 지폐 접기
+340200	[PCCE 기출문제] 8번 / 닉네임 규칙	0	bjh	problems/340200.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 8번 ／ 닉네임 규칙
+340201	[PCCE 기출문제] 7번 / 버스	0	bjh	problems/340201.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+340202	[PCCE 기출문제] 6번 / 물 부족	0	bjh	problems/340202.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 6번 ／ 물 부족
+340203	[PCCE 기출문제] 5번 / 심폐소생술	0	bjh	problems/340203.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+340204	[PCCE 기출문제] 4번 / 병과분류	0	bjh	problems/340204.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+340205	[PCCE 기출문제] 3번 / 수 나누기	0	bjh	problems/340205.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 3번 ／ 수 나누기
+340206	[PCCE 기출문제] 2번 / 각도 합치기	0	bjh	problems/340206.md	코딩테스트 연습 > 코딩 기초 트레이닝	［PCCE 기출문제］ 2번 ／ 각도 합치기
+340207	[PCCE 기출문제] 1번 / 문자 출력	0	bjh	problems/340207.md	코딩테스트 연습 > 코딩 기초 트레이닝	
+340210	[PCCP 기출문제] 4번 / 수식 복원하기	3	bjh	problems/340210.md	코딩테스트 연습 > PCCP 기출문제	
+340211	[PCCP 기출문제] 3번 / 충돌위험 찾기	2	bjh	problems/340211.md	코딩테스트 연습 > PCCP 기출문제	
+340212	[PCCP 기출문제] 2번 / 퍼즐 게임 챌린지	2	bjh	problems/340212.md	코딩테스트 연습 > PCCP 기출문제	［PCCP 기출문제］ 2번 ／ 퍼즐 게임 챌린지
+340213	[PCCP 기출문제] 1번 / 동영상 재생기	1	bjh	problems/340213.md	코딩테스트 연습 > PCCP 기출문제	［PCCP 기출문제］ 1번 ／ 동영상 재생기
+388351	유연근무제	1	bjh	problems/388351.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 1차 예선	
+388352	비밀 코드 해독	2	bjh	problems/388352.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 1차 예선	
+388353	지게차와 크레인	2	bjh	problems/388353.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 1차 예선	지게차와 크레인
+388354	홀짝트리	3	bjh	problems/388354.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 1차 예선	
+389478	택배 상자 꺼내기	1	bjh	problems/389478.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 2차 예선	택배 상자 꺼내기
+389479	서버 증설 횟수	2	bjh	problems/389479.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 2차 예선	서버 증설 횟수
+389480	완전범죄	2	bjh	problems/389480.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 2차 예선	
+389481	봉인된 주문	3	bjh	problems/389481.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 2차 예선	
+389629	가장 큰 삼각형 덩어리	4	bjh	problems/389629.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 본선	
+389630	격자 뒤집기 미로	4	bjh	problems/389630.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 본선	
+389631	눈사람 만들기	5	bjh	problems/389631.md	코딩테스트 연습 > 2025 프로그래머스 코드챌린지 본선	
+451808	숫자 야구	3	bjh	problems/451808.md	코딩테스트 연습 > 연습문제	
+468370	중요한 단어를 스포 방지	1	bjh	problems/468370.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468371	노란불 신호등	1	bjh	problems/468371.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468372	리프 노드 수 최대화	2	bjh	problems/468372.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468373	바이러스 파이프	2	bjh	problems/468373.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468374	카카오 앱 정리하기	3	bjh	problems/468374.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468375	발전소 회로 복구	3	bjh	problems/468375.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468376	최고 속도	3	bjh	problems/468376.md	코딩테스트 연습 > 2025 카카오 하반기 1차	
+468377	힌트 스테이지	2	bjh	problems/468377.md	코딩테스트 연습 > 2025 카카오 하반기 2차	
+468378	보물 찾기	3	bjh	problems/468378.md	코딩테스트 연습 > 2025 카카오 하반기 2차	
+468379	선인장 숨기기	2	bjh	problems/468379.md	코딩테스트 연습 > 2025 카카오 하반기 2차	
+468380	제곱 개수 배열	3	bjh	problems/468380.md	코딩테스트 연습 > 2025 카카오 하반기 2차	
+468381	기차 선로	3	bjh	problems/468381.md	코딩테스트 연습 > 2025 카카오 하반기 2차	

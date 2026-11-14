@@ -1,0 +1,7 @@
+# third-party problem statements (copyright) and scratch files are never committed
+problems/
+problems_txt/
+work/
+repos_cache/
+__pycache__/
+*.pyc

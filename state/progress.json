@@ -1,0 +1,364 @@
+{
+ "start": {
+  "write": "done",
+  "review": "running",
+  "file_kb": 65,
+  "write_workflow": "wf_afa77a39-0d2",
+  "write_report": {
+   "id": "start",
+   "bytes": 66076,
+   "code_blocks": 12,
+   "h3_sections": 16,
+   "quizzes": 16,
+   "problems_written": [],
+   "problems_dropped": [],
+   "solutions_all_examples_pass": true,
+   "verifier_clean": true,
+   "saved_to_git": false,
+   "concerns": [
+    "Not saved to git: checkpoint.py got a GitHub 403 (no push permission) and committed nothing. The only copy is <course>/chapters/start.html. As part of its normal run the script also regenerated STATUS.md (a shared file); I did not edit it.",
+    "Size is 66 KB, over the spec's 20-45 KB guide but inside STYLE's usual 50-120 KB range. Visible text is about 24K characters; the size comes mostly from the required 35-row roadmap table, markup and Korean UTF-8.",
+    "solutions_all_examples_pass=true only because the spec assigns no problems to this chapter, so there are no solutions to test.",
+    "The one output box (legend Hello example) follows a data-check=\"compile\" block, because the spec allows only none/compile here. The verifier therefore compiles it but does not run it. work/start/check_compile_runs.py compiled and ran it, and the output matched: PASS.",
+    "Programmers UI details come from my knowledge and could not be checked offline: the button labels (코드 실행, 제출 후 채점하기, 테스트 케이스 추가하기, 초기화, 다른 사람의 풀이, 질문하기), cout output showing in the 코드 실행 result panel, the C++ language filter hiding SQL-only problems, writing your own main in a function-type problem causing an error, and the desktop layout (problem on the left, editor on the right).",
+    "The 120802 function template is confirmed by STYLE.md and a real submission (/home/user/soggeum/coding-test). The I/O template is labelled a 'typical shape' (181952-like, with an added comment), because the exact initial code is not visible.",
+    "The '300개 안팎 (Lv.0 ~100, Lv.1 ~70, Lv.2 ~90, Lv.3 ~50)' count and the roadmap's per-chapter levels were computed from chapters_def.py: 315 unique assigned problems, excluding the 'C로 다시' re-solves. They will drift if other writers drop problems.",
+    "Some forward references assume other chapters follow their specs: the first undefined-behaviour demo in chapter 2, local-environment use, the 오답 노트 template in 28, C# in 31, C-difference notes in 1-9, 340207 as a required problem in chapter 1, 120802 as the first function-type problem in chapter 2, and 181951 and 181952 in chapter 1."
+   ]
+  },
+  "review_workflow": "wf_afa77a39-0d2"
+ },
+ "c01": {
+  "write": "done",
+  "review": "running",
+  "file_kb": 106,
+  "write_workflow": "wf_93284829-029",
+  "write_report": {
+   "id": "c01",
+   "bytes": 105990,
+   "code_blocks": 66,
+   "h3_sections": 15,
+   "quizzes": 21,
+   "problems_written": [
+    "340207",
+    "181952",
+    "181948",
+    "181951",
+    "181946"
+   ],
+   "problems_dropped": [],
+   "solutions_all_examples_pass": true,
+   "verifier_clean": true,
+   "saved_to_git": false,
+   "concerns": [
+    "NOT SAVED TO GIT: I ran tools/checkpoint.py twice. Both times the push probe was refused with HTTP 403 (no push permission to github.com/battery-korail/.github), and the script then skipped git entirely, so nothing was committed. The verified chapter exists only at /tmp/claude-0/-home-user--github/c7582eac-8209-501d-9bcf-ff27aaa31704/scratchpad/course/chapters/c01.html. The parts and harness are under work/c01/ (parts/p1-p4.html, build.sh, test_all.sh). Push access has to be granted, or another durable copy made, before this session ends.",
+    "340207 (PCCE, fill-in-the-blank): the C++ starter code could not be seen. The blank positions (the \"3\\n2\\n1\" literal and printing `message`) are inferred from the Java solution in keunwon/study, and the text says so.",
+    "Claims about the Programmers site and judge are hedged rather than verified on the site, which is blocked from this network. These cover the run-result panel wording, how a nonzero main return is handled, and whether a trailing newline is tolerated. The trailing-newline and starter-code claims are backed by accepted C++ solutions in soggeum/coding-test: `cout << str;` with no newline passed 181952; a trailing endl passed 181951; starters use `int main(void)` with the input lines pre-filled; 181946's starter uses `string str1, str2;`, which the card explains.",
+    "The verifier passes (problems: []) but reports 2 warnings. Both are intentional demos explained in the text: block#8 shows the warning from `#include <iostream>;`, and block#16 shows the multi-character constant warnings for 'Hello'/'Hi', whose numeric output is g++-specific and labelled implementation-defined.",
+    "Size: 66 code blocks, 106 KB, 21 quizzes. That is above STYLE's typical 15-40 blocks and 8-20 quizzes, but inside the 50-120 KB range. Most blocks are tiny demos or real g++ error/warning examples. Every error message shown was captured from g++ 13.3 using the verifier's flags, with the file named main.cpp. The mian/Main link-error block is data-check=none because -c alone compiles it, and its ld message is real output.",
+    "Numbers measured in this environment and labelled as such: 7 lines become 36,521 after `g++ -std=c++17 -E`; writing 1,000,000 lines to a file takes 1,682 write syscalls and about 0.05 s with '\\n', versus 1,000,000 syscalls and about 0.38 s with endl; reading a 1,000,000-character input for 181952 takes about 37 ms.",
+    "Testing: all 5 solutions were tested in work/c01/test_all.sh (g++ -std=c++17 -O1 -Wall -Wextra). Every statement example passes, plus worst cases: 181951 with -100000 100000, 181946 with two 10-character strings, 181952 with 1,000,000 characters. The solution code in the chapter is byte-identical to the tested files (checked by extracting it from the HTML). The 181948 C/printf variant and the R\"(...)\" raw-string variant were also run.",
+    "checkpoint.py runs tools/status.py, which regenerated the shared STATUS.md. The script did this on its own, as designed; I changed no other shared files."
+   ]
+  },
+  "review_workflow": "wf_93284829-029"
+ },
+ "c02": {
+  "write": "done",
+  "review": "running",
+  "file_kb": 121,
+  "write_workflow": "wf_6d42461d-abb",
+  "review_workflow": "wf_0e667583-028",
+  "write_report": {
+   "id": "c02",
+   "bytes": 124062,
+   "code_blocks": 73,
+   "h3_sections": 16,
+   "quizzes": 19,
+   "problems_written": [
+    "250133",
+    "181947",
+    "120802",
+    "120803",
+    "120804",
+    "120820"
+   ],
+   "problems_dropped": [],
+   "solutions_all_examples_pass": true,
+   "verifier_clean": true,
+   "saved_to_git": false,
+   "concerns": [
+    "NOT SAVED TO GIT: tools/checkpoint.py exited after its push probe failed (GitHub 403 'no push permission'). It skips the commit by design, so nothing was committed. The chapter exists only at /tmp/claude-0/-home-user--github/c7582eac-8209-501d-9bcf-ff27aaa31704/scratchpad/course/chapters/c02.html (source parts in work/c02/parts/p1-p4.html). I did not commit by hand because the task forbids it.",
+    "Verifier output is \"problems\": [] with 6 warnings. All 6 are deliberate and explained in the text: -Wuninitialized (UB demo, section 3), -Woverflow (int*int stored in long long, section 5), -Wformat (printf %d with double, UB demo, section 12), and -Wunused-result for scanf in 3 C blocks. The scanf warning appears only with optimization (-O1) on Ubuntu gcc, and the text says so.",
+    "PCCE 250133: the site's initial code with blanks is not visible. The solution's structure (msg / int val1 = 3 / string val2 = \"3\", printing msg, val1 + 10, val2 + \"10\") comes from the Java solution in /home/user/keunwon/study. The text hedges where the blanks probably are (variable values or types). The full program's output was verified by the verifier.",
+    "Programmers UI claims that could not be checked here, written from general knowledge: cout output inside solution is shown in the '코드 실행' results; submitting a 함수형 solution that still contains main() causes an error; 함수형 problems give no stdin.",
+    "Above STYLE's 'typical' ranges: 124 KB (typical 50-120), 73 code blocks (typical 15-40), 16 h3 sections (typical 6-12). Cause: the spec's 12 topics plus 4 skeleton sections. Most blocks are small verified run/error demos. I kept depth rather than trimming.",
+    "UB demo outputs are labelled '보장되지 않음' and were observed with g++/gcc 13.3 on Ubuntu 24.04 x86-64. Uninitialized int at -O0 gave 32765/32767/32766 in one run (values change per run, as the text says), and 0 at -O1. static_cast<int>(1e10) gave 2147483647 at -O1 and -2147483648 at -O0. printf(\"%d\", double) gave different garbage each run.",
+    "Displayed compiler messages use straight quotes (C locale), matching c01. All 11 message blocks shown right after code were re-checked by script and match real compiler output exactly (line:col and text).",
+    "Embedded boxes: 4 (.bss/.data and the startup code; 20 KB RAM on STM32F103C8; HAL_GetTick unsigned wrap-around; Cortex-M4F single-precision FPU and the f suffix). That is the STYLE maximum."
+   ]
+  }
+ },
+ "c03": {
+  "write": "done",
+  "review": "running",
+  "file_kb": 140,
+  "write_workflow": "wf_6e743558-432",
+  "write_report": {
+   "id": "c03",
+   "bytes": 143404,
+   "problems_written": [
+    "120805",
+    "120810",
+    "250132",
+    "340206",
+    "120806",
+    "120814",
+    "181917",
+    "120830",
+    "120819",
+    "120837"
+   ],
+   "solutions_all_examples_pass": true,
+   "verifier_clean": true,
+   "saved_to_git": false,
+   "concerns": [
+    "NOT SAVED TO GIT: tools/checkpoint.py probes push access first, gets 403 from github.com/battery-korail/.github, and then skips the commit entirely ('skipped git (nothing committed)'). I ran it twice and it did the same both times. The chapter exists only at chapters/c03.html, with source parts in work/c03/parts/p1-p4.html. Someone with push rights needs to re-run the checkpoint.",
+    "The file is 143 KB, above STYLE.md's typical 50–120 KB. It covers 11 spec topics and 10 problems: 15 h3 sections, 77 code blocks, 17 quizzes, 18 .pen boxes and 4 .emb boxes. I did not trim it. A reviewer could drop the signed/unsigned comparison pen in section 6, which the spec did not ask for.",
+    "The verifier reports 8 warnings. All are intentional demos of the pitfalls themselves (-Wsequence-point, -Wsign-compare, -Wbool-compare/-Wparentheses, '&&' within '||', -Wlogical-not-parentheses, '&' vs '==', -Wxor-used-as-pow, -Woverflow). Each one is shown in a 'run err' block and explained in the text.",
+    "The spec groups i = i++ with the other 'don't do this' cases. The chapter is more precise: in C and C++14 it is undefined behaviour, but since C++17 it is well-defined and i stays 5. g++ 13 still warns 'may be undefined'; clang -std=c++17 does not. j++ + j++ is still undefined behaviour in C++17. I checked both compilers.",
+    "The PCCE problems (250132, 340206) don't show the site's starter code. I inferred the structure from other people's submitted C++ in /home/user/err-cho404, min-seo-choi and soggeum (int a; int c; cin >> a >> c; one computed line; cout << ... << endl). The text says the line to fix is 'most likely' the computing line, and notes that for 340206 fixing the cout line also works.",
+    "Shown compiler messages use ASCII quotes ('i'), matching c01. g++ in a UTF-8 locale prints curly quotes (‘i’). The division-by-zero terminal output was captured under a pty without '(core dumped)', and the text says that suffix may also appear.",
+    "Embedded facts stated from knowledge, not compiled for ARM (no ARM toolchain here): Cortex-M0/M0+ (STM32F0/G0/L0) have no divide instruction; Cortex-M3/M4 return quotient 0 on divide-by-zero unless CCR.DIV_0_TRP is set; GPIO_PIN_5 == 0x0020; HAL_GPIO_WritePin writes BSRR. The shift/mask equivalence and compiler lowering were checked on x86 g++: unsigned /8 becomes shr and %8 becomes and, even at -O0.",
+    "Solution tests are in work/c03/final/<pid>_test.cpp and cover every statement example plus extra checks. 120805, 120806 and 120814 were checked against brute force over the full input range; 120806's double version and integer version agree on all 10,000 inputs. 181917 was checked on all 16 inputs. 120837's greedy was compared with a DP minimum for every hp from 0 to 1000. 120830 and 120819 were checked at max-constraint inputs. PCCE programs were run on stdin with the examples and edge values. All 12 solution blocks in the chapter are byte-identical to the tested files."
+   ],
+   "code_blocks": 77,
+   "h3_sections": 15,
+   "quizzes": 17,
+   "problems_dropped": []
+  },
+  "review_workflow": "wf_6e743558-432"
+ },
+ "c04": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_fe49fd3c-0c2",
+  "review_workflow": "wf_fe49fd3c-0c2"
+ },
+ "c05": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_db174a8c-7da",
+  "review_workflow": "wf_db174a8c-7da"
+ },
+ "c06": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_93284829-029",
+  "review_workflow": "wf_93284829-029"
+ },
+ "c07": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_afa77a39-0d2",
+  "review_workflow": "wf_afa77a39-0d2"
+ },
+ "c08": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_0e667583-028",
+  "review_workflow": "wf_0e667583-028"
+ },
+ "c09": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_6e743558-432",
+  "review_workflow": "wf_6e743558-432"
+ },
+ "c10": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_fe49fd3c-0c2",
+  "review_workflow": "wf_fe49fd3c-0c2"
+ },
+ "c11": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_db174a8c-7da",
+  "review_workflow": "wf_db174a8c-7da"
+ },
+ "c12": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_260a344e-741",
+  "review_workflow": "wf_260a344e-741"
+ },
+ "c13": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_260a344e-741",
+  "review_workflow": "wf_260a344e-741"
+ },
+ "c14": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_260a344e-741",
+  "review_workflow": "wf_260a344e-741"
+ },
+ "c15": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_fe49fd3c-0c2",
+  "review_workflow": "wf_fe49fd3c-0c2"
+ },
+ "c16": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_db174a8c-7da",
+  "review_workflow": "wf_db174a8c-7da"
+ },
+ "c17": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_6e743558-432",
+  "review_workflow": "wf_6e743558-432"
+ },
+ "c18": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_260a344e-741",
+  "review_workflow": "wf_260a344e-741"
+ },
+ "c19": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_afa77a39-0d2",
+  "review_workflow": "wf_afa77a39-0d2"
+ },
+ "c20": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_93284829-029",
+  "review_workflow": "wf_93284829-029"
+ },
+ "c21": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_0e667583-028",
+  "review_workflow": "wf_0e667583-028"
+ },
+ "c22": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_6e743558-432",
+  "review_workflow": "wf_6e743558-432"
+ },
+ "c23": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_fe49fd3c-0c2",
+  "review_workflow": "wf_fe49fd3c-0c2"
+ },
+ "c24": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_db174a8c-7da",
+  "review_workflow": "wf_db174a8c-7da"
+ },
+ "c25": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_0e667583-028",
+  "review_workflow": "wf_0e667583-028"
+ },
+ "c26": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_93284829-029",
+  "review_workflow": "wf_93284829-029"
+ },
+ "c27": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_afa77a39-0d2",
+  "review_workflow": "wf_afa77a39-0d2"
+ },
+ "c28": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_fe49fd3c-0c2",
+  "review_workflow": "wf_fe49fd3c-0c2"
+ },
+ "c29": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_0e667583-028",
+  "review_workflow": "wf_0e667583-028"
+ },
+ "c30": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_260a344e-741",
+  "review_workflow": "wf_260a344e-741"
+ },
+ "c31": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_93284829-029",
+  "review_workflow": "wf_93284829-029"
+ },
+ "apxA": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_6e743558-432",
+  "review_workflow": "wf_6e743558-432"
+ },
+ "apxB": {
+  "write": "running",
+  "review": "running",
+  "file_kb": 0,
+  "write_workflow": "wf_afa77a39-0d2",
+  "review_workflow": "wf_afa77a39-0d2"
+ },
+ "_updated": "2026-11-14T20:57:59+09:00",
+ "_backup": {
+  "url": "https://claude.ai/artifact/XcDHmRkRbP7YeYiMXhDQ2h",
+  "slug": "f7dcc3e1-58cc-4c41-b6ba-c7c9fc59943e",
+  "version": "1793883971-0d47"
+ },
+ "_artifact": {
+  "url": "https://claude.ai/artifact/Va8eWowGk6n3oAG4tPhQUN",
+  "slug": "e76023af-405b-4651-9d44-e791db641e2f",
+  "version": "1794215414-f7ed",
+  "note": "2026-11-05 14:49 UTC: start, c01-c03 published; others are '준비 중' placeholders"
+ }
+}

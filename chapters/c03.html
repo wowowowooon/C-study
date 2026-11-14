@@ -1,0 +1,1768 @@
+<section class="lesson" id="c03" data-title="연산자" data-short="연산자" hidden>
+<div class="kicker">Chapter 3 · Part A 언어 기초</div>
+<h2>연산자: 계산하고 비교하기<span class="en-t">Operators</span></h2>
+<div class="goal"><b>이 챕터를 마치면:</b> ① <code>7 / 2</code>, <code>-7 % 2</code>, <code>7 / 2.0</code>처럼 정수·실수·음수가 섞인 계산의 결과를 실행하기 전에 정확히 예측할 수 있습니다. ② 몫과 나머지로 자릿수 떼기, 시간 변환, 올림 나눗셈, 순환(시계·각도)을 식 한 줄로 쓸 수 있습니다. ③ 비교·논리·비트 연산자와 우선순위를 알고 <code>x &amp; 1 == 0</code>, <code>2 ^ 3</code>, <code>1000000 * 1000000</code> 같은 함정을 스스로 찾아낼 수 있습니다. ④ 연산자만으로 풀리는 프로그래머스 Lv.0 문제 10개를 직접 풀 수 있습니다.</div>
+
+<h3><span class="no">1</span>이 챕터에서 배울 것과 이유</h3>
+<div class="why">
+<p><b>코딩테스트:</b> Lv.0 문제의 상당수는 몫, 나머지, 비교만으로 풀립니다. 자릿수 떼기, 짝수·홀수, 배수, 시간 변환, 올림 계산이 모두 이 챕터의 연산자입니다. Lv.2~3에서도 정수 나눗셈, 오버플로, 연산자 우선순위 실수는 '예제는 맞는데 제출하면 틀리는' 가장 흔한 원인입니다. 이런 실수는 에러 메시지 없이 조용히 틀린 값을 내기 때문에 규칙을 정확히 알아야만 잡을 수 있습니다.</p>
+<p><b>임베디드:</b> ADC 값을 전압으로 바꾸는 계산, UART 링 버퍼의 인덱스 되감기, GPIO 레지스터의 비트 켜기·끄기가 모두 이 챕터의 연산자로 이루어집니다. FPU(실수 연산 장치)가 없는 MCU에서는 정수 연산을 어떤 순서로 하느냐가 곧 정밀도이고, 나눗셈 명령이 없는 MCU에서는 <code>/</code> 하나에 수십 사이클이 듭니다.</p>
+<p><b>준비:</b> 2장의 <code>int</code>, <code>long long</code>, <code>double</code>, <code>bool</code>, 형 변환(<code>static_cast</code>, <code>(int)</code>), <code>INT_MAX</code>와 오버플로를 기억하면 충분합니다. 이 챕터에는 아직 <code>if</code>와 반복문이 없습니다. 모든 예제는 위에서 아래로 한 줄씩, 한 번만 실행됩니다.</p>
+</div>
+<p>먼저 용어 세 개를 정리합니다. <code>a + b</code>에서 <code>+</code>처럼 계산을 지시하는 기호를 <b>연산자(operator)</b>, <code>a</code>와 <code>b</code>처럼 연산자가 다루는 값을 <b>피연산자(operand)</b>라고 합니다. <code>a + b * 2</code>처럼 계산하면 값 하나가 나오는 코드 조각은 <b>식(expression)</b>입니다. 피연산자가 두 개인 연산자를 <b>이항(binary)</b> 연산자, <code>-x</code>나 <code>!x</code>처럼 하나인 연산자를 <b>단항(unary)</b> 연산자라고 합니다. 컴파일 에러 메시지에 이 단어들이 영어로 그대로 나오므로 지금 익혀 두세요.</p>
+<div class="tbl narrow"><table>
+<tr><th>종류</th><th>연산자</th><th>절</th></tr>
+<tr><td>산술</td><td class="mono">+ - * / %</td><td>2, 3</td></tr>
+<tr><td>대입</td><td class="mono">= += -= *= /= %=</td><td>4</td></tr>
+<tr><td>증감</td><td class="mono">++ --</td><td>5</td></tr>
+<tr><td>비교</td><td class="mono">== != &lt; &lt;= &gt; &gt;=</td><td>6</td></tr>
+<tr><td>논리</td><td class="mono">&amp;&amp; || !</td><td>7</td></tr>
+<tr><td>비트</td><td class="mono">&amp; | ^ ~ &lt;&lt; &gt;&gt;</td><td>10</td></tr>
+</table></div>
+<p>이 챕터의 예제는 모두 64비트 리눅스의 g++(<code>-std=c++17 -O1 -Wall -Wextra</code>)에서 실행한 결과입니다. 직접 타이핑해서 실행하고, 결과를 보기 전에 먼저 예측해 보세요. 예측이 틀린 곳이 바로 내가 모르는 곳입니다.</p>
+
+<h3><span class="no">2</span>산술 연산자: + - * / %</h3>
+<p>사칙연산과 나머지입니다. 먼저 실행해 보고 결과를 하나씩 확인합니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 7;
+    int b = 2;
+    cout &lt;&lt; a + b &lt;&lt; '\n';
+    cout &lt;&lt; a - b &lt;&lt; '\n';
+    cout &lt;&lt; a * b &lt;&lt; '\n';
+    cout &lt;&lt; a / b &lt;&lt; '\n';
+    cout &lt;&lt; a % b &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>9
+5
+14
+3
+1</pre></div>
+<ul>
+<li><code>a + b</code>, <code>a - b</code>, <code>a * b</code>: 수학과 같습니다. 곱셈 기호는 <code>×</code>가 아니라 <code>*</code>입니다.</li>
+<li><code>a / b</code>가 3.5가 아니라 <b>3</b>입니다. <code>int</code>끼리 나누면 결과도 <code>int</code>이고, 소수점 아래는 반올림 없이 <b>버립니다</b>. 즉 정수 나눗셈은 <b>몫</b>을 구합니다.</li>
+<li><code>a % b</code>는 <b>나머지(remainder)</b>입니다. 7 = 2 × 3 + 1이므로 1입니다. 퍼센트가 아니라 '나머지 연산자(modulo)'라고 읽습니다.</li>
+</ul>
+<p>몫과 나머지 사이에는 항상 다음 관계가 성립합니다. 이 관계를 기억하면 음수의 경우도 스스로 계산할 수 있습니다.</p>
+<div class="box"><span class="lbl">핵심 정리</span><p><code>(a / b) * b + a % b == a</code> — b가 0이 아니면 항상 성립합니다.<br>7을 2로 나누면 몫 3, 나머지 1 → 3 × 2 + 1 = 7</p></div>
+<p>두 수 중 하나라도 실수(<code>double</code>)면 결과도 실수가 되어 소수점 아래가 남습니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; 7 / 2 &lt;&lt; '\n';
+    cout &lt;&lt; 7.0 / 2 &lt;&lt; '\n';
+    cout &lt;&lt; 7 / 2.0 &lt;&lt; '\n';
+    cout &lt;&lt; 7.0 / 2.0 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>3
+3.5
+3.5
+3.5</pre></div>
+<p><code>7</code>은 정수 리터럴(<code>int</code>), <code>7.0</code>은 실수 리터럴(<code>double</code>)입니다. 소수점 하나가 계산 방식을 바꿉니다. 타입이 섞였을 때의 정확한 규칙은 12절에서 정리합니다.</p>
+
+<h4>음수의 몫과 나머지</h4>
+<p>수학에서는 −7을 2로 나누면 몫 −4, 나머지 1이라고 배웠을 수 있습니다. C++은 다릅니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; -7 / 2 &lt;&lt; ' ' &lt;&lt; -7 % 2 &lt;&lt; '\n';
+    cout &lt;&lt; 7 / -2 &lt;&lt; ' ' &lt;&lt; 7 % -2 &lt;&lt; '\n';
+    cout &lt;&lt; -7 / -2 &lt;&lt; ' ' &lt;&lt; -7 % -2 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>-3 -1
+-3 1
+3 -1</pre></div>
+<p>C++11부터 표준이 정한 규칙은 두 가지입니다.</p>
+<ol>
+<li><b>몫은 0 쪽으로 버립니다(truncation toward zero).</b> −3.5는 −4가 아니라 −3이 됩니다. 계산한 뒤 소수점 아래를 그냥 지운다고 생각하면 됩니다. C++11 이전에는 이 방향을 컴파일러가 정해도 됐지만, 지금은 표준이 보장합니다.</li>
+<li><b>나머지는 핵심 정리의 식이 맞도록 정해집니다.</b> −7 = 2 × (−3) + (−1)이므로 나머지는 −1입니다. 결과적으로 <b>나머지의 부호는 나뉘는 수(왼쪽 피연산자)를 따릅니다.</b> 그래서 <code>7 % -2</code>는 1, <code>-7 % 2</code>는 −1입니다.</li>
+</ol>
+<div class="pen"><b>음수 나머지:</b> <code>-7 % 2</code>는 1이 아니라 <b>−1</b>입니다. 그래서 '홀수인가?'를 <code>n % 2 == 1</code>로 검사하면 n이 음수 홀수일 때 틀립니다. 홀수 검사는 <code>n % 2 != 0</code>으로 쓰는 습관을 들이세요(<code>==</code>, <code>!=</code>는 6절). 파이썬은 <code>-7 % 2</code>가 1이라서, 파이썬 풀이를 C++로 옮길 때 이 차이로 자주 틀립니다.</div>
+
+<h4>0으로 나누기</h4>
+<p>정수를 0으로 나누면 어떻게 될까요? 컴파일러가 미리 알 수 없도록 나누는 수를 입력으로 받아 봅니다. 입력은 <code>0</code>입니다.</p>
+<pre class="code" data-check="ub" data-stdin="0"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 10;
+    int b = 1;
+    cin &gt;&gt; b;
+    cout &lt;&lt; "나누기 전" &lt;&lt; '\n';
+    cout &lt;&lt; a / b &lt;&lt; '\n';
+    cout &lt;&lt; "나눈 후" &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">터미널에 나온 것 (보장되지 않음)</span><pre>나누기 전
+Floating point exception</pre></div>
+<ul>
+<li>정수를 0으로 나누는 것은 <b>정의되지 않은 동작(undefined behavior)</b>입니다. 2장의 오버플로처럼 표준이 결과를 정하지 않았으므로 무슨 일이든 일어날 수 있습니다. 그래서 이 블록의 결과는 보장되지 않습니다.</li>
+<li>64비트 리눅스(x86-64)에서는 CPU가 나눗셈 예외를 일으키고, 운영체제가 프로그램을 강제로 끝냅니다(SIGFPE라는 신호). <code>"나눈 후"</code>는 끝내 출력되지 않습니다. 메시지에 Floating point(부동소수점)라고 나오지만 원인은 정수 나눗셈입니다. 이름이 역사적으로 그렇게 붙었을 뿐입니다. 환경에 따라 뒤에 <code>(core dumped)</code>가 붙기도 합니다.</li>
+<li>프로그래머스에서는 이런 비정상 종료가 <b>런타임 에러</b>로 채점됩니다.</li>
+<li>코드에 <code>10 / 0</code>처럼 0을 직접 쓰면 g++가 <code>warning: division by zero [-Wdiv-by-zero]</code> 경고를 띄웁니다. 하지만 위처럼 입력이나 계산 결과가 0이 되는 경우는 컴파일러가 잡지 못합니다.</li>
+<li>같은 코드를 STM32F4 같은 Cortex-M3/M4 MCU에서 돌리면, 기본 설정에서는 나눗셈 명령이 몫 0을 내놓고 프로그램이 그냥 계속 달립니다(CCR 레지스터의 DIV_0_TRP 비트를 켜면 예외가 발생). PC에서는 죽고 MCU에서는 조용히 틀린 값으로 달리는 것, 이것이 '정의되지 않은 동작'이 무서운 이유입니다.</li>
+</ul>
+<p>실수는 다르게 동작합니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double x = 1.0;
+    double zero = 0.0;
+    cout &lt;&lt; x / zero &lt;&lt; '\n';
+    cout &lt;&lt; -x / zero &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>inf
+-inf</pre></div>
+<p><code>inf</code>는 무한대(infinity)입니다. <code>0.0 / 0.0</code>은 <code>nan</code>(Not a Number, '숫자가 아님')이 되고, 환경에 따라 <code>nan</code> 또는 <code>-nan</code>으로 출력됩니다. 엄밀히 말하면 이 결과는 C++ 표준이 보장하는 것이 아니라, g++를 비롯한 거의 모든 환경이 따르는 IEEE 754 부동소수점 규격이 정한 것입니다. 프로그램은 죽지 않지만, <code>inf</code>나 <code>nan</code>이 한 번 생기면 그 뒤의 계산이 전부 오염되므로 반가운 결과는 아닙니다.</p>
+<div class="pen"><b>정수 0으로 나누기:</b> 컴파일러는 대부분 잡아 주지 않고, 실행하면 프로그램이 죽거나(PC) 엉뚱한 값이 나옵니다(MCU). 나누는 수가 0이 될 수 있는지 문제의 제한사항에서 먼저 확인하세요. 예를 들어 120805 몫 구하기는 제한사항이 <code>0 &lt; num2</code>라서 안전합니다. 0이 될 수 있다면 7절의 단축 평가나 4장의 <code>if</code>로 먼저 걸러야 합니다. <code>a % 0</code>도 똑같이 정의되지 않은 동작입니다.</div>
+
+<h4><code>%</code>는 정수 전용</h4>
+<pre class="code" data-check="error"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double x = 7.5;
+    cout &lt;&lt; x % 2 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 에러</span><pre>main.cpp: In function 'int main()':
+main.cpp:6:15: error: invalid operands of types 'double' and 'int' to binary 'operator%'
+    6 |     cout &lt;&lt; x % 2 &lt;&lt; '\n';
+      |             ~ ^ ~
+      |             |   |
+      |             |   int
+      |             double</pre></div>
+<p>'이항 연산자 <code>%</code>에 <code>double</code>과 <code>int</code>는 올바른 피연산자가 아니다(invalid operands)'라는 뜻입니다. 아래 밑줄 그림이 왼쪽은 <code>double</code>, 오른쪽은 <code>int</code>라고 표시해 줍니다. 실수의 나머지가 필요하면 <code>&lt;cmath&gt;</code> 헤더의 <code>fmod</code>를 씁니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; fmod(7.5, 2.0) &lt;&lt; '\n';
+    cout &lt;&lt; fmod(-7.5, 2.0) &lt;&lt; '\n';
+    cout &lt;&lt; fmod(370.5, 360.0) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1.5
+-1.5
+10.5</pre></div>
+<p><code>fmod(7.5, 2.0)</code>처럼 이름 뒤의 괄호 안에 값을 넣으면 계산 결과를 돌려받는 것을 <b>함수(function) 호출</b>이라고 합니다. 2장의 <code>getline(cin, s)</code>도 함수 호출이었습니다. 함수를 직접 만드는 법은 8장에서 배우고, 지금은 '이름(값, 값) 모양으로 쓰면 결과가 나온다'로 충분합니다. <code>fmod</code>의 결과도 <code>%</code>처럼 나뉘는 수의 부호를 따릅니다(−7.5 → −1.5).</p>
+
+<div class="q">실행하기 전에 출력을 예측해 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; 17 / 5 &lt;&lt; ' ' &lt;&lt; 17 % 5 &lt;&lt; '\n';
+    cout &lt;&lt; -17 / 5 &lt;&lt; ' ' &lt;&lt; -17 % 5 &lt;&lt; '\n';
+    cout &lt;&lt; 17 / 5.0 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<div class="run"><span class="lbl">실행 결과</span><pre>3 2
+-3 -2
+3.4</pre></div>
+<p>둘째 줄: −17 / 5 = −3.4이고 0 쪽으로 버리면 −3입니다. 나머지는 −17 − (−3 × 5) = −17 + 15 = −2입니다. 부호가 나뉘는 수(−17)를 따른다는 규칙과도 맞습니다. 셋째 줄은 <code>5.0</code>이 실수라서 실수 나눗셈이 됩니다.</p>
+</div></details>
+
+<h3><span class="no">3</span>몫과 나머지의 쓰임새 모음</h3>
+<p>코딩테스트 기초 문제의 절반은 <code>/</code>와 <code>%</code>를 어디에 쓰느냐의 문제입니다. 자주 나오는 패턴을 한 표에 모았습니다. 하나씩 예제로 확인합니다.</p>
+<div class="tbl"><table>
+<tr><th>하고 싶은 것</th><th>식</th><th>예</th></tr>
+<tr><td>짝수·홀수</td><td class="mono">n % 2</td><td>0이면 짝수, 아니면 홀수</td></tr>
+<tr><td>k의 배수인가</td><td class="mono">n % k == 0</td><td>21 % 7 == 0 → 참</td></tr>
+<tr><td>마지막 자리</td><td class="mono">n % 10</td><td>1234 → 4</td></tr>
+<tr><td>마지막 자리 떼기</td><td class="mono">n / 10</td><td>1234 → 123</td></tr>
+<tr><td>초 → 분, 초</td><td class="mono">t / 60, t % 60</td><td>125초 → 2분 5초</td></tr>
+<tr><td>올림 나눗셈</td><td class="mono">(a + b - 1) / b</td><td>15명, 7인승 → 3대</td></tr>
+<tr><td>돌고 도는 값</td><td class="mono">(x % m + m) % m</td><td>−30° → 330°</td></tr>
+</table></div>
+
+<h4>짝수·홀수와 배수</h4>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 7;
+    cout &lt;&lt; n % 2 &lt;&lt; '\n';
+    cout &lt;&lt; (n % 2 == 0) &lt;&lt; '\n';
+    cout &lt;&lt; (21 % 7 == 0) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1
+0
+1</pre></div>
+<p>2로 나눈 나머지가 0이면 짝수, 아니면 홀수입니다. k로 나눈 나머지가 0이면 'k로 나누어떨어진다', 즉 k의 배수입니다. <code>==</code>는 '같은가?'를 묻는 비교 연산자이고, 맞으면 <code>1</code>, 틀리면 <code>0</code>이 출력됩니다. 6절에서 자세히 다룹니다. 4장에서는 이 식을 <code>if</code>의 조건으로 쓰게 됩니다.</p>
+
+<h4>자릿수 떼기</h4>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 1234;
+    cout &lt;&lt; n % 10 &lt;&lt; '\n';        // 일의 자리
+    cout &lt;&lt; n / 10 % 10 &lt;&lt; '\n';   // 십의 자리
+    cout &lt;&lt; n / 100 % 10 &lt;&lt; '\n';  // 백의 자리
+    cout &lt;&lt; n / 1000 &lt;&lt; '\n';      // 천의 자리
+    cout &lt;&lt; n / 10 &lt;&lt; '\n';        // 일의 자리를 뗀 수
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>4
+3
+2
+1
+123</pre></div>
+<p>10진수에서 10으로 나누면 숫자 전체가 오른쪽으로 한 칸 밀립니다. 그래서 <b><code>n % 10</code>은 밀려 나가는 마지막 자리, <code>n / 10</code>은 남는 부분</b>입니다. <code>n / 10 % 10</code>은 왼쪽부터 차례로 계산합니다. 1234 / 10 = 123, 123 % 10 = 3입니다(같은 우선순위끼리는 왼쪽부터 계산한다는 규칙은 8절). 모든 자릿수를 차례로 떼는 일은 5장에서 반복문으로 <code>n % 10</code>과 <code>n /= 10</code>을 되풀이해서 합니다.</p>
+
+<h4>시간 변환</h4>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int total = 3725;  // 초
+    int h = total / 3600;
+    int m = total % 3600 / 60;
+    int s = total % 60;
+    cout &lt;&lt; h &lt;&lt; "시간 " &lt;&lt; m &lt;&lt; "분 " &lt;&lt; s &lt;&lt; "초" &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1시간 2분 5초</pre></div>
+<div class="tbl narrow"><table class="trace">
+<tr><th>계산</th><th>값</th><th>의미</th></tr>
+<tr><td class="mono">3725 / 3600</td><td class="mono">1</td><td>1시간(3600초)이 몇 번 들어가나</td></tr>
+<tr><td class="mono">3725 % 3600</td><td class="mono">125</td><td>시간을 빼고 남은 초</td></tr>
+<tr><td class="mono">125 / 60</td><td class="mono">2</td><td>남은 초 안에 1분이 몇 번</td></tr>
+<tr><td class="mono">3725 % 60</td><td class="mono">5</td><td>분으로 묶고 남은 초</td></tr>
+</table></div>
+<p>초는 왜 <code>total % 3600 % 60</code>이 아니라 <code>total % 60</code>만으로 될까요? 3600은 60의 배수라서, 전체를 60초씩 묶고 남는 것이나 시간을 먼저 빼고 60초씩 묶고 남는 것이나 같기 때문입니다. 큰 단위부터 몫을 구하고 나머지를 다음 단위로 넘기는 이 구조는 거스름돈 계산(120819 아이스 아메리카노)이나 개미 군단(120837)에서 그대로 다시 나옵니다.</p>
+
+<h4>올림 나눗셈</h4>
+<p>학생 15명이 7인승 차를 탄다면 몇 대가 필요할까요? <code>15 / 7</code>은 2지만, 2대로는 1명이 남으니 답은 3대입니다. 정수 나눗셈은 항상 버리므로, 올림이 필요하면 식을 바꿔야 합니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int people = 15;
+    int seats = 7;
+    cout &lt;&lt; people / seats &lt;&lt; '\n';
+    cout &lt;&lt; (people + seats - 1) / seats &lt;&lt; '\n';
+    cout &lt;&lt; (14 + seats - 1) / seats &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>2
+3
+2</pre></div>
+<p>원리는 이렇습니다. <code>b - 1</code>을 더하면, 나머지가 조금이라도 있을 때는 다음 배수를 넘어가서 몫이 1 커지고, 딱 나누어떨어질 때는 다음 배수에 1 모자라서 몫이 그대로입니다.</p>
+<div class="tbl narrow"><table class="trace">
+<tr><th>a (b = 7)</th><th>a + 6</th><th>(a + 6) / 7</th><th>실제 올림</th></tr>
+<tr><td class="mono">14</td><td class="mono">20</td><td class="mono">2</td><td class="mono">2</td></tr>
+<tr><td class="mono">15</td><td class="mono">21</td><td class="mono">3</td><td class="mono">3</td></tr>
+<tr><td class="mono">20</td><td class="mono">26</td><td class="mono">3</td><td class="mono">3</td></tr>
+<tr><td class="mono">21</td><td class="mono">27</td><td class="mono">3</td><td class="mono">3</td></tr>
+<tr><td class="mono">22</td><td class="mono">28</td><td class="mono">4</td><td class="mono">4</td></tr>
+</table></div>
+<div class="pen"><b>올림 공식은 양수에서만:</b> <code>(a + b - 1) / b</code>는 a ≥ 0, b &gt; 0일 때만 맞습니다. a = −4, b = 3이면 실제 올림은 ceil(−1.33…) = −1인데, 공식은 (−4 + 2) / 3 = −2 / 3 = <b>0</b>을 냅니다. 음수의 정수 나눗셈은 0 쪽으로 버리는데, 음수에서 0 쪽은 곧 올림 방향이라 이미 올림이 된 값에 한 번 더 올리는 셈이 되기 때문입니다. 또 a가 <code>INT_MAX</code> 근처면 <code>a + b - 1</code>에서 오버플로가 날 수 있습니다. 코딩테스트 제한사항은 대부분 양수라서 이 공식을 그대로 쓰면 되지만, 쓸 때마다 '둘 다 양수인가'를 확인하세요.</div>
+
+<h4>돌고 도는 값: 시계, 요일, 각도</h4>
+<p><code>x % m</code>은 x가 0 이상이면 항상 0부터 m − 1 사이입니다. 그래서 끝에 도달하면 처음으로 돌아가는 값(시계의 시, 요일, 각도, 링 버퍼 인덱스)을 다룰 때 씁니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int hour = 22;
+    cout &lt;&lt; (hour + 5) % 24 &lt;&lt; '\n';          // 5시간 뒤
+    int day = 0;                              // 0=월, 1=화, ..., 6=일
+    cout &lt;&lt; (day - 3) % 7 &lt;&lt; '\n';            // 3일 전?
+    cout &lt;&lt; ((day - 3) % 7 + 7) % 7 &lt;&lt; '\n';  // 3일 전: 4=금
+    int angle = 765;
+    cout &lt;&lt; angle % 360 &lt;&lt; '\n';
+    int neg = -30;
+    cout &lt;&lt; (neg % 360 + 360) % 360 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>3
+-3
+4
+45
+330</pre></div>
+<ul>
+<li>22시의 5시간 뒤는 27 % 24 = 3시입니다.</li>
+<li>월요일(0)의 3일 전을 <code>(0 - 3) % 7</code>로 구하면 −3이 나옵니다. 2절에서 본 대로 음수의 나머지는 음수이기 때문입니다. 요일 번호로 쓸 수 없는 값입니다.</li>
+<li><code>(x % m + m) % m</code>은 음수에서도 0 ~ m − 1을 보장합니다. <code>x % m</code>은 −(m − 1) ~ m − 1 사이이고, 여기에 m을 더하면 1 ~ 2m − 1 사이의 양수가 되며, 다시 <code>% m</code>을 하면 0 ~ m − 1이 됩니다. 마지막 <code>% m</code>은 처음부터 양수였던 경우(예: 3 + 7 = 10 → 3)를 되돌리는 역할입니다.</li>
+<li>765°는 두 바퀴(720°)를 돌고 45°이므로 <code>765 % 360</code> = 45입니다. −30°는 330°와 같은 각도입니다. PCCE 기출 340206 각도 합치기가 바로 이 계산입니다.</li>
+</ul>
+<div class="emb">UART로 들어오는 바이트를 담는 <b>링 버퍼(ring buffer)</b>는 크기가 정해진 배열을 원형으로 씁니다. 다음에 쓸 위치를 <code>head = (head + 1) % SIZE;</code>로 옮기면 마지막 칸 다음에 자동으로 0번 칸으로 돌아갑니다. SIZE가 8이면 head는 0, 1, …, 7, 0, 1, …로 돕니다. 인터럽트 안에서 이 계산이 매 바이트마다 돌기 때문에, 10절에서 볼 비트 연산으로 <code>%</code>를 대신하는 이유도 생깁니다. 링 버퍼 전체 구현은 30장에서 합니다.</div>
+
+<div class="q">아래 세 가지를 식으로 써 보세요. ① 4567초는 몇 시간 몇 분 몇 초인가 ② 사과 23개를 한 상자에 5개씩 담을 때 필요한 상자 수 ③ 98765의 백의 자리 숫자</div>
+<details><summary>답 보기</summary><div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int t = 4567;
+    cout &lt;&lt; t / 3600 &lt;&lt; ' ' &lt;&lt; t % 3600 / 60 &lt;&lt; ' ' &lt;&lt; t % 60 &lt;&lt; '\n';
+    cout &lt;&lt; (23 + 5 - 1) / 5 &lt;&lt; '\n';
+    cout &lt;&lt; 98765 / 100 % 10 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1 16 7
+5
+7</pre></div>
+<p>① 4567 % 3600 = 967, 967 / 60 = 16, 4567 % 60 = 7이므로 1시간 16분 7초입니다. ② 23 / 5 = 4이지만 3개가 남으므로 올림해서 5상자입니다. ③ 98765 / 100 = 987이고, 987 % 10 = 7입니다.</p>
+</div></details>
+
+<h3><span class="no">4</span>대입과 복합 대입</h3>
+<p>2장에서 배운 대로 <code>=</code>는 '같다'가 아니라 '오른쪽 값을 계산해서 왼쪽 변수에 넣는다'입니다. <code>x = x + 3</code>처럼 변수 자신을 바꾸는 일이 워낙 많아서, 줄여 쓰는 <b>복합 대입 연산자(compound assignment)</b>가 있습니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int x = 10;
+    x += 3;   // x = x + 3
+    cout &lt;&lt; x &lt;&lt; '\n';
+    x -= 5;   // x = x - 5
+    cout &lt;&lt; x &lt;&lt; '\n';
+    x *= 2;   // x = x * 2
+    cout &lt;&lt; x &lt;&lt; '\n';
+    x /= 3;   // x = x / 3 (정수 나눗셈)
+    cout &lt;&lt; x &lt;&lt; '\n';
+    x %= 3;   // x = x % 3
+    cout &lt;&lt; x &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>13
+8
+16
+5
+2</pre></div>
+<div class="tbl narrow"><table class="trace">
+<tr><th>문장</th><th>계산</th><th>x</th></tr>
+<tr><td class="mono">int x = 10;</td><td>-</td><td class="mono">10</td></tr>
+<tr><td class="mono">x += 3;</td><td class="mono">10 + 3</td><td class="mono">13</td></tr>
+<tr><td class="mono">x -= 5;</td><td class="mono">13 - 5</td><td class="mono">8</td></tr>
+<tr><td class="mono">x *= 2;</td><td class="mono">8 * 2</td><td class="mono">16</td></tr>
+<tr><td class="mono">x /= 3;</td><td class="mono">16 / 3</td><td class="mono">5</td></tr>
+<tr><td class="mono">x %= 3;</td><td class="mono">5 % 3</td><td class="mono">2</td></tr>
+</table></div>
+<p><code>x /= 3</code>도 x와 3이 모두 <code>int</code>이므로 정수 나눗셈입니다. x가 <code>double</code>이었다면 5.33333이 됩니다. 그리고 복합 대입은 변수의 타입을 바꾸지 않습니다. 계산 결과는 언제나 원래 변수의 타입으로 바뀌어 담기므로 <code>int</code> 변수는 계속 <code>int</code>입니다.</p>
+<div class="pen"><b>오른쪽 전체가 먼저 계산됩니다:</b> <code>x *= 2 + 3;</code>은 <code>x = x * 2 + 3</code>이 아니라 <code>x = x * (2 + 3)</code>입니다. 복합 대입은 오른쪽 식을 끝까지 계산한 뒤에 한 번 적용됩니다. x가 4였다면 결과는 11이 아니라 20입니다.</div>
+<div class="pen"><b><code>=+</code>는 복합 대입이 아닙니다:</b> <code>x += 3;</code>을 <code>x =+ 3;</code>으로 잘못 치면 <code>x = +3;</code>(양수 3을 대입)으로 해석됩니다. x가 10이었다면 13이 아니라 <b>3</b>이 됩니다. 문법상 올바른 코드라서 <code>-Wall -Wextra</code>로도 경고가 나오지 않습니다. 연산 기호가 먼저, <code>=</code>가 나중입니다.</div>
+
+<h4>대입식도 값을 가진다</h4>
+<p>C++에서 대입은 그 자체로 하나의 식이고, 값을 가집니다. 대입식의 값은 '대입된 뒤의 왼쪽 변수'입니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 1;
+    cout &lt;&lt; (a = 5) &lt;&lt; '\n';
+    cout &lt;&lt; a &lt;&lt; '\n';
+    int p = 0;
+    int q = 0;
+    int r = 0;
+    p = q = r = 7;
+    cout &lt;&lt; p &lt;&lt; ' ' &lt;&lt; q &lt;&lt; ' ' &lt;&lt; r &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>5
+5
+7 7 7</pre></div>
+<ul>
+<li><code>cout &lt;&lt; (a = 5)</code>: a에 5를 넣고, 그 식의 값 5를 출력합니다. a도 실제로 5로 바뀝니다.</li>
+<li><code>p = q = r = 7;</code>: 대입은 <b>오른쪽부터</b> 묶입니다. <code>p = (q = (r = 7))</code>이라서 r에 7, 그 값으로 q에 7, 다시 p에 7이 들어갑니다. 이 '결합 방향'은 8절에서 정리합니다.</li>
+</ul>
+<p>대입식이 값을 가지기 때문에 생기는 대표적인 사고가 있습니다. 4장에서 배울 <code>if (a == 5)</code>를 <code>if (a = 5)</code>로 잘못 쓰면, 비교가 아니라 대입이 일어나고 그 값 5가 조건이 됩니다. 0이 아닌 값은 '참'으로 취급되므로 이 조건은 항상 참입니다. 그런데도 문법상 올바르기 때문에 컴파일이 됩니다. g++가 이때 어떤 경고를 주는지는 4장에서 직접 확인합니다.</p>
+
+<div class="q">출력을 예측해 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 17;
+    n %= 5;
+    n *= n + 1;
+    n -= 2;
+    cout &lt;&lt; n &lt;&lt; '\n';
+    int k = 10;
+    k /= 4;
+    double d = 10;
+    d /= 4;
+    cout &lt;&lt; k &lt;&lt; ' ' &lt;&lt; d &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<div class="run"><span class="lbl">실행 결과</span><pre>4
+2 2.5</pre></div>
+<p>17 % 5 = 2 → <code>n *= n + 1</code>은 n = 2 × (2 + 1) = 6 → 6 − 2 = 4입니다. k는 <code>int</code>라서 10 / 4 = 2, d는 <code>double</code>이라서 2.5입니다.</p>
+</div></details>
+
+<h3><span class="no">5</span>증감 연산자 ++, --</h3>
+<p>변수에 1을 더하거나 빼는 일은 반복문(5장)에서 수없이 나옵니다. 그래서 전용 연산자가 있습니다. <code>++</code>는 1 증가(increment), <code>--</code>는 1 감소(decrement)입니다. 변수 앞에 붙이면 <b>전위(prefix)</b>, 뒤에 붙이면 <b>후위(postfix)</b>라고 합니다.</p>
+<div class="tbl"><table>
+<tr><th>쓰는 법</th><th>이름</th><th>변수 a의 변화</th><th>식 전체의 값</th></tr>
+<tr><td class="mono">++a</td><td>전위 증가</td><td>1 증가</td><td>증가한 <b>뒤</b>의 값</td></tr>
+<tr><td class="mono">a++</td><td>후위 증가</td><td>1 증가</td><td>증가하기 <b>전</b>의 값</td></tr>
+<tr><td class="mono">--a</td><td>전위 감소</td><td>1 감소</td><td>감소한 뒤의 값</td></tr>
+<tr><td class="mono">a--</td><td>후위 감소</td><td>1 감소</td><td>감소하기 전의 값</td></tr>
+</table></div>
+<p>혼자 한 문장으로 쓰면 전위와 후위는 완전히 같습니다. <code>count++;</code>와 <code>++count;</code>는 둘 다 count를 1 늘릴 뿐입니다. 차이는 <b>그 식의 값을 다른 곳에서 쓸 때</b>만 나타납니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 5;
+    int b = a++;  // b에 5를 넣고, 그다음 a는 6
+    int c = ++a;  // a를 7로 만들고, 그 값 7을 c에
+    cout &lt;&lt; a &lt;&lt; ' ' &lt;&lt; b &lt;&lt; ' ' &lt;&lt; c &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>7 5 7</pre></div>
+<div class="tbl narrow"><table class="trace">
+<tr><th>문장</th><th>식의 값</th><th>a</th><th>b</th><th>c</th></tr>
+<tr><td class="mono">int a = 5;</td><td>-</td><td class="mono">5</td><td>-</td><td>-</td></tr>
+<tr><td class="mono">int b = a++;</td><td class="mono">a++ → 5</td><td class="mono">6</td><td class="mono">5</td><td>-</td></tr>
+<tr><td class="mono">int c = ++a;</td><td class="mono">++a → 7</td><td class="mono">7</td><td class="mono">5</td><td class="mono">7</td></tr>
+</table></div>
+<p>후위 <code>a++</code>는 '지금 값을 내주고, 그다음에 1 증가', 전위 <code>++a</code>는 '먼저 1 증가하고, 증가한 값을 내줌'입니다. 곱셈과 섞어도 같습니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 3;
+    int m = n-- * 10;  // 3 * 10을 계산하고, n은 2
+    int k = 3;
+    int r = --k * 10;  // k를 2로 만들고, 2 * 10
+    cout &lt;&lt; n &lt;&lt; ' ' &lt;&lt; m &lt;&lt; '\n';
+    cout &lt;&lt; k &lt;&lt; ' ' &lt;&lt; r &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>2 30
+2 20</pre></div>
+<p>n과 k는 둘 다 3에서 2가 됐지만, 곱셈에 쓰인 값은 3(후위)과 2(전위)로 달랐습니다. <code>double</code> 변수에도 <code>++</code>를 쓸 수 있고, 역시 1.0이 더해집니다.</p>
+<div class="box"><span class="lbl">핵심 정리</span><ul>
+<li>혼자 쓰면 <code>i++</code>와 <code>++i</code>는 같다. 5장의 <code>for</code>문에서 보게 될 <code>i++</code>가 바로 이 용법입니다.</li>
+<li>식 안에서 값을 쓰면 후위는 <b>바뀌기 전</b> 값, 전위는 <b>바뀐 뒤</b> 값을 낸다.</li>
+<li>헷갈리는 식을 쓰는 대신 두 문장으로 나눈다. <code>int b = a; a++;</code>가 <code>int b = a++;</code>보다 읽기 쉽습니다.</li>
+</ul></div>
+<div class="pen"><b>한 식에서 같은 변수를 두 번 바꾸지 마세요:</b> <code>i = i++;</code>이나 <code>j++ + j++</code>처럼 한 식 안에서 같은 변수를 여러 번 바꾸는 코드는 시험 문제로나 나올 법한 코드입니다. 결과가 정의되지 않았거나, 정의되어 있더라도 의도와 다르게 동작합니다.</div>
+<pre class="code" data-check="ub"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int i = 5;
+    i = i++;            // C++17부터 결과가 정해짐(i는 5)
+    int j = 5;
+    int k = j++ + j++;  // C++17에서도 정의되지 않은 동작
+    cout &lt;&lt; i &lt;&lt; '\n';
+    cout &lt;&lt; j &lt;&lt; ' ' &lt;&lt; k &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고 (앞부분)</span><pre>main.cpp: In function 'int main()':
+main.cpp:6:7: warning: operation on 'i' may be undefined [-Wsequence-point]
+    6 |     i = i++;            // C++17부터 결과가 정해짐(i는 5)
+      |     ~~^~~~~
+main.cpp:8:14: warning: operation on 'j' may be undefined [-Wsequence-point]
+    8 |     int k = j++ + j++;  // C++17에서도 정의되지 않은 동작
+      |             ~^~</pre></div>
+<div class="run"><span class="lbl">이 환경의 실행 결과 (보장되지 않음)</span><pre>5
+7 11</pre></div>
+<ul>
+<li><code>j++ + j++</code>: <code>+</code>의 왼쪽과 오른쪽 중 무엇을 먼저 계산할지 C++이 정하지 않았습니다. 그런 상태에서 같은 변수를 양쪽에서 바꾸면 <b>정의되지 않은 동작</b>입니다. 이 환경에서는 5 + 6 = 11이 나왔지만, 다른 컴파일러나 다른 최적화 옵션에서 다른 값이 나와도 컴파일러 잘못이 아닙니다.</li>
+<li><code>i = i++</code>: C와 C++14까지는 정의되지 않은 동작이었습니다. C++17에서 '대입은 오른쪽을 먼저 다 계산한다'는 규칙이 생기면서 결과가 정해졌습니다. <code>i++</code>가 값 5를 내고 i를 6으로 만든 뒤, 마지막에 i에 5가 대입되어 <b>i는 그대로 5</b>입니다. 그래도 g++는 'may be undefined(정의되지 않았을 수 있음)'라고 경고하고, C로 컴파일하면 지금도 정의되지 않은 동작입니다. i를 1 늘리려던 거라면 어느 쪽이든 틀린 코드입니다. <code>i++;</code> 한 줄이면 됩니다.</li>
+</ul>
+<p>규칙은 하나만 기억하면 됩니다. <b><code>++</code>, <code>--</code>, 대입으로 바꾼 변수는 같은 식 안에서 다시 쓰지 않는다.</b> 바꾸는 일은 한 문장에 하나씩 합니다. 경고 메시지의 <code>-Wsequence-point</code>는 이런 코드를 잡으라고 있는 경고입니다.</p>
+
+<div class="q">출력을 예측해 보세요. trace 표를 직접 그리면 실수가 줄어듭니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int x = 10;
+    int y = x++ + 5;
+    int z = --x * 2;
+    cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; ' ' &lt;&lt; z &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<div class="run"><span class="lbl">실행 결과</span><pre>10 15 20</pre></div>
+<div class="tbl narrow"><table class="trace">
+<tr><th>문장</th><th>x</th><th>y</th><th>z</th></tr>
+<tr><td class="mono">int x = 10;</td><td class="mono">10</td><td>-</td><td>-</td></tr>
+<tr><td class="mono">int y = x++ + 5;</td><td class="mono">11</td><td class="mono">15</td><td>-</td></tr>
+<tr><td class="mono">int z = --x * 2;</td><td class="mono">10</td><td class="mono">15</td><td class="mono">20</td></tr>
+</table></div>
+<p><code>x++ + 5</code>는 x의 옛값 10에 5를 더합니다. <code>--x * 2</code>는 x를 먼저 10으로 줄이고 2를 곱합니다. 각 식에서 x를 한 번씩만 바꾸므로 결과가 정해진 코드입니다.</p>
+</div></details>
+
+<h3><span class="no">6</span>비교 연산자: == != &lt; &lt;= &gt; &gt;=</h3>
+<p>두 값을 비교해서 참(<code>true</code>) 또는 거짓(<code>false</code>)을 내는 연산자입니다. 결과의 타입은 2장에서 배운 <code>bool</code>입니다.</p>
+<div class="tbl narrow"><table>
+<tr><th>연산자</th><th>뜻</th><th>a = 3, b = 5일 때</th></tr>
+<tr><td class="mono">a == b</td><td>같다</td><td class="mono">false</td></tr>
+<tr><td class="mono">a != b</td><td>다르다</td><td class="mono">true</td></tr>
+<tr><td class="mono">a &lt; b</td><td>작다</td><td class="mono">true</td></tr>
+<tr><td class="mono">a &lt;= b</td><td>작거나 같다</td><td class="mono">true</td></tr>
+<tr><td class="mono">a &gt; b</td><td>크다</td><td class="mono">false</td></tr>
+<tr><td class="mono">a &gt;= b</td><td>크거나 같다</td><td class="mono">false</td></tr>
+</table></div>
+<p>두 글자짜리 기호는 순서가 정해져 있습니다. <code>&lt;=</code>, <code>&gt;=</code>, <code>!=</code>처럼 <code>=</code>가 항상 뒤에 옵니다. <code>=&lt;</code>나 <code>=&gt;</code>는 C++ 연산자가 아닙니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 3;
+    int b = 5;
+    cout &lt;&lt; (a &lt; b) &lt;&lt; '\n';
+    cout &lt;&lt; (a == b) &lt;&lt; '\n';
+    cout &lt;&lt; (a != b) &lt;&lt; '\n';
+    cout &lt;&lt; boolalpha;          // 지금부터 true/false로 출력
+    cout &lt;&lt; (a &gt;= b) &lt;&lt; '\n';
+    cout &lt;&lt; (a &lt;= 3) &lt;&lt; '\n';
+    bool same = (a == 3);
+    cout &lt;&lt; same &lt;&lt; '\n';
+    cout &lt;&lt; noboolalpha;        // 다시 1/0으로
+    cout &lt;&lt; same &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1
+0
+1
+false
+true
+true
+1</pre></div>
+<ul>
+<li><code>cout</code>은 <code>bool</code>을 기본적으로 <code>1</code>(참)과 <code>0</code>(거짓)으로 출력합니다.</li>
+<li>2장에서 잠깐 본 <code>boolalpha</code>를 <code>cout &lt;&lt; boolalpha;</code>로 한 번 보내면 그 뒤로는 <code>true</code>/<code>false</code>로 출력하고, <code>noboolalpha</code>로 되돌립니다. 2장의 <code>fixed</code>처럼 한 번 설정하면 계속 유지되는 출력 설정입니다.</li>
+<li>비교 결과를 <code>bool</code> 변수에 저장할 수 있습니다(<code>bool same = (a == 3);</code>). 함수형 문제에서 <code>bool</code>을 <code>return</code>하면 채점기가 그 값을 직접 비교하므로, <code>boolalpha</code>는 화면에 출력할 때만 신경 쓰면 됩니다.</li>
+</ul>
+<div class="pen"><b><code>=</code>와 <code>==</code>:</b> <code>a = 5</code>는 대입(a를 바꿈), <code>a == 5</code>는 비교(a는 그대로)입니다. 4절에서 본 대로 대입도 값을 가지는 식이라서, 잘못 써도 컴파일이 되는 경우가 많습니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 1;
+    cout &lt;&lt; (a == 5) &lt;&lt; '\n';  // 비교: a는 그대로
+    cout &lt;&lt; a &lt;&lt; '\n';
+    cout &lt;&lt; (a = 5) &lt;&lt; '\n';   // 대입: a가 바뀜
+    cout &lt;&lt; a &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0
+1
+5
+5</pre></div>
+<p>위 코드에서 비교식을 모두 괄호로 감싼 데는 이유가 있습니다. 괄호를 빼면 컴파일이 안 됩니다.</p>
+<pre class="code" data-check="error"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 3;
+    int b = 5;
+    cout &lt;&lt; a &lt; b &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 에러 (앞부분)</span><pre>main.cpp: In function 'int main()':
+main.cpp:7:15: error: no match for 'operator&lt;' (operand types are 'std::basic_ostream&lt;char&gt;' and 'int')
+    7 |     cout &lt;&lt; a &lt; b &lt;&lt; '\n';
+      |     ~~~~~~~~~ ^ ~~~~~~~~~
+      |          |        |
+      |          |        int
+      |          std::basic_ostream&lt;char&gt;</pre></div>
+<p><code>&lt;&lt;</code>가 <code>&lt;</code>보다 먼저 묶이기 때문에(8절 표) 컴파일러는 이 줄을 <code>(cout &lt;&lt; a) &lt; (b &lt;&lt; '\n')</code>으로 읽습니다. 왼쪽 <code>cout &lt;&lt; a</code>의 결과는 출력 통로인 <code>cout</code> 자신(<code>std::basic_ostream&lt;char&gt;</code>)이고 오른쪽은 <code>int</code>라서, 둘을 <code>&lt;</code>로 비교하는 방법이 없다(no match)는 에러입니다. <b>비교·논리·비트 연산의 결과를 <code>cout</code>으로 출력할 때는 항상 괄호로 감싸세요.</b></p>
+
+<h4>실수의 == 비교</h4>
+<p>2장에서 <code>0.1 + 0.2</code>가 정확히 0.3이 아니라는 것을 봤습니다. 그래서 실수끼리 <code>==</code>로 비교하면 기대와 다른 결과가 나옵니다. 실수는 '차이가 아주 작으면 같다'고 비교합니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double x = 0.1 + 0.2;
+    cout &lt;&lt; (x == 0.3) &lt;&lt; '\n';
+    cout &lt;&lt; (fabs(x - 0.3) &lt; 1e-9) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0
+1</pre></div>
+<p><code>fabs</code>는 실수의 절댓값을 돌려주는 함수입니다(9절). <code>1e-9</code>는 1 × 10<sup>−9</sup>, 즉 0.000000001을 짧게 쓴 지수 표기입니다. '두 수의 차이가 10억분의 1보다 작으면 같다고 본다'는 뜻입니다. 이 허용 오차를 얼마로 잡을지는 문제마다 다르며 27장에서 다시 다룹니다. <code>int</code>끼리의 <code>==</code>는 정확하므로 이런 걱정이 필요 없습니다.</p>
+<div class="pen"><b>부호 있는 수와 unsigned 비교:</b> 2장에서 본 <code>unsigned</code> 타입과 음수를 비교하면 상식과 다른 결과가 나옵니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = -1;
+    unsigned int u = 0;
+    cout &lt;&lt; (a &lt; u) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고</span><pre>main.cpp:7:16: warning: comparison of integer expressions of different signedness: 'int' and 'unsigned int' [-Wsign-compare]</pre></div>
+<div class="run"><span class="lbl">실행 결과</span><pre>0</pre></div>
+<p>−1 &lt; 0이 거짓으로 나왔습니다. <code>int</code>와 <code>unsigned int</code>를 비교하면 <code>int</code> 쪽이 <code>unsigned</code>로 바뀌는데, −1은 <code>unsigned int</code>로 바뀌면 가장 큰 값인 4294967295가 됩니다. 경고 메시지가 '부호 있는 정수와 부호 없는 정수를 비교한다(different signedness)'고 알려 줍니다. 6장에서 <code>vector</code>의 <code>size()</code>와 비교할 때 이 경고를 자주 보게 되니, 그때 다시 설명합니다.</p>
+
+<div class="q">출력을 예측해 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int x = 7;
+    cout &lt;&lt; (x % 2 == 1) &lt;&lt; ' ' &lt;&lt; (x / 2 == 3.5) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<div class="run"><span class="lbl">실행 결과</span><pre>1 0</pre></div>
+<p>7 % 2는 1이므로 첫 비교는 참입니다. <code>x / 2</code>는 정수 나눗셈이라 3이고, 3 == 3.5는 거짓입니다. 연산자는 각자 규칙대로 계산된 뒤에 비교됩니다.</p>
+</div></details>
+
+<h3><span class="no">7</span>논리 연산자: &amp;&amp; || !</h3>
+<p>참·거짓 여러 개를 조합하는 연산자입니다. '20대인가?'는 '20 이상' <b>그리고</b> '30 미만'이고, '할인 대상인가?'는 '20 미만' <b>또는</b> '65 이상'입니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int age = 25;
+    bool in_twenties = (age &gt;= 20) &amp;&amp; (age &lt; 30);
+    bool discount = (age &lt; 20) || (age &gt;= 65);
+    cout &lt;&lt; in_twenties &lt;&lt; ' ' &lt;&lt; discount &lt;&lt; ' ' &lt;&lt; !in_twenties &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1 0 0</pre></div>
+<ul>
+<li><code>&amp;&amp;</code>(논리 AND, '그리고'): 양쪽이 <b>모두</b> 참일 때만 참.</li>
+<li><code>||</code>(논리 OR, '또는'): <b>하나라도</b> 참이면 참. 키보드의 <code>\</code> 키(한글 키보드에서는 <code>₩</code> 키)를 Shift와 함께 누르면 나오는 세로 막대를 두 번 씁니다.</li>
+<li><code>!</code>(논리 NOT, '아니다'): 참과 거짓을 뒤집는 단항 연산자.</li>
+</ul>
+<div class="tbl narrow"><table>
+<tr><th>A</th><th>B</th><th>A &amp;&amp; B</th><th>A || B</th><th>!A</th></tr>
+<tr><td class="mono">true</td><td class="mono">true</td><td class="mono">true</td><td class="mono">true</td><td class="mono">false</td></tr>
+<tr><td class="mono">true</td><td class="mono">false</td><td class="mono">false</td><td class="mono">true</td><td class="mono">false</td></tr>
+<tr><td class="mono">false</td><td class="mono">true</td><td class="mono">false</td><td class="mono">true</td><td class="mono">true</td></tr>
+<tr><td class="mono">false</td><td class="mono">false</td><td class="mono">false</td><td class="mono">false</td><td class="mono">true</td></tr>
+</table></div>
+<p><code>int</code> 같은 정수도 논리 연산에 쓸 수 있습니다. 2장에서 본 대로 <b>0은 거짓, 0이 아닌 값은 모두 참</b>으로 취급됩니다. 그래서 <code>!0</code>은 1, <code>!7</code>은 0입니다.</p>
+<div class="pen"><b>범위는 <code>&amp;&amp;</code>로:</b> 수학처럼 <code>20 &lt;= age &lt;= 29</code>라고 쓰면 원하는 뜻이 되지 않습니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int age = 35;
+    cout &lt;&lt; (20 &lt;= age &lt;= 29) &lt;&lt; '\n';
+    cout &lt;&lt; (20 &lt;= age &amp;&amp; age &lt;= 29) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고 (요약)</span><pre>main.cpp:6:24: warning: comparison of constant '29' with boolean expression is always true [-Wbool-compare]
+main.cpp:6:17: warning: comparisons like 'X&lt;=Y&lt;=Z' do not have their mathematical meaning [-Wparentheses]</pre></div>
+<div class="run"><span class="lbl">실행 결과</span><pre>1
+0</pre></div>
+<p>35살인데 첫 줄이 참(1)으로 나왔습니다. 비교는 왼쪽부터 하나씩 계산되므로 <code>(20 &lt;= age) &lt;= 29</code>가 됩니다. <code>20 &lt;= 35</code>는 참이고 참은 1이므로, <code>1 &lt;= 29</code>를 계산해서 또 참입니다. 앞의 비교 결과는 0 또는 1뿐이라 이 식은 age가 무엇이든 <b>항상 참</b>입니다. g++도 'X&lt;=Y&lt;=Z 같은 비교는 수학의 뜻이 아니다'라고 경고합니다. 4장에서 <code>if</code>와 함께 다시 확인합니다.</p>
+
+<h4>단축 평가</h4>
+<p><code>&amp;&amp;</code>와 <code>||</code>는 <b>왼쪽을 먼저 계산하고, 왼쪽만으로 결과가 정해지면 오른쪽은 아예 실행하지 않습니다.</b> 이것을 <b>단축 평가(short-circuit evaluation)</b>라고 합니다.</p>
+<ul>
+<li><code>A &amp;&amp; B</code>: A가 거짓이면 B가 무엇이든 결과는 거짓 → B를 건너뜁니다.</li>
+<li><code>A || B</code>: A가 참이면 B가 무엇이든 결과는 참 → B를 건너뜁니다.</li>
+</ul>
+<p>이 성질은 '위험한 계산 앞에 안전 검사를 두는' 데 씁니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 10;
+    int b = 0;
+    bool ok = (b != 0) &amp;&amp; (a / b &gt; 1);  // 오른쪽은 실행되지 않는다
+    cout &lt;&lt; ok &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0</pre></div>
+<p>b가 0이라 <code>b != 0</code>이 거짓이므로 <code>a / b</code>는 실행되지 않고, 프로그램은 0으로 나누지 않고 무사히 끝납니다. 두 조건의 순서를 바꿔 <code>(a / b &gt; 1) &amp;&amp; (b != 0)</code>으로 쓰면 나눗셈이 먼저 실행되어 2절에서 본 것처럼 프로그램이 죽습니다. <b>논리 연산에서는 순서가 의미를 가집니다.</b></p>
+<p>오른쪽이 정말 실행되지 않는지 눈으로 확인해 봅시다. 오른쪽에 <code>++count</code>를 넣어서, 실행되면 count가 늘어나게 했습니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 10;
+    int count = 0;
+    bool r1 = (a &lt; 5) &amp;&amp; (++count &gt; 0);  // 왼쪽 거짓 → 건너뜀
+    cout &lt;&lt; r1 &lt;&lt; ' ' &lt;&lt; count &lt;&lt; '\n';
+    bool r2 = (a &gt; 5) || (++count &gt; 0);  // 왼쪽 참 → 건너뜀
+    cout &lt;&lt; r2 &lt;&lt; ' ' &lt;&lt; count &lt;&lt; '\n';
+    bool r3 = (a &gt; 5) &amp;&amp; (++count &gt; 0);  // 왼쪽 참 → 오른쪽 실행
+    cout &lt;&lt; r3 &lt;&lt; ' ' &lt;&lt; count &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0 0
+1 0
+1 1</pre></div>
+<p>세 번째에서만 count가 1이 됐습니다. 원리를 보여 주려고 이렇게 썼지만, 실전에서는 <code>&amp;&amp;</code>, <code>||</code>의 오른쪽에 값을 바꾸는 코드를 넣지 마세요. 실행될지 말지가 왼쪽에 달려 있어서 읽는 사람이 헷갈립니다.</p>
+
+<h4><code>&amp;&amp;</code>가 <code>||</code>보다 먼저</h4>
+<p><code>&amp;&amp;</code>와 <code>||</code>를 섞으면 <code>&amp;&amp;</code>가 먼저 묶입니다. 수학에서 곱셈이 덧셈보다 먼저인 것과 비슷합니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    bool t = true;
+    bool f = false;
+    cout &lt;&lt; (t || f &amp;&amp; f) &lt;&lt; '\n';
+    cout &lt;&lt; ((t || f) &amp;&amp; f) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고</span><pre>main.cpp:7:21: warning: suggest parentheses around '&amp;&amp;' within '||' [-Wparentheses]</pre></div>
+<div class="run"><span class="lbl">실행 결과</span><pre>1
+0</pre></div>
+<p>첫 줄은 <code>t || (f &amp;&amp; f)</code> = 참 || 거짓 = 참, 둘째 줄은 괄호대로 (참) &amp;&amp; 거짓 = 거짓입니다. g++가 '<code>||</code> 안의 <code>&amp;&amp;</code>에 괄호를 치라'고 권하는 이유는, 사람이 이 우선순위를 자주 착각하기 때문입니다. <code>&amp;&amp;</code>와 <code>||</code>를 섞을 때는 의도대로 괄호를 치세요. 연습 문제 181917 간단한 논리 연산이 정확히 이 괄호 문제입니다.</p>
+<div class="tip">'~가 아니다'를 만들 때는 드모르간 법칙이 편합니다. <code>!(A &amp;&amp; B)</code>는 <code>!A || !B</code>와 같고, <code>!(A || B)</code>는 <code>!A &amp;&amp; !B</code>와 같습니다. 예를 들어 '20대가 아니다'는 <code>!(age &gt;= 20 &amp;&amp; age &lt; 30)</code>이고, 풀어 쓰면 <code>age &lt; 20 || age &gt;= 30</code>입니다. 부정하면 <code>&amp;&amp;</code>와 <code>||</code>가 서로 바뀌고 각 조건이 뒤집힙니다.</div>
+
+<div class="q">① 'n은 3의 배수이면서 5의 배수는 아니다'를 <code>bool</code> 식으로 써 보세요. ② 아래 코드의 출력을 예측해 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; (!0) &lt;&lt; (!7) &lt;&lt; (!!7) &lt;&lt; '\n';
+    int x = 0;
+    cout &lt;&lt; ((x != 0) &amp;&amp; (10 / x &gt; 2)) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<p>① <code>n % 3 == 0 &amp;&amp; n % 5 != 0</code> (괄호를 쳐서 <code>(n % 3 == 0) &amp;&amp; (n % 5 != 0)</code>으로 써도 같습니다. <code>%</code>와 <code>==</code>가 <code>&amp;&amp;</code>보다 먼저 계산되기 때문입니다.)</p>
+<div class="run"><span class="lbl">실행 결과</span><pre>101
+0</pre></div>
+<p>② <code>!0</code>은 1, 7은 0이 아니라 참이므로 <code>!7</code>은 0, <code>!!7</code>은 다시 뒤집어 1입니다. 셋 사이에 공백이 없으니 <code>101</code>로 붙어 나옵니다. 둘째 줄은 x가 0이라 왼쪽이 거짓이므로 <code>10 / x</code>는 실행되지 않고 0이 출력됩니다.</p>
+</div></details>
+
+<h3><span class="no">8</span>연산자 우선순위와 결합 방향</h3>
+<p><code>2 + 3 * 4</code>가 20이 아니라 14인 이유는 <code>*</code>가 <code>+</code>보다 먼저 묶이기 때문입니다. 이렇게 어떤 연산자가 먼저 피연산자와 묶이는지를 <b>우선순위(precedence)</b>, 우선순위가 같은 연산자끼리 왼쪽부터 묶을지 오른쪽부터 묶을지를 <b>결합 방향(associativity)</b>이라고 합니다. 자주 쓰는 연산자만 모은 표입니다(위가 먼저).</p>
+<div class="tbl"><table>
+<tr><th>순위</th><th>연산자</th><th>설명</th><th>결합 방향</th></tr>
+<tr><td>1</td><td class="mono">a++ a--</td><td>후위 증감</td><td>왼쪽부터</td></tr>
+<tr><td>2</td><td class="mono">++a --a -a ! ~ (int)</td><td>전위 증감, 부호, 논리 NOT, 비트 NOT, 캐스트</td><td>오른쪽부터</td></tr>
+<tr><td>3</td><td class="mono">* / %</td><td>곱셈, 나눗셈, 나머지</td><td>왼쪽부터</td></tr>
+<tr><td>4</td><td class="mono">+ -</td><td>덧셈, 뺄셈</td><td>왼쪽부터</td></tr>
+<tr><td>5</td><td class="mono">&lt;&lt; &gt;&gt;</td><td>비트 시프트 (<code>cout</code>의 <code>&lt;&lt;</code>도 이 순위)</td><td>왼쪽부터</td></tr>
+<tr><td>6</td><td class="mono">&lt; &lt;= &gt; &gt;=</td><td>대소 비교</td><td>왼쪽부터</td></tr>
+<tr><td>7</td><td class="mono">== !=</td><td>같음 비교</td><td>왼쪽부터</td></tr>
+<tr><td>8</td><td class="mono">&amp;</td><td>비트 AND</td><td>왼쪽부터</td></tr>
+<tr><td>9</td><td class="mono">^</td><td>비트 XOR</td><td>왼쪽부터</td></tr>
+<tr><td>10</td><td class="mono">|</td><td>비트 OR</td><td>왼쪽부터</td></tr>
+<tr><td>11</td><td class="mono">&amp;&amp;</td><td>논리 AND</td><td>왼쪽부터</td></tr>
+<tr><td>12</td><td class="mono">||</td><td>논리 OR</td><td>왼쪽부터</td></tr>
+<tr><td>13</td><td class="mono">?: = += -= *= /= %=</td><td>삼항 연산자(4장), 대입</td><td>오른쪽부터</td></tr>
+</table></div>
+<p>외우는 요령은 큰 흐름입니다. <b>단항 → 산술(곱셈류 → 덧셈류) → 시프트 → 비교(대소 → 같음) → 비트(<code>&amp;</code> → <code>^</code> → <code>|</code>) → 논리(<code>&amp;&amp;</code> → <code>||</code>) → 대입</b>. 이 중 가장 많이 사고를 내는 곳은 두 군데입니다. 6절에서 본 <code>cout &lt;&lt;</code>와 비교의 관계, 그리고 10절에서 볼 '비트 연산자가 <code>==</code>보다 늦다'는 점입니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; 2 + 3 * 4 &lt;&lt; ' ' &lt;&lt; (2 + 3) * 4 &lt;&lt; '\n';
+    cout &lt;&lt; 10 - 4 - 3 &lt;&lt; ' ' &lt;&lt; 10 - (4 - 3) &lt;&lt; '\n';
+    cout &lt;&lt; 7 / 2 * 2 &lt;&lt; ' ' &lt;&lt; 7 * 2 / 2 &lt;&lt; '\n';
+    cout &lt;&lt; 2 * 3 % 4 &lt;&lt; ' ' &lt;&lt; 2 * (3 % 4) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>14 20
+3 9
+6 7
+2 6</pre></div>
+<ul>
+<li><code>10 - 4 - 3</code>: 같은 순위는 왼쪽부터이므로 (10 − 4) − 3 = 3입니다. 오른쪽부터 묶으면 9가 됩니다.</li>
+<li><code>2 * 3 % 4</code>: <code>*</code>와 <code>%</code>는 같은 순위라서 왼쪽부터 (2 × 3) % 4 = 6 % 4 = 2입니다.</li>
+<li><code>cout &lt;&lt; 2 + 3 * 4</code>는 괄호 없이도 됩니다. <code>+</code>, <code>*</code>가 <code>&lt;&lt;</code>보다 먼저 묶이기 때문입니다. 반대로 비교·비트·논리 연산은 <code>&lt;&lt;</code>보다 늦으므로 괄호가 필요합니다.</li>
+</ul>
+<div class="pen"><b><code>7 / 2 * 2</code>는 6, <code>7 * 2 / 2</code>는 7:</b> 수학에서는 둘 다 7이지만, 정수 연산에서는 계산 순서가 결과를 바꿉니다. <code>/</code>와 <code>*</code>는 같은 순위라서 왼쪽부터 계산합니다.</div>
+<div class="tbl narrow"><table class="trace">
+<tr><th>식</th><th>1단계</th><th>2단계</th><th>결과</th></tr>
+<tr><td class="mono">7 / 2 * 2</td><td class="mono">7 / 2 = 3</td><td class="mono">3 * 2 = 6</td><td class="mono">6</td></tr>
+<tr><td class="mono">7 * 2 / 2</td><td class="mono">7 * 2 = 14</td><td class="mono">14 / 2 = 7</td><td class="mono">7</td></tr>
+</table></div>
+<p>나눗셈을 먼저 하면 버려진 소수점 아래(0.5)가 영영 사라진 채로 곱해집니다. 그래서 정수로 비율을 계산할 때는 <b>곱셈을 먼저, 나눗셈을 나중에</b> 합니다. 단, 곱셈을 먼저 하면 중간값이 커지므로 11절의 오버플로를 함께 확인해야 합니다.</p>
+<div class="emb">FPU가 없거나 실수 연산을 피하는 펌웨어에서는 센서 값을 정수 연산으로 변환합니다. 12비트 ADC(0~4095)로 0~3300 mV를 읽는 예입니다.
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int raw = 2048;                   // ADC 읽은 값
+    int mv_bad = raw / 4095 * 3300;   // 2048 / 4095가 먼저 0
+    int mv_good = raw * 3300 / 4095;  // 곱셈 먼저
+    cout &lt;&lt; mv_bad &lt;&lt; ' ' &lt;&lt; mv_good &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0 1650</pre></div>
+나눗셈을 먼저 하면 4095 미만의 모든 값이 0 mV가 됩니다. 곱셈을 먼저 하면 중간값이 최대 4095 × 3300 = 13,513,500인데, 32비트 <code>int</code>에는 넉넉히 들어갑니다. 하지만 <code>int</code>가 16비트인 AVR(아두이노 우노)에서는 넘칩니다. 그래서 펌웨어에서는 크기가 정해진 타입(<code>int32_t</code> 등, 29장)을 씁니다.</div>
+<div class="pen"><b><code>!a == b</code>는 <code>!(a == b)</code>가 아닙니다:</b> 단항 연산자 <code>!</code>는 비교보다 훨씬 먼저 묶이므로 <code>(!a) == b</code>가 됩니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 0;
+    int b = 5;
+    cout &lt;&lt; (!a == b) &lt;&lt; '\n';
+    cout &lt;&lt; (!(a == b)) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고</span><pre>main.cpp:7:17: warning: logical not is only applied to the left hand side of comparison [-Wlogical-not-parentheses]</pre></div>
+<div class="run"><span class="lbl">실행 결과</span><pre>0
+1</pre></div>
+<p>첫 줄은 <code>!a</code>(= <code>!0</code> = 1)를 먼저 구하고 <code>1 == 5</code>를 비교하므로 0입니다. 둘째 줄은 <code>a == b</code>(거짓)를 뒤집어 1입니다. 경고도 '논리 NOT이 비교의 왼쪽에만 적용된다'고 정확히 짚어 줍니다. 'a와 b가 다르다'를 쓰고 싶다면 가장 읽기 쉬운 <code>a != b</code>를 쓰세요.</p>
+<div class="box"><span class="lbl">핵심 정리</span><ul>
+<li>헷갈리면 괄호를 칩니다. 괄호는 실행 속도에 아무 영향이 없고, 읽는 사람의 실수를 막습니다.</li>
+<li>정확히는, 우선순위와 결합 방향은 '어떻게 묶을지'만 정합니다. <code>a + b</code>에서 a와 b 중 무엇을 먼저 계산할지는 C++이 정하지 않았습니다(<code>&amp;&amp;</code>, <code>||</code>처럼 왼쪽을 먼저 계산하도록 정해진 연산자도 몇 개 있습니다). 5절의 <code>j++ + j++</code>가 위험한 이유입니다.</li>
+</ul></div>
+
+<div class="q">C++이 실제로 묶는 방식대로 괄호를 쳐 보세요. ① <code>a + b * c - d</code> ② <code>a &lt; b == c &lt; d</code> ③ <code>x = y += 2</code> ④ <code>!x &amp;&amp; y || z</code> ⑤ 그리고 <code>20 / 4 * 5 % 3</code>의 값은?</div>
+<details><summary>답 보기</summary><div>
+<p>① <code>(a + (b * c)) - d</code> ② <code>(a &lt; b) == (c &lt; d)</code> — 대소 비교가 같음 비교보다 먼저입니다. ③ <code>x = (y += 2)</code> — 대입은 오른쪽부터입니다. ④ <code>((!x) &amp;&amp; y) || z</code> ⑤ 셋 다 같은 순위라 왼쪽부터 ((20 / 4) * 5) % 3 = (5 × 5) % 3 = 25 % 3 = <b>1</b>입니다.</p>
+</div></details>
+
+<h3><span class="no">9</span>수학 함수: &lt;cmath&gt;와 max, min</h3>
+<p>제곱근, 거듭제곱, 반올림 같은 계산은 연산자가 아니라 함수로 제공됩니다. <code>#include &lt;cmath&gt;</code>를 쓰면 사용할 수 있고, 2절의 <code>fmod</code>처럼 <code>이름(값)</code> 모양으로 부르면 결과를 돌려줍니다.</p>
+<div class="tbl"><table>
+<tr><th>함수</th><th>뜻</th><th>예</th><th>결과</th><th>결과 타입</th></tr>
+<tr><td class="mono">abs(x)</td><td>절댓값</td><td class="mono">abs(-7)</td><td class="mono">7</td><td>넣은 타입 그대로</td></tr>
+<tr><td class="mono">fabs(x)</td><td>실수 절댓값</td><td class="mono">fabs(-2.5)</td><td class="mono">2.5</td><td class="mono">double</td></tr>
+<tr><td class="mono">sqrt(x)</td><td>제곱근</td><td class="mono">sqrt(16)</td><td class="mono">4</td><td class="mono">double</td></tr>
+<tr><td class="mono">pow(x, y)</td><td>x의 y제곱</td><td class="mono">pow(2, 10)</td><td class="mono">1024</td><td class="mono">double</td></tr>
+<tr><td class="mono">floor(x)</td><td>내림</td><td class="mono">floor(2.7)</td><td class="mono">2</td><td class="mono">double</td></tr>
+<tr><td class="mono">ceil(x)</td><td>올림</td><td class="mono">ceil(2.1)</td><td class="mono">3</td><td class="mono">double</td></tr>
+<tr><td class="mono">round(x)</td><td>반올림</td><td class="mono">round(2.5)</td><td class="mono">3</td><td class="mono">double</td></tr>
+<tr><td class="mono">trunc(x)</td><td>0 쪽으로 버림</td><td class="mono">trunc(-2.7)</td><td class="mono">-2</td><td class="mono">double</td></tr>
+<tr><td class="mono">fmod(x, y)</td><td>실수 나머지</td><td class="mono">fmod(7.5, 2.0)</td><td class="mono">1.5</td><td class="mono">double</td></tr>
+</table></div>
+<p>마지막 열이 이 절의 핵심입니다. <b><code>abs</code>를 빼면 전부 <code>double</code>을 돌려줍니다.</b> 정수를 넣어도 마찬가지입니다. (정확히는 <code>float</code>를 넣으면 <code>float</code>를 돌려주지만, 이 노트는 실수에 <code>double</code>만 씁니다.)</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; abs(-7) &lt;&lt; ' ' &lt;&lt; fabs(-2.5) &lt;&lt; '\n';
+    cout &lt;&lt; sqrt(16) &lt;&lt; ' ' &lt;&lt; sqrt(2) &lt;&lt; '\n';
+    cout &lt;&lt; pow(2, 10) &lt;&lt; ' ' &lt;&lt; pow(2.5, 2) &lt;&lt; '\n';
+    int r = sqrt(17);  // double → int: 소수점 아래를 버림
+    cout &lt;&lt; r &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>7 2.5
+4 1.41421
+1024 6.25
+4</pre></div>
+<ul>
+<li><code>sqrt(16)</code>의 결과는 4.0이라는 <code>double</code>입니다. <code>cout</code>은 소수점 아래가 0인 실수를 <code>4</code>처럼 정수 모양으로 출력합니다. 화면 모양만 보고 <code>int</code>라고 착각하지 마세요.</li>
+<li><code>sqrt(2)</code>가 1.41421로 나오는 것은 <code>cout</code>이 기본으로 유효숫자 6자리까지만 보여 주기 때문입니다. 더 보려면 2장의 <code>setprecision</code>을 씁니다.</li>
+<li><code>int r = sqrt(17);</code>은 4.123…을 <code>int</code>에 넣으면서 소수점 아래를 버립니다. 이 변환은 <code>-Wall -Wextra</code>로도 경고가 나오지 않습니다(<code>-Wconversion</code>을 추가해야 경고합니다). 조용히 일어나는 변환이라 더 조심해야 합니다.</li>
+<li>C++에서는 <code>&lt;cmath&gt;</code>를 포함하면 <code>abs(-2.5)</code>도 2.5를 돌려줍니다. 하지만 C의 <code>abs</code>는 정수 전용이라 <code>abs(-2.5)</code>가 2가 됩니다(gcc가 <code>-Wextra</code>에서 경고). 실수의 절댓값은 C와 C++ 어디서나 안전한 <code>fabs</code>로 쓰는 습관을 들이세요.</li>
+</ul>
+<div class="pen"><b><code>pow</code>는 <code>double</code>을 돌려줍니다:</b> 정수 거듭제곱에 <code>pow</code>를 쓰면 두 가지 문제가 생깁니다. 출력 모양이 바뀌고, 큰 수에서는 값 자체가 틀립니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; pow(10, 9) &lt;&lt; '\n';
+    cout &lt;&lt; (long long)pow(10, 9) &lt;&lt; '\n';
+    long long n = 99999999;
+    cout &lt;&lt; n * n &lt;&lt; '\n';
+    cout &lt;&lt; (long long)pow(n, 2) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1e+09
+1000000000
+9999999800000001
+9999999800000000</pre></div>
+<ul>
+<li><code>pow(10, 9)</code>를 그대로 출력하면 <code>1e+09</code>(1 × 10<sup>9</sup>)라는 지수 표기가 나옵니다. 큰 실수는 <code>cout</code>이 이렇게 줄여서 보여 주기 때문입니다. 입출력형 문제라면 이것만으로 오답입니다.</li>
+<li>마지막 두 줄이 더 무섭습니다. 정답은 9999999800000001인데 <code>pow</code>를 거치면 끝자리가 0이 됩니다. <code>double</code>은 정수를 2<sup>53</sup>(약 9 × 10<sup>15</sup>)까지만 정확히 담을 수 있고, 이 값은 그보다 커서 가장 가까운 표현 가능한 값으로 반올림되기 때문입니다. 에러도 경고도 없이 1이 틀립니다.</li>
+</ul>
+<p>그래서 <b>정수 거듭제곱은 곱셈으로</b> 씁니다. 제곱은 <code>n * n</code>, 세제곱은 <code>n * n * n</code>입니다. 지수가 크면 5장의 반복문으로 곱하고, 정말 큰 거듭제곱은 27장의 빠른 거듭제곱을 씁니다.</p>
+
+<h4>내림, 올림, 반올림, 버림</h4>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; floor(2.7) &lt;&lt; ' ' &lt;&lt; ceil(2.7) &lt;&lt; ' '
+         &lt;&lt; round(2.7) &lt;&lt; ' ' &lt;&lt; trunc(2.7) &lt;&lt; '\n';
+    cout &lt;&lt; floor(-2.7) &lt;&lt; ' ' &lt;&lt; ceil(-2.7) &lt;&lt; ' '
+         &lt;&lt; round(-2.7) &lt;&lt; ' ' &lt;&lt; trunc(-2.7) &lt;&lt; '\n';
+    cout &lt;&lt; floor(2.5) &lt;&lt; ' ' &lt;&lt; ceil(2.5) &lt;&lt; ' '
+         &lt;&lt; round(2.5) &lt;&lt; ' ' &lt;&lt; trunc(2.5) &lt;&lt; '\n';
+    cout &lt;&lt; floor(-2.5) &lt;&lt; ' ' &lt;&lt; ceil(-2.5) &lt;&lt; ' '
+         &lt;&lt; round(-2.5) &lt;&lt; ' ' &lt;&lt; trunc(-2.5) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>2 3 3 2
+-3 -2 -3 -2
+2 3 3 2
+-3 -2 -3 -2</pre></div>
+<p><code>cout</code> 한 문장이 길면 이렇게 <code>&lt;&lt;</code> 앞에서 줄을 바꿔도 됩니다. 문장은 세미콜론에서 끝나기 때문입니다.</p>
+<div class="tbl"><table>
+<tr><th>함수</th><th>방향</th><th class="mono">2.7</th><th class="mono">-2.7</th><th class="mono">2.5</th><th class="mono">-2.5</th></tr>
+<tr><td class="mono">floor</td><td>항상 아래로(더 작은 정수)</td><td class="mono">2</td><td class="mono">-3</td><td class="mono">2</td><td class="mono">-3</td></tr>
+<tr><td class="mono">ceil</td><td>항상 위로(더 큰 정수)</td><td class="mono">3</td><td class="mono">-2</td><td class="mono">3</td><td class="mono">-2</td></tr>
+<tr><td class="mono">round</td><td>가까운 정수, .5는 0에서 먼 쪽</td><td class="mono">3</td><td class="mono">-3</td><td class="mono">3</td><td class="mono">-3</td></tr>
+<tr><td class="mono">trunc</td><td>0 쪽으로(소수점 아래 삭제)</td><td class="mono">2</td><td class="mono">-2</td><td class="mono">2</td><td class="mono">-2</td></tr>
+</table></div>
+<p><code>trunc</code>는 2장에서 본 <code>(int)</code> 변환, 그리고 2절에서 본 정수 나눗셈과 같은 방향(0 쪽)입니다. 양수에서는 <code>floor</code>와 <code>trunc</code>가 같고, 음수에서만 다릅니다. 네 함수 모두 결과가 <code>double</code>이므로 정수가 필요하면 <code>(int)round(x)</code>처럼 바꿔서 씁니다.</p>
+<div class="pen"><b><code>ceil(15 / 7)</code>은 3이 아니라 2:</b> 함수의 괄호 안이 먼저 계산됩니다. <code>15 / 7</code>은 정수 나눗셈이라 이미 2가 됐고, <code>ceil(2)</code>는 2입니다. 실수 나눗셈을 넘겨야 합니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; ceil(15 / 7) &lt;&lt; ' ' &lt;&lt; ceil(15 / 7.0) &lt;&lt; '\n';
+    cout &lt;&lt; (15 + 7 - 1) / 7 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>2 3
+3</pre></div>
+<p>양의 정수끼리의 올림은 3절의 <code>(a + b - 1) / b</code>가 실수를 거치지 않아서 더 안전합니다.</p>
+
+<h4>max와 min</h4>
+<p>두 값 중 큰 것과 작은 것을 고르는 <code>max</code>, <code>min</code>은 <code>&lt;cmath&gt;</code>가 아니라 <b><code>&lt;algorithm&gt;</code></b> 헤더에 있습니다. 다른 헤더를 통해 우연히 컴파일되는 환경도 있지만 보장되지 않으므로 항상 직접 포함하세요.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 4;
+    int b = 9;
+    int c = 6;
+    cout &lt;&lt; max(a, b) &lt;&lt; ' ' &lt;&lt; min(a, b) &lt;&lt; '\n';
+    cout &lt;&lt; max(a, max(b, c)) &lt;&lt; '\n';  // 셋 중 최댓값
+    cout &lt;&lt; min(2.5, 1.5) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>9 4
+9
+1.5</pre></div>
+<p>셋 이상은 <code>max(a, max(b, c))</code>처럼 겹쳐 씁니다. 안쪽 <code>max(b, c)</code>가 먼저 9를 내고, 그다음 <code>max(4, 9)</code>가 계산됩니다. 그런데 <code>max</code>에는 까다로운 조건이 하나 있습니다.</p>
+<pre class="code" data-check="error"><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; max(1, 2LL) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 에러 (핵심 줄만)</span><pre>main.cpp: In function 'int main()':
+main.cpp:6:16: error: no matching function for call to 'max(int, long long int)'
+    6 |     cout &lt;&lt; max(1, 2LL) &lt;&lt; '\n';
+      |             ~~~^~~~~~~~
+...
+main.cpp:6:16: note:   deduced conflicting types for parameter 'const _Tp' ('int' and 'long long int')</pre></div>
+<p>실제 메시지는 라이브러리 내부 파일 경로가 섞여 훨씬 길지만, 읽을 곳은 두 줄입니다. 첫 줄 'no matching function for call to max(int, long long int)'는 '<code>int</code>와 <code>long long</code>을 받는 <code>max</code>가 없다'는 뜻입니다. 아래쪽 'deduced conflicting types'는 '두 값의 타입이 서로 달라서(conflicting) 하나로 정할 수 없었다'는 뜻입니다. <b><code>max</code>와 <code>min</code>은 두 인자의 타입이 정확히 같아야 합니다.</b> 1은 <code>int</code>, <code>2LL</code>은 <code>long long</code>이라 실패했습니다. 실전에서는 <code>long long</code> 변수와 <code>int</code> 변수를 비교할 때 이 에러를 만납니다. <code>max(3, 4.5)</code>도 같은 이유로 컴파일되지 않습니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    long long big = 5000000000LL;
+    cout &lt;&lt; max(1LL, big) &lt;&lt; '\n';            // 1LL: long long 리터럴
+    cout &lt;&lt; max&lt;long long&gt;(1, big) &lt;&lt; '\n';  // 타입을 직접 지정
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>5000000000
+5000000000</pre></div>
+<p>고치는 방법은 둘입니다. 리터럴에 2장의 <code>LL</code> 접미사를 붙여 타입을 맞추거나, <code>max&lt;long long&gt;(…)</code>처럼 꺾쇠 안에 타입을 직접 적습니다. 꺾쇠 문법은 6장의 <code>vector&lt;int&gt;</code>에서 다시 만납니다. 코딩테스트에서 <code>long long</code> 답을 갱신하는 <code>max(answer, (long long)x)</code> 같은 코드가 이 규칙 때문에 나옵니다.</p>
+
+<div class="q">① <code>cout &lt;&lt; sqrt(25) + pow(2, 3) &lt;&lt; '\n';</code>은 무엇을 출력하고, 그 값의 타입은 무엇일까요? ② 아래 코드의 출력은? ③ <code>max(3, 4.5)</code>를 컴파일되게 고쳐 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; floor(-0.5) &lt;&lt; ' ' &lt;&lt; round(-0.5) &lt;&lt; ' '
+         &lt;&lt; (int)-0.5 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<p>① 5 + 8 = 13을 출력하고, 타입은 <code>double</code>입니다(13.0). 소수점 아래가 0이라 <code>13</code>으로 보일 뿐입니다.</p>
+<div class="run"><span class="lbl">실행 결과</span><pre>-1 -1 0</pre></div>
+<p>② <code>floor</code>는 항상 아래로 가므로 −1, <code>round</code>는 .5를 0에서 먼 쪽으로 보내므로 −1, <code>(int)</code>는 0 쪽으로 버리므로 0입니다. ③ <code>max(3.0, 4.5)</code>처럼 두 인자를 모두 <code>double</code>로 맞춥니다.</p>
+</div></details>
+
+<h3><span class="no">10</span>비트 연산 맛보기</h3>
+<p>컴퓨터는 모든 정수를 2진수(0과 1)로 저장합니다. 비트 연산자는 이 2진수의 각 자리, 즉 <b>비트(bit)</b>를 직접 다룹니다. 코딩테스트에서는 홀짝 판정, 2의 거듭제곱, 부분집합 표현(18장)에, 임베디드에서는 레지스터 조작에 매일 씁니다. 여기서는 맛보기만 하고, 깊은 내용은 27장(코딩테스트)과 29장(임베디드)에서 다룹니다.</p>
+<h4>2진수 읽기</h4>
+<p>10진수의 각 자리가 오른쪽부터 1, 10, 100, …을 나타내듯, 2진수의 각 자리는 오른쪽부터 1, 2, 4, 8, 16, …(2<sup>0</sup>, 2<sup>1</sup>, 2<sup>2</sup>, …)을 나타냅니다. 12 = 8 + 4이므로 8비트로 쓰면 <code>00001100</code>입니다.</p>
+<div class="tbl"><table>
+<tr><th>자리 번호</th><td class="mono">7</td><td class="mono">6</td><td class="mono">5</td><td class="mono">4</td><td class="mono">3</td><td class="mono">2</td><td class="mono">1</td><td class="mono">0</td></tr>
+<tr><th>자리값</th><td class="mono">128</td><td class="mono">64</td><td class="mono">32</td><td class="mono">16</td><td class="mono">8</td><td class="mono">4</td><td class="mono">2</td><td class="mono">1</td></tr>
+<tr><th>12</th><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">1</td><td class="mono">1</td><td class="mono">0</td><td class="mono">0</td></tr>
+<tr><th>10</th><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">1</td><td class="mono">0</td><td class="mono">1</td><td class="mono">0</td></tr>
+</table></div>
+<p>2진수를 눈으로 확인하려면 <code>&lt;bitset&gt;</code> 헤더의 <code>bitset&lt;8&gt;(값)</code>을 출력합니다. 값을 8자리 2진수로 보여 주는 도구이고, 꺾쇠 안의 8이 자릿수입니다. 이 챕터에서는 출력용으로만 씁니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;bitset&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 12;
+    int b = 10;
+    cout &lt;&lt; bitset&lt;8&gt;(a) &lt;&lt; '\n';
+    cout &lt;&lt; bitset&lt;8&gt;(b) &lt;&lt; '\n';
+    cout &lt;&lt; bitset&lt;8&gt;(a &amp; b) &lt;&lt; ' ' &lt;&lt; (a &amp; b) &lt;&lt; '\n';
+    cout &lt;&lt; bitset&lt;8&gt;(a | b) &lt;&lt; ' ' &lt;&lt; (a | b) &lt;&lt; '\n';
+    cout &lt;&lt; bitset&lt;8&gt;(a ^ b) &lt;&lt; ' ' &lt;&lt; (a ^ b) &lt;&lt; '\n';
+    cout &lt;&lt; bitset&lt;8&gt;(~a) &lt;&lt; ' ' &lt;&lt; (~a) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>00001100
+00001010
+00001000 8
+00001110 14
+00000110 6
+11110011 -13</pre></div>
+<p>비트 연산은 같은 자리의 비트끼리 따로따로 계산합니다. 세로로 맞춰 보면 규칙이 보입니다.</p>
+<pre class="code" data-check="none"><code class="language-plaintext">    00001100  (12)        00001100  (12)        00001100  (12)
+  &amp; 00001010  (10)      | 00001010  (10)      ^ 00001010  (10)
+  = 00001000  (8)       = 00001110  (14)      = 00000110  (6)</code></pre>
+<div class="tbl"><table>
+<tr><th>연산자</th><th>이름</th><th>각 비트의 규칙</th><th>대표 용도</th></tr>
+<tr><td class="mono">&amp;</td><td>AND</td><td>둘 다 1이면 1</td><td>특정 비트만 남기기(마스크), 비트 검사</td></tr>
+<tr><td class="mono">|</td><td>OR</td><td>하나라도 1이면 1</td><td>특정 비트 켜기</td></tr>
+<tr><td class="mono">^</td><td>XOR</td><td>서로 다르면 1</td><td>특정 비트 뒤집기</td></tr>
+<tr><td class="mono">~</td><td>NOT</td><td>0과 1을 뒤집음(단항)</td><td>마스크 반전(비트 끄기에 사용)</td></tr>
+<tr><td class="mono">&lt;&lt;</td><td>왼쪽 시프트</td><td>왼쪽으로 밀고 빈자리는 0</td><td>2<sup>k</sup> 만들기, 비트 위치 지정</td></tr>
+<tr><td class="mono">&gt;&gt;</td><td>오른쪽 시프트</td><td>오른쪽으로 밀어 버림</td><td>2<sup>k</sup>로 나누기, 특정 비트 꺼내기</td></tr>
+</table></div>
+<p><code>~a</code>가 −13이 된 이유는 이렇습니다. <code>bitset&lt;8&gt;</code>은 아래 8비트만 보여 주지만, <code>int</code>는 32비트라서 앞의 24비트(원래 0)도 모두 1로 뒤집힙니다. 부호 있는 정수는 맨 앞 비트가 1이면 음수로 읽는 방식(2의 보수, 29장)을 쓰기 때문에 결과가 −13입니다. 2의 보수에서는 항상 <code>~x == -x - 1</code>입니다. 그리고 <code>&amp;</code>(비트 AND)와 <code>&amp;&amp;</code>(논리 AND)는 다른 연산자입니다. <code>12 &amp; 10</code>은 8이지만 <code>12 &amp;&amp; 10</code>은 '둘 다 0이 아님'이라 참(1)입니다.</p>
+
+<h4>시프트와 2의 거듭제곱</h4>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; (1 &lt;&lt; 0) &lt;&lt; ' ' &lt;&lt; (1 &lt;&lt; 3) &lt;&lt; ' ' &lt;&lt; (1 &lt;&lt; 10) &lt;&lt; '\n';
+    cout &lt;&lt; (5 &lt;&lt; 1) &lt;&lt; ' ' &lt;&lt; (5 &lt;&lt; 2) &lt;&lt; '\n';
+    cout &lt;&lt; (20 &gt;&gt; 1) &lt;&lt; ' ' &lt;&lt; (20 &gt;&gt; 2) &lt;&lt; ' ' &lt;&lt; (7 &gt;&gt; 1) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1 8 1024
+10 20
+10 5 3</pre></div>
+<ul>
+<li>한 칸 왼쪽으로 밀 때마다 모든 자리값이 2배가 되므로 <code>x &lt;&lt; k</code>는 x × 2<sup>k</sup>입니다(범위를 넘지 않는 한). 특히 <b><code>1 &lt;&lt; k</code>는 2<sup>k</sup></b>입니다.</li>
+<li><code>x &gt;&gt; k</code>는 오른쪽으로 밀면서 맨 오른쪽 비트들을 버리므로, 0 이상의 x에서는 x / 2<sup>k</sup>의 몫과 같습니다(7 &gt;&gt; 1 = 3). 음수의 오른쪽 시프트는 29장에서 다룹니다.</li>
+<li>시프트에도 괄호가 필요합니다. <code>cout</code>의 <code>&lt;&lt;</code>와 시프트의 <code>&lt;&lt;</code>는 같은 연산자이기 때문입니다. 괄호 없이 <code>cout &lt;&lt; 1 &lt;&lt; 3</code>이라고 쓰면 1과 3을 차례로 출력해서 <code>13</code>이 나옵니다.</li>
+</ul>
+<div class="pen"><b><code>1 &lt;&lt; k</code>의 범위:</b> 1은 <code>int</code>이므로 k는 0부터 30까지만 쓰세요. <code>1 &lt;&lt; 31</code>부터는 결과가 <code>int</code>의 최댓값(2<sup>31</sup> − 1)을 넘어 올바른 2의 거듭제곱이 나오지 않고, 32 이상 밀면 정의되지 않은 동작입니다. 더 큰 값이 필요하면 <code>1LL &lt;&lt; k</code>(k는 62까지)를 씁니다.</div>
+
+<h4><code>n &amp; 1</code>로 홀짝 판정</h4>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; (6 &amp; 1) &lt;&lt; ' ' &lt;&lt; (7 &amp; 1) &lt;&lt; ' ' &lt;&lt; (-3 &amp; 1) &lt;&lt; '\n';
+    cout &lt;&lt; (-3 % 2) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0 1 1
+-1</pre></div>
+<p>2진수에서 홀수는 맨 오른쪽 비트(1의 자리)가 1입니다. <code>n &amp; 1</code>은 그 비트 하나만 남기므로, 홀수면 1, 짝수면 0입니다. 음수에서도 홀수면 1이 나옵니다(−3 &amp; 1 = 1). 반면 2절에서 본 대로 <code>-3 % 2</code>는 −1입니다. 음수의 비트 표현이 2의 보수라는 것은 C++20부터 표준이 보장하고, 그 전에도 현실의 모든 컴퓨터가 이 방식을 씁니다.</p>
+<div class="pen"><b><code>x &amp; 1 == 0</code>은 항상 0:</b> 8절 표에서 비트 연산자 <code>&amp;</code>는 <code>==</code>보다 <b>늦게</b> 묶입니다. 그래서 이 식은 <code>x &amp; (1 == 0)</code>, 즉 <code>x &amp; 0</code>이 되어 x가 무엇이든 0입니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int x = 6;
+    cout &lt;&lt; (x &amp; 1 == 0) &lt;&lt; '\n';
+    cout &lt;&lt; ((x &amp; 1) == 0) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고</span><pre>main.cpp:6:20: warning: suggest parentheses around comparison in operand of '&amp;' [-Wparentheses]</pre></div>
+<div class="run"><span class="lbl">실행 결과</span><pre>0
+1</pre></div>
+<p>6은 짝수인데 첫 줄이 0(거짓)입니다. g++가 '<code>&amp;</code>의 피연산자로 쓰인 비교에 괄호를 치라'고 경고합니다. <b>비트 연산을 비교하거나 출력할 때는 항상 <code>(x &amp; 1)</code>처럼 괄호로 감싸세요.</b> <code>|</code>와 <code>^</code>도 마찬가지입니다.</p>
+<div class="pen"><b><code>^</code>는 거듭제곱이 아니라 XOR입니다:</b> 수학이나 엑셀에서 2<sup>3</sup>을 <code>2^3</code>으로 쓰는 습관 때문에 가장 많이 하는 실수입니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;bitset&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; (2 ^ 3) &lt;&lt; '\n';
+    cout &lt;&lt; bitset&lt;4&gt;(2) &lt;&lt; " ^ " &lt;&lt; bitset&lt;4&gt;(3) &lt;&lt; " = "
+         &lt;&lt; bitset&lt;4&gt;(2 ^ 3) &lt;&lt; '\n';
+    cout &lt;&lt; (1 &lt;&lt; 3) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고 (앞부분)</span><pre>main.cpp:6:16: warning: result of '2^3' is 1; did you mean '1 &lt;&lt; 3' (8)? [-Wxor-used-as-pow]
+    6 |     cout &lt;&lt; (2 ^ 3) &lt;&lt; '\n';
+      |                ^
+      |              -
+      |              1 &lt;&lt;</pre></div>
+<div class="run"><span class="lbl">실행 결과</span><pre>1
+0010 ^ 0011 = 0001
+8</pre></div>
+<p><code>2 ^ 3</code>은 0010과 0011에서 서로 다른 비트만 1로 남겨 0001, 즉 <b>1</b>입니다. 이 노트의 환경인 g++ 13은 숫자를 직접 쓴 경우 '혹시 <code>1 &lt;&lt; 3</code>을 뜻했나?'라고 경고해 주지만(버전이 낮은 컴파일러는 이 경고가 없을 수 있습니다), 변수끼리 쓴 <code>c ^ 2</code>에는 이 경고가 나오지 않습니다. 2<sup>k</sup>는 <code>1 &lt;&lt; k</code>, 일반적인 제곱은 <code>c * c</code>로 씁니다. 연습 문제 250132(피타고라스의 정리)에서 이 함정을 다시 만납니다.</p>
+<div class="emb">STM32F0·G0·L0 시리즈에 쓰이는 Cortex-M0/M0+ 코어에는 나눗셈 명령이 없습니다. <code>/</code>나 <code>%</code>를 쓰면 컴파일러가 나눗셈을 흉내 내는 라이브러리 함수를 호출하고, 여기에 수십 사이클이 듭니다(Cortex-M3/M4/M7에는 하드웨어 나눗셈 명령이 있습니다). 나누는 수가 2의 거듭제곱이면 비트 연산으로 바꿀 수 있습니다.
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    unsigned int x = 29;
+    cout &lt;&lt; x % 8 &lt;&lt; ' ' &lt;&lt; (x &amp; 7) &lt;&lt; '\n';
+    cout &lt;&lt; x / 8 &lt;&lt; ' ' &lt;&lt; (x &gt;&gt; 3) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>5 5
+3 3</pre></div>
+8 = 2<sup>3</sup>이므로 '8로 나눈 나머지'는 '아래 3비트', '8로 나눈 몫'은 '오른쪽으로 3칸 민 값'입니다. 7(2진수 111)이 아래 3비트만 남기는 <b>마스크(mask)</b>입니다. 이 동치는 <b>unsigned처럼 0 이상인 값에서만</b> 성립합니다. 음수에서는 <code>-7 % 8</code>이 −7이지만 <code>-7 &amp; 7</code>은 1입니다. 상수 2의 거듭제곱으로 나누는 코드는 컴파일러가 알아서 시프트와 마스크로 바꿔 주므로 평소에는 읽기 쉬운 <code>/ 8</code>로 써도 됩니다. 이 원리를 알면 링 버퍼 크기를 64, 128, 256처럼 2의 거듭제곱으로 잡고 <code>head = (head + 1) &amp; (SIZE - 1);</code>로 쓰는 펌웨어 코드가 읽힙니다.</div>
+<div class="emb">STM32에서 LED가 연결된 PA5 핀을 켜는 레지스터 코드는 <code>GPIOA-&gt;ODR |= (1 &lt;&lt; 5);</code>입니다. ODR(Output Data Register)은 32비트 정수처럼 생긴 하드웨어 레지스터이고, 비트 하나가 핀 하나에 대응합니다. <code>-&gt;</code> 문법은 9·10장에서, 레지스터 접근의 진짜 원리(메모리 주소, <code>volatile</code>)는 29·30장에서 배웁니다. 여기서는 레지스터를 평범한 변수로 흉내 내서 비트 조작 네 가지를 확인합니다.
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;bitset&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    unsigned int odr = 0;       // 출력 레지스터 흉내
+    odr |= (1 &lt;&lt; 5);            // 5번 비트 켜기
+    cout &lt;&lt; bitset&lt;8&gt;(odr) &lt;&lt; '\n';
+    odr ^= (1 &lt;&lt; 5);            // 5번 비트 뒤집기(토글)
+    cout &lt;&lt; bitset&lt;8&gt;(odr) &lt;&lt; '\n';
+    odr |= (1 &lt;&lt; 0) | (1 &lt;&lt; 3);  // 0번, 3번 동시에 켜기
+    cout &lt;&lt; bitset&lt;8&gt;(odr) &lt;&lt; '\n';
+    odr &amp;= ~(1 &lt;&lt; 3);           // 3번 비트 끄기
+    cout &lt;&lt; bitset&lt;8&gt;(odr) &lt;&lt; '\n';
+    cout &lt;&lt; ((odr &gt;&gt; 0) &amp; 1) &lt;&lt; '\n';  // 0번 비트 읽기
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>00100000
+00000000
+00001001
+00000001
+1</pre></div>
+켜기는 <code>|=</code>, 끄기는 <code>&amp;= ~</code>, 뒤집기는 <code>^=</code>, 읽기는 <code>(x &gt;&gt; n) &amp; 1</code>입니다. 끄기에서 <code>~(1 &lt;&lt; 3)</code>은 3번 비트만 0이고 나머지가 모두 1인 마스크라서, AND하면 3번 비트만 꺼지고 나머지는 그대로 남습니다. HAL에서 쓰던 <code>GPIO_PIN_5</code>의 정체도 <code>0x0020</code>, 즉 <code>1 &lt;&lt; 5</code>이고, <code>HAL_GPIO_WritePin()</code>은 내부에서 이런 비트 마스크를 BSRR이라는 레지스터에 씁니다.</div>
+
+<div class="q">① 13과 6을 2진수로 쓰고 <code>13 &amp; 6</code>, <code>13 | 6</code>, <code>13 ^ 6</code>을 손으로 계산해 보세요. ② 2의 10제곱을 구하려고 <code>2 ^ 10</code>이라고 썼습니다. 결과는 얼마이고, 어떻게 고쳐야 할까요?</div>
+<details><summary>답 보기</summary><div>
+<pre class="code" data-check="none"><code class="language-plaintext">    1101  (13)       1101  (13)       1101  (13)
+  &amp; 0110  (6)      | 0110  (6)      ^ 0110  (6)
+  = 0100  (4)      = 1111  (15)     = 1011  (11)</code></pre>
+<p>① 4, 15, 11입니다. ② 0010 ^ 1010 = 1000이라 <b>8</b>이 나옵니다. <code>1 &lt;&lt; 10</code>(= 1024)으로 고칩니다.</p>
+</div></details>
+
+<h3><span class="no">11</span>오버플로 다시 보기: 곱하기 전에 바꿔라</h3>
+<p>2장에서 <code>int</code>는 약 ±21억(<code>INT_MAX</code> = 2147483647)까지만 담을 수 있고, 부호 있는 정수가 넘치면(signed overflow) 정의되지 않은 동작이라는 것을 봤습니다. 그리고 넘친 결과를 <code>long long</code>에 담아 봐야 이미 늦다는 것도 잠깐 봤습니다. 이 절에서는 그 이유를 연산자의 규칙으로 정리하고, 변수끼리 곱할 때 어디서 변환해야 하는지 확인합니다.</p>
+<pre class="code" data-check="ub"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    long long x = 1000000 * 1000000;
+    cout &lt;&lt; x &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run err"><span class="lbl">컴파일 경고</span><pre>main.cpp: In function 'int main()':
+main.cpp:5:27: warning: integer overflow in expression of type 'int' results in '-727379968' [-Woverflow]
+    5 |     long long x = 1000000 * 1000000;
+      |                   ~~~~~~~~^~~~~~~~~</pre></div>
+<div class="run"><span class="lbl">이 환경의 실행 결과 (보장되지 않음)</span><pre>-727379968</pre></div>
+<p>10<sup>12</sup>이 나와야 하는데 음수가 나왔습니다. 경고 메시지가 원인을 정확히 말해 줍니다. '<code>int</code> 타입의 식에서 정수 오버플로가 일어났다'. 일은 이 순서로 벌어집니다.</p>
+<ol class="steps">
+<li><code>1000000</code>과 <code>1000000</code>은 둘 다 <code>int</code> 리터럴입니다.</li>
+<li><code>int * int</code>이므로 곱셈은 <code>int</code>로 계산됩니다. 10<sup>12</sup>은 <code>int</code>에 들어가지 않아 오버플로가 일어납니다(정의되지 않은 동작).</li>
+<li>이미 망가진 값이 <code>long long</code> 변수 x에 담깁니다. 담는 상자가 크다고 망가진 값이 되돌아오지는 않습니다.</li>
+</ol>
+<div class="box"><span class="lbl">핵심 정리</span><p><b>계산의 타입은 결과를 담을 변수가 아니라 피연산자의 타입으로 정해집니다.</b> <code>long long</code>으로 계산하고 싶으면, 곱하기 <b>전에</b> 피연산자 중 하나를 <code>long long</code>으로 만들어야 합니다.</p></div>
+<p>값이 입력으로 들어오면 컴파일러는 경고조차 해 줄 수 없습니다. 입력이 <code>1000000 1000000</code>일 때를 봅시다.</p>
+<div class="run in"><span class="lbl">입력</span><pre>1000000 1000000</pre></div>
+<pre class="code" data-check="ub" data-stdin="1000000 1000000"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 0;
+    int b = 0;
+    cin &gt;&gt; a &gt;&gt; b;
+    long long wrong = a * b;              // int로 곱한 뒤 담음
+    long long late = (long long)(a * b);  // 곱한 뒤에 변환
+    long long right = (long long)a * b;   // 곱하기 전에 변환
+    cout &lt;&lt; wrong &lt;&lt; '\n' &lt;&lt; late &lt;&lt; '\n' &lt;&lt; right &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">이 환경의 실행 결과 (앞의 두 줄은 보장되지 않음)</span><pre>-727379968
+-727379968
+1000000000000</pre></div>
+<div class="tbl"><table>
+<tr><th>식</th><th>곱셈이 일어나는 타입</th><th>결과</th></tr>
+<tr><td class="mono">a * b</td><td><code>int</code></td><td>넘침</td></tr>
+<tr><td class="mono">(long long)(a * b)</td><td><code>int</code> (괄호 안 곱셈이 먼저, 변환은 그 뒤)</td><td>넘침</td></tr>
+<tr><td class="mono">(long long)a * b</td><td><code>long long</code> (캐스트가 <code>*</code>보다 먼저 묶임)</td><td>정확</td></tr>
+<tr><td class="mono">1LL * a * b</td><td><code>long long</code> (왼쪽부터: <code>1LL * a</code>가 먼저)</td><td>정확</td></tr>
+</table></div>
+<p><code>(long long)a * b</code>가 되는 이유는 8절 표에 있습니다. 캐스트는 단항 연산자라서 <code>*</code>보다 먼저 묶입니다. a가 먼저 <code>long long</code>이 되고, 12절에서 정리할 규칙에 따라 b도 <code>long long</code>으로 맞춰진 뒤 곱해집니다. 아래는 결과가 보장되는 올바른 방법들입니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 1000000;
+    int b = 1000000;
+    long long r1 = (long long)a * b;
+    long long r2 = 1LL * a * b;          // 1LL을 맨 앞에
+    long long r3 = 1000000LL * 1000000;  // 리터럴에 LL
+    cout &lt;&lt; r1 &lt;&lt; '\n' &lt;&lt; r2 &lt;&lt; '\n' &lt;&lt; r3 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>1000000000000
+1000000000000
+1000000000000</pre></div>
+<div class="pen"><b>곱하는 수가 셋이면 순서도 중요합니다:</b> <code>a * b * (long long)c</code>는 왼쪽부터 계산하므로 <code>a * b</code>가 먼저 <code>int</code>로 계산되어 넘친 다음에야 <code>long long</code>이 등장합니다. 변환은 <b>맨 앞</b>에서 하세요. <code>(long long)a * b * c</code> 또는 <code>1LL * a * b * c</code>.</div>
+<div class="tip">오버플로는 프로그램을 죽이지 않고 조용히 틀린 값을 냅니다. 프로그래머스에서는 아무 설명 없이 '실패'로만 나타납니다. 그래서 곱셈이나 큰 합계가 보이면 제한사항의 최댓값을 직접 넣어 계산해 보는 습관을 들이세요.
+<div class="tbl"><table>
+<tr><th>상황</th><th>최댓값</th><th>판단</th></tr>
+<tr><td>양꼬치(120830): n &lt; 1000, n × 12000</td><td>약 1.2 × 10<sup>7</sup></td><td><code>int</code>로 충분</td></tr>
+<tr><td>a, b ≤ 10<sup>5</sup>일 때 a × b</td><td>10<sup>10</sup></td><td><code>long long</code> 필요</td></tr>
+<tr><td>10<sup>6</sup>개의 값(각 ≤ 10<sup>6</sup>)의 합</td><td>10<sup>12</sup></td><td><code>long long</code> 필요</td></tr>
+<tr><td>a, b ≤ 10<sup>9</sup>일 때 a + b</td><td>2 × 10<sup>9</sup></td><td><code>int</code>에 겨우 들어감(INT_MAX ≈ 2.147 × 10<sup>9</sup>). 하나만 더 더해도 넘침</td></tr>
+</table></div></div>
+
+<div class="q">a, b가 최대 10<sup>6</sup>인 <code>int</code>일 때, 곱을 정확히 구하는 줄을 모두 고르세요. (가) <code>long long r = a * b;</code> (나) <code>long long r = (long long)(a * b);</code> (다) <code>long long r = (long long)a * b;</code> (라) <code>long long r = a * (long long)b;</code></div>
+<details><summary>답 보기</summary><div><p>(다)와 (라)입니다. (라)도 괜찮은 이유는, <code>(long long)b</code>가 먼저 만들어지고 곱셈 <code>a * (long long)b</code>에서 a가 <code>long long</code>으로 맞춰지기 때문입니다. 곱셈이 일어나는 순간 한쪽이라도 <code>long long</code>이면 됩니다. (나)는 괄호 안의 <code>int</code> 곱셈이 이미 넘친 뒤에 변환합니다.</p></div></details>
+
+<h3><span class="no">12</span>형 변환과 연산: 언제 실수가 되는가</h3>
+<p>지금까지 본 현상을 하나의 규칙으로 정리합니다. 이항 연산자의 두 피연산자 타입이 다르면, C++은 계산하기 전에 둘을 같은 타입으로 맞춥니다. 이것을 <b>일반 산술 변환(usual arithmetic conversions)</b>이라고 합니다. 코딩테스트에 필요한 만큼 줄이면 다음과 같습니다.</p>
+<div class="box"><span class="lbl">핵심 정리</span><ol>
+<li>한쪽이 <code>double</code>이면 다른 쪽도 <code>double</code>로 바뀌고, 결과도 <code>double</code>입니다.</li>
+<li>한쪽이 <code>long long</code>, 다른 쪽이 <code>int</code>면 <code>long long</code>으로 맞춥니다.</li>
+<li><code>bool</code>, <code>char</code>, <code>short</code>는 계산에 들어가는 순간 먼저 <code>int</code>로 바뀝니다(정수 승격, integer promotion). 그래서 <code>'a' + 1</code>은 98이고, 2장에서 본 <code>true + true</code>가 2입니다.</li>
+<li>변환은 <b>연산자 하나마다 따로</b> 일어납니다. 식 전체를 미리 보고 정하지 않습니다.</li>
+</ol><p>정확히는 <code>unsigned</code>가 섞일 때의 규칙이 더 있습니다. 6절의 −1 &lt; 0u가 거짓이 된 것이 그 예이고, 29장에서 정리합니다.</p></div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 7;
+    int b = 2;
+    cout &lt;&lt; a / b &lt;&lt; '\n';
+    cout &lt;&lt; a / 2.0 &lt;&lt; '\n';
+    cout &lt;&lt; (double)a / b &lt;&lt; '\n';
+    cout &lt;&lt; (double)(a / b) &lt;&lt; '\n';
+    cout &lt;&lt; static_cast&lt;double&gt;(a) / b &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>3
+3.5
+3.5
+3
+3.5</pre></div>
+<ul>
+<li><code>a / 2.0</code>: 규칙 1에 따라 a가 7.0으로 바뀌어 실수 나눗셈이 됩니다.</li>
+<li><code>(double)a / b</code>: 캐스트가 <code>/</code>보다 먼저 묶이므로(8절 표) a가 먼저 7.0이 되고, 그다음 b가 2.0으로 맞춰집니다.</li>
+<li><code>(double)(a / b)</code>: 괄호 안의 정수 나눗셈이 먼저 일어나 이미 3이 되었고, 그 3을 3.0으로 바꿉니다. <b>변환이 너무 늦었습니다.</b></li>
+<li><code>static_cast&lt;double&gt;(a) / b</code>: 2장에서 권장한 C++ 방식의 변환입니다. 동작은 <code>(double)a</code>와 같습니다. 이 챕터는 긴 계산식이 한 줄에 들어가도록 <code>(double)a</code>, <code>(long long)a</code> 같은 C 스타일 캐스트를 주로 썼고, 코딩테스트 코드에서도 이 짧은 형태를 많이 씁니다. 어느 쪽으로 써도 결과는 같습니다.</li>
+</ul>
+<p>규칙 4(연산자마다 따로)를 확인해 봅시다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double r1 = 7 / 2 * 2.0;
+    double r2 = 7 / 2.0 * 2;
+    cout &lt;&lt; r1 &lt;&lt; ' ' &lt;&lt; r2 &lt;&lt; '\n';
+    double avg1 = (90 + 85 + 81) / 3;    // 정수 나눗셈 후 double에 담음
+    double avg2 = (90 + 85 + 81) / 3.0;
+    cout &lt;&lt; avg1 &lt;&lt; ' ' &lt;&lt; avg2 &lt;&lt; '\n';
+    cout &lt;&lt; 'a' + 1 &lt;&lt; ' ' &lt;&lt; true + true &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>6 7
+85 85.3333
+98 2</pre></div>
+<div class="tbl narrow"><table class="trace">
+<tr><th>식</th><th>첫 연산</th><th>그 결과의 타입</th><th>둘째 연산</th><th>결과</th></tr>
+<tr><td class="mono">7 / 2 * 2.0</td><td class="mono">7 / 2 = 3</td><td><code>int</code></td><td class="mono">3 * 2.0 = 6.0</td><td class="mono">6</td></tr>
+<tr><td class="mono">7 / 2.0 * 2</td><td class="mono">7 / 2.0 = 3.5</td><td><code>double</code></td><td class="mono">3.5 * 2 = 7.0</td><td class="mono">7</td></tr>
+</table></div>
+<p><code>7 / 2 * 2.0</code>에 실수 2.0이 있지만 소용없습니다. 첫 연산 <code>7 / 2</code>에는 실수가 없어서 이미 정수 나눗셈으로 3이 됐기 때문입니다. 평균도 같습니다. <code>avg1</code>을 <code>double</code>로 선언했지만 오른쪽은 <code>int / int</code>라서 85가 먼저 만들어지고, 그 85가 85.0으로 담깁니다. 11절의 오버플로와 똑같은 구조입니다. <b>담는 변수의 타입은 계산에 영향을 주지 않습니다.</b></p>
+
+<h4>실수로 나누고 정수로 버리기</h4>
+<p>'나눈 값에 1000을 곱한 뒤 정수 부분만' 같은 계산은 실수 나눗셈을 하고 마지막에 <code>(int)</code>로 버립니다. 연습 문제 120806(두 수의 나눗셈)의 핵심입니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int num1 = 7;
+    int num2 = 3;
+    double v = (double)num1 / num2 * 1000;
+    cout &lt;&lt; v &lt;&lt; '\n';
+    cout &lt;&lt; (int)v &lt;&lt; '\n';               // 소수점 아래를 버림
+    cout &lt;&lt; num1 / num2 * 1000 &lt;&lt; '\n';   // 나눗셈이 먼저 정수로
+    cout &lt;&lt; num1 * 1000 / num2 &lt;&lt; '\n';   // 곱셈을 먼저
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>2333.33
+2333
+2000
+2333</pre></div>
+<p>첫 줄의 <code>2333.33</code>은 실제 값 2333.333…을 <code>cout</code>이 6자리로 줄여 보여 준 것입니다. <code>(int)v</code>는 0 쪽으로 버려서 2333입니다. 셋째 줄은 7 / 3 = 2가 먼저 일어나 2000이 됐습니다. 넷째 줄처럼 곱셈을 먼저 하면 실수 없이 정수만으로 같은 답이 나옵니다(7000 / 3 = 2333).</p>
+<div class="pen"><b>실수를 정수로 버릴 때의 함정:</b> 2장에서 본 대로 실수는 대부분 근삿값입니다. 정확히 정수가 되어야 할 값이 아주 조금 작게 계산되면, 버림 한 번에 1이 틀립니다.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double price = 4.35;
+    cout &lt;&lt; price * 100 &lt;&lt; '\n';
+    cout &lt;&lt; (int)(price * 100) &lt;&lt; '\n';
+    cout &lt;&lt; (int)round(price * 100) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>435
+434
+435</pre></div>
+<p><code>price * 100</code>을 출력하면 435로 보이지만, 실제 값은 434.99999999999994입니다(<code>setprecision(17)</code>로 출력하면 보입니다). <code>cout</code>이 6자리로 반올림해서 보여 줬을 뿐이고, <code>(int)</code>는 이 값을 434로 버립니다. 대처법은 세 가지입니다.</p>
+<ol>
+<li><b>정수만으로 계산할 수 있으면 정수로 계산합니다.</b> 위의 <code>num1 * 1000 / num2</code>처럼요. 가장 확실한 방법입니다.</li>
+<li>가장 가까운 정수를 원하면 버림이 아니라 <code>round</code>를 씁니다.</li>
+<li>버림이 필요한데 오차가 걱정되면 아주 작은 값을 더한 뒤 버리는 방법(<code>(int)(v + 1e-9)</code>)도 쓰입니다. 실수 정밀도는 27장에서 자세히 다룹니다.</li>
+</ol>
+
+<div class="q">① <code>cout &lt;&lt; 5 / 2 + 5 / 2.0 &lt;&lt; '\n';</code>의 출력은? ② 평균을 구하려고 아래처럼 썼더니 3.5가 아니라 3이 나옵니다. 고쳐 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int total = 7;
+    int cnt = 2;
+    double avg = total / cnt;
+    cout &lt;&lt; avg &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<div class="run"><span class="lbl">실행 결과</span><pre>3</pre></div>
+<p>① <code>5 / 2</code>는 2, <code>5 / 2.0</code>은 2.5이고, <code>int + double</code>은 <code>double</code>이므로 4.5입니다. ② <code>total / cnt</code>가 <code>int / int</code>라서 3이 먼저 만들어집니다. <code>double avg = (double)total / cnt;</code>(또는 <code>static_cast&lt;double&gt;(total) / cnt</code>)로 나누기 전에 바꿔야 3.5가 됩니다. <code>(double)(total / cnt)</code>는 늦습니다.</p>
+</div></details>
+
+<h3><span class="no">13</span>확인 문제 모음</h3>
+<p>여러 절의 내용을 섞었습니다. 답을 보기 전에 종이에 먼저 적어 보세요.</p>
+
+<div class="q">1. 출력을 예측해 보세요.</div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 17;
+    int b = 5;
+    cout &lt;&lt; a / b * b + a % b &lt;&lt; '\n';
+    cout &lt;&lt; (a &gt; b &amp;&amp; a % b == 2) &lt;&lt; '\n';
+    cout &lt;&lt; -a / b &lt;&lt; ' ' &lt;&lt; -a % b &lt;&lt; '\n';
+    cout &lt;&lt; (a &amp; 1) &lt;&lt; ' ' &lt;&lt; (b &lt;&lt; 2) &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<details><summary>답 보기</summary><div>
+<div class="run"><span class="lbl">실행 결과</span><pre>17
+1
+-3 -2
+1 20</pre></div>
+<p>첫 줄은 2절 핵심 정리의 식 그대로라서 항상 a가 나옵니다(15 + 2). 둘째 줄은 <code>&gt;</code>와 <code>==</code>가 <code>&amp;&amp;</code>보다 먼저 계산되어 참 &amp;&amp; 참입니다. 셋째 줄은 0 쪽 버림과 '나머지는 나뉘는 수의 부호'. 넷째 줄은 17이 홀수라 1, 5 × 2<sup>2</sup> = 20입니다.</p>
+</div></details>
+
+<div class="q">2. 1부터 n까지의 합을 공식으로 구하려고 <code>long long sum = n * (n + 1) / 2;</code>라고 썼습니다(n은 <code>int</code>, 최대 100000). 무엇이 문제이고 어떻게 고쳐야 할까요?</div>
+<details><summary>답 보기</summary><div>
+<p><code>n * (n + 1)</code>이 <code>int</code>로 계산됩니다. n = 100000이면 100000 × 100001 = 10,000,100,000으로 <code>INT_MAX</code>(약 21억)를 넘어 오버플로입니다. <code>long long</code>에 담는 것은 그다음입니다. 곱하기 전에 <code>long long</code>으로 만들어야 합니다.</p>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 100000;
+    long long sum = 1LL * n * (n + 1) / 2;
+    cout &lt;&lt; sum &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>5000050000</pre></div>
+<p><code>1LL * n</code>이 먼저 <code>long long</code>이 되고, 그 결과에 <code>(n + 1)</code>이 곱해지므로 곱셈 전체가 <code>long long</code>입니다. <code>(n + 1)</code> 자체는 100001이라 <code>int</code>로 충분합니다.</p>
+</div></details>
+
+<div class="q">3. 입력받은 n이 홀수인지를 <code>bool odd = (n % 2 == 1);</code>로 저장했습니다. 어떤 입력에서 틀리고, 어떻게 고쳐야 할까요?</div>
+<details><summary>답 보기</summary><div><p>n이 음수 홀수(예: −7)일 때 <code>-7 % 2</code>는 −1이라서 <code>odd</code>가 거짓이 됩니다. <code>bool odd = (n % 2 != 0);</code> 또는 <code>bool odd = ((n &amp; 1) == 1);</code>로 고칩니다. 두 번째 식에서 <code>(n &amp; 1)</code>의 괄호를 빼면 10절의 우선순위 함정에 빠집니다.</p></div></details>
+
+<div class="q">4. 다음 중 n이 짝수일 때 참이 되는 식을 모두 고르세요. (가) <code>n % 2 == 0</code> (나) <code>n &amp; 1 == 0</code> (다) <code>(n &amp; 1) == 0</code> (라) <code>!(n % 2)</code> (마) <code>n % 2 = 0</code></div>
+<details><summary>답 보기</summary><div><p>(가), (다), (라)입니다. (나)는 <code>n &amp; (1 == 0)</code>이라 항상 0입니다. (라)는 n이 짝수면 <code>n % 2</code>가 0이고 <code>!0</code>은 참이라 맞습니다(다만 (가)가 더 읽기 쉽습니다). (마)는 비교가 아니라 대입인데, <code>n % 2</code>는 값을 넣을 수 있는 변수가 아니라서 <code>error: lvalue required as left operand of assignment</code>(대입의 왼쪽에는 변수 같은 것이 와야 한다)라는 컴파일 에러가 납니다.</p></div></details>
+
+<div class="q">5. 두 자리 수 n(10 ~ 99)의 십의 자리와 일의 자리를 바꾼 수를 구하는 식을 써 보세요. 예: 47 → 74, 30 → 3</div>
+<details><summary>답 보기</summary><div>
+<pre class="code" data-check="run"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 47;
+    int swapped = n % 10 * 10 + n / 10;
+    cout &lt;&lt; swapped &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>74</pre></div>
+<p>일의 자리 <code>n % 10</code>(7)을 십의 자리로 올리려면 10을 곱하고, 십의 자리 <code>n / 10</code>(4)을 더합니다. <code>%</code>와 <code>*</code>는 같은 순위라 왼쪽부터 <code>(n % 10) * 10</code>이 되고, 그 뒤에 <code>+</code>가 계산됩니다. 30이면 0 × 10 + 3 = 3입니다.</p>
+</div></details>
+
+<div class="q">6. 시각 h시 m분에서 k분이 지난 시각을 '시 분' 형태로 출력하는 프로그램을 써 보세요. 입력은 <code>h m k</code> 한 줄이고 시는 0 ~ 23으로 출력합니다. 예: <code>23 50 30</code> → <code>0 20</code></div>
+<details><summary>답 보기</summary><div>
+<div class="run in"><span class="lbl">입력</span><pre>23 50 30</pre></div>
+<pre class="code" data-check="run" data-stdin="23 50 30"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int h = 0;
+    int m = 0;
+    int k = 0;
+    cin &gt;&gt; h &gt;&gt; m &gt;&gt; k;
+    int total = h * 60 + m + k;  // 0시 0분부터 몇 분째인가
+    cout &lt;&lt; total / 60 % 24 &lt;&lt; ' ' &lt;&lt; total % 60 &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>0 20</pre></div>
+<p>시와 분을 따로 계산하면 '50분 + 30분 = 80분'처럼 받아올림을 처리하기 번거롭습니다. 전부 분으로 바꾼 뒤(23 × 60 + 50 + 30 = 1460), 3절의 시간 변환처럼 다시 나눕니다. 1460 / 60 = 24시간인데, 시는 24에서 0으로 돌아가므로 <code>% 24</code>로 순환시킵니다. 분은 1460 % 60 = 20입니다. '단위를 하나로 통일하고 계산한 뒤 다시 나눈다'는 시간 문제의 정석입니다.</p>
+</div></details>
+
+<h3><span class="no">14</span>프로그래머스 연습 문제</h3>
+<p>이 챕터의 문제는 모두 연산자 몇 개로 풀립니다. 짧은 만큼 '정확히' 푸는 연습에 좋습니다. 다음 순서를 지키세요.</p>
+<ol class="steps">
+<li>문제를 읽고 15~30분 동안 혼자 풀어 봅니다. 제한사항(값의 범위)을 꼭 읽고, 0으로 나누기·음수·오버플로가 가능한지 먼저 따져 봅니다.</li>
+<li>막히면 힌트 1(방향), 그래도 막히면 힌트 2(구체적인 방법)를 엽니다.</li>
+<li>함수형 문제는 '코드 실행'으로 보이는 예제를 먼저 통과시킨 뒤 '제출 후 채점'을 누릅니다. 제출하면 보이지 않는 테스트까지 채점됩니다.</li>
+<li>풀이를 본 문제는 2~3일 뒤 빈 에디터에서 처음부터 다시 풉니다.</li>
+</ol>
+<p>PCCE 기출 두 문제(250132, 340206)는 주어진 코드에서 한 줄만 고치는 형식이고, <code>cin</code>으로 입력받아 <code>cout</code>으로 출력하는 입출력형입니다. 이 노트에서는 사이트의 원래 코드를 그대로 보여 줄 수 없으므로, 고친 뒤의 완성 코드와 어느 줄을 고쳐야 하는지를 설명합니다.</p>
+
+<h4>필수 문제</h4>
+
+<div class="prob" data-pid="120805" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120805" target="_blank" rel="noopener">몫 구하기</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">필수</span>
+  </div>
+  <p class="psum">두 양의 정수 <code>num1</code>, <code>num2</code>가 주어질 때, <code>num1</code>을 <code>num2</code>로 나눈 몫을 돌려주는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 정수 / 정수 = 몫(2절). 함수형 템플릿의 <code>answer</code>에 식 하나를 넣는 가장 기본 형태입니다.</p>
+  <details><summary>힌트 1</summary><div><p>2절 첫 예제에서 <code>7 / 2</code>가 얼마였는지 떠올리세요. 이 문제의 예제 2와 같은 숫자입니다.</p></div></details>
+  <details><summary>힌트 2</summary><div><p>템플릿의 <code>int answer = 0;</code>을 <code>int answer = num1 / num2;</code>로 바꾸면 됩니다. 두 매개변수가 모두 <code>int</code>라서 <code>/</code>가 곧 몫입니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    int answer = num1 / num2;  // 정수 / 정수 = 몫
+    return answer;
+}</code></pre>
+<p><code>num1</code>, <code>num2</code>가 모두 <code>int</code>이므로 <code>num1 / num2</code>는 소수점 아래를 버린 몫입니다. 예제 (10, 5) → 2, (7, 2) → 3을 모두 통과합니다. 제한사항이 <code>0 &lt; num1</code>, <code>0 &lt; num2</code>라서 0으로 나누기도, 음수 나눗셈의 버림 방향도 신경 쓸 필요가 없습니다. 쉬운 문제에서도 이 확인을 매번 하는 습관이 Lv.2 이상에서 실수를 막아 줍니다.</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="120810" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120810" target="_blank" rel="noopener">나머지 구하기</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">필수</span>
+  </div>
+  <p class="psum">두 양의 정수 <code>num1</code>, <code>num2</code>가 주어질 때, <code>num1</code>을 <code>num2</code>로 나눈 나머지를 돌려주는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 나머지 연산자 <code>%</code>. 나누어떨어지면 0이 나온다는 것도 예제로 확인합니다.</p>
+  <details><summary>힌트 1</summary><div><p>나머지를 구하는 연산자는 무엇이었나요? 퍼센트 기호처럼 생겼습니다.</p></div></details>
+  <details><summary>힌트 2</summary><div><p><code>int answer = num1 % num2;</code>입니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    int answer = num1 % num2;
+    return answer;
+}</code></pre>
+<p>예제 (3, 2) → 1, (10, 5) → 0을 통과합니다. 10 % 5처럼 나누어떨어지면 나머지는 0이고, 3절의 '배수인가?' 검사(<code>n % k == 0</code>)가 바로 이 성질을 이용합니다. 제한사항상 <code>num2</code>가 0보다 크므로 <code>% 0</code>도 일어나지 않습니다.</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="250132" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/250132" target="_blank" rel="noopener">[PCCE 기출문제] 2번 / 피타고라스의 정리</a>
+    <span class="lv">Lv.0</span><span class="ptype">빈칸채우기(PCCE)</span><span class="pcore">필수</span>
+  </div>
+  <p class="psum">직각삼각형의 한 변 a와 빗변 c가 입력으로 주어질 때, 나머지 한 변의 길이의 제곱(<code>b_square</code>)을 출력하도록 주어진 코드에서 한 줄을 고치는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 제곱을 곱셈으로 쓰기(<code>^</code>는 XOR, <code>pow</code>는 <code>double</code> — 9·10절). 입력을 받는 PCCE 형식에 익숙해지기.</p>
+  <details><summary>힌트 1</summary><div><p>피타고라스의 정리 a² + b² = c²를 b²에 대해 정리해 보세요. 출력할 값은 b가 아니라 b²입니다. 그 식을 C++로 어떻게 쓸까요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>b² = c² − a²입니다. C++에서 제곱은 <code>c * c</code>로 씁니다. <code>c ^ 2</code>는 제곱이 아닙니다(10절). 주어진 코드에서 <code>b_square</code>를 계산하는 줄을 이 식으로 고치세요.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<div class="run in"><span class="lbl">입력</span><pre>3
+5</pre></div>
+<pre class="code" data-check="run" data-stdin="3&#10;5"><code class="language-cpp">#include &lt;iostream&gt;
+
+using namespace std;
+
+int main(void) {
+    int a;
+    int c;
+    cin &gt;&gt; a &gt;&gt; c;
+
+    int b_square = c * c - a * a;  // 고친 줄
+    cout &lt;&lt; b_square &lt;&lt; endl;
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>16</pre></div>
+<p>사이트에 주어지는 코드는 a와 c를 입력받고, <code>b_square</code>를 계산하고, 출력하는 몇 줄짜리 <code>main</code>입니다. 입력 줄과 출력 줄은 그대로 두면 되므로, 고칠 줄은 <code>b_square</code>를 계산하는 줄입니다. 그 줄을 <code>c * c - a * a</code>로 바꿉니다. <code>*</code>가 <code>-</code>보다 먼저 묶이므로 괄호 없이도 (c × c) − (a × a)로 계산됩니다. 예제 1은 25 − 9 = 16, 예제 2(9, 10)는 100 − 81 = 19로 둘 다 통과합니다. c ≤ 100이라 <code>c * c</code>는 최대 10000이고 오버플로 걱정이 없습니다.</p>
+<p>변수를 초기화하지 않은 <code>int a;</code>와 <code>endl</code>은 사이트의 원래 코드 모양입니다. 바로 다음 줄에서 <code>cin</code>으로 값을 넣으므로 문제가 없고, 한 줄만 고치는 문제라서 나머지는 손대지 않습니다.</p>
+<p>흔한 오답은 세 가지입니다.</p>
+<ul>
+<li><code>c ^ 2 - a ^ 2</code>: <code>^</code>는 XOR입니다. 게다가 <code>-</code>가 <code>^</code>보다 먼저 묶여서 <code>c ^ (2 - a) ^ 2</code>로 계산되고, c = 5, a = 3이면 <b>−8</b>이 나옵니다. 숫자가 아니라 변수라서 10절의 '혹시 <code>1 &lt;&lt; 3</code>?' 경고도 나오지 않습니다(괄호를 권하는 <code>-Wparentheses</code> 경고만 나옵니다).</li>
+<li><code>pow(c, 2) - pow(a, 2)</code>: 이 범위에서는 값이 맞지만, <code>&lt;cmath&gt;</code>가 필요하고 <code>double</code>을 <code>int</code>로 바꾸는 과정이 끼어듭니다. 정수 제곱은 곱셈이 정석입니다(9절).</li>
+<li><code>sqrt</code>로 b를 구해서 출력: 문제는 b가 아니라 b²을 요구합니다. 출력할 값을 정확히 읽으세요.</li>
+</ul>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="340206" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/340206" target="_blank" rel="noopener">[PCCE 기출문제] 2번 / 각도 합치기</a>
+    <span class="lv">Lv.0</span><span class="ptype">빈칸채우기(PCCE)</span><span class="pcore">필수</span>
+  </div>
+  <p class="psum">0 이상 5000 이하의 두 각도를 입력받아, 두 각의 합을 0도 이상 360도 미만의 같은 각으로 바꿔 출력하도록 주어진 코드에서 한 줄을 고치는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 돌고 도는 값과 <code>%</code>(3절), 괄호와 우선순위(8절).</p>
+  <details><summary>힌트 1</summary><div><p>360도를 몇 바퀴 돌든 같은 각입니다. 합에서 360을 '빼지는 만큼 다 빼고 남은 것'은 어떤 연산으로 구하나요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>합을 360으로 나눈 나머지입니다. 괄호 위치에 주의하세요. <code>angle1 + angle2 % 360</code>은 <code>angle1 + (angle2 % 360)</code>으로 묶입니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<div class="run in"><span class="lbl">입력</span><pre>280
+485</pre></div>
+<pre class="code" data-check="run" data-stdin="280&#10;485"><code class="language-cpp">#include &lt;iostream&gt;
+
+using namespace std;
+
+int main(void) {
+    int angle1;
+    int angle2;
+    cin &gt;&gt; angle1 &gt;&gt; angle2;
+
+    int sum_angle = (angle1 + angle2) % 360;  // 고친 줄
+    cout &lt;&lt; sum_angle &lt;&lt; endl;
+    return 0;
+}</code></pre>
+<div class="run"><span class="lbl">실행 결과</span><pre>45</pre></div>
+<p>280 + 485 = 765이고, 765 % 360 = 45입니다(두 바퀴 720도를 빼고 남은 각). 괄호를 빼고 <code>angle1 + angle2 % 360</code>이라고 쓰면 <code>%</code>가 먼저 계산되어 280 + 125 = 405가 나옵니다. 360 이상이라 틀린 답입니다.</p>
+<p>제한사항상 두 각도가 0 이상이라 합도 0 이상이고, <code>% 360</code>의 결과는 항상 0 ~ 359입니다. 그래서 3절의 <code>(x % m + m) % m</code>까지는 필요 없습니다. 음수 각도가 들어올 수 있는 문제였다면 필요합니다. 합의 최댓값 10000도 <code>int</code>로 충분합니다.</p>
+<p>사이트의 원래 코드에는 <code>% 360</code> 처리가 빠졌거나 잘못된 줄이 하나 있습니다. 합을 계산하는 줄이 아니라 출력하는 줄을 <code>cout &lt;&lt; sum_angle % 360 &lt;&lt; endl;</code>로 고쳐도 같은 결과가 나옵니다. 어느 줄을 고칠지는 주어진 코드를 보고 정하세요. 핵심은 '합 전체'를 360으로 나눈 나머지라는 점입니다.</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="120806" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120806" target="_blank" rel="noopener">두 수의 나눗셈</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">필수</span>
+  </div>
+  <p class="psum">정수 <code>num1</code>, <code>num2</code>가 주어질 때, <code>num1</code>을 <code>num2</code>로 나눈 값에 1,000을 곱한 뒤 정수 부분만 돌려주는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> <code>int / int</code>의 함정과 변환 시점(12절), 실수를 정수로 버리기.</p>
+  <details><summary>힌트 1</summary><div><p>예제 1을 그대로 옮겨 <code>num1 / num2 * 1000</code>이라고 쓰면 3 / 2 * 1000은 얼마가 될까요? 1500이 아니라면 왜일까요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>나누기 <b>전에</b> 한쪽을 <code>double</code>로 바꿉니다: <code>(double)num1 / num2 * 1000</code>. 그 결과를 <code>(int)</code>로 바꾸면 소수점 아래가 버려집니다. 1000을 먼저 곱하고 정수 나눗셈을 하는 방법도 있습니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    // 나누기 '전에' double로 바꿔야 실수 나눗셈이 된다
+    double value = (double)num1 / num2 * 1000;
+    int answer = (int)value;  // 소수점 아래를 버린다
+    return answer;
+}</code></pre>
+<p>예제 2 (7, 3)을 따라가 봅니다.</p>
+<div class="tbl narrow"><table class="trace">
+<tr><th>단계</th><th>계산</th><th>값</th><th>타입</th></tr>
+<tr><td>1</td><td class="mono">(double)num1</td><td class="mono">7.0</td><td><code>double</code></td></tr>
+<tr><td>2</td><td class="mono">7.0 / 3</td><td class="mono">2.3333…</td><td><code>double</code></td></tr>
+<tr><td>3</td><td class="mono">2.3333… * 1000</td><td class="mono">2333.333…</td><td><code>double</code></td></tr>
+<tr><td>4</td><td class="mono">(int)value</td><td class="mono">2333</td><td><code>int</code></td></tr>
+</table></div>
+<p>캐스트 <code>(double)</code>는 <code>/</code>보다 먼저 묶이므로 1단계가 가장 먼저 일어나고, 이후 계산은 모두 <code>double</code>입니다. 예제 (3, 2) → 1500, (7, 3) → 2333, (1, 16) → 62를 모두 통과합니다. 흔한 오답을 비교해 보세요.</p>
+<div class="tbl"><table>
+<tr><th>코드</th><th>(7, 3)의 결과</th><th>이유</th></tr>
+<tr><td class="mono">num1 / num2 * 1000</td><td class="mono">2000</td><td>7 / 3 = 2가 먼저 일어남</td></tr>
+<tr><td class="mono">(double)(num1 / num2) * 1000</td><td class="mono">2000</td><td>정수 나눗셈 뒤에 변환: 늦음</td></tr>
+<tr><td class="mono">(double)num1 / num2 * 1000</td><td class="mono">2333</td><td>정답</td></tr>
+</table></div>
+<p>실수를 거치지 않는 풀이도 있습니다.</p>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int num1, int num2) {
+    // 1000을 먼저 곱하고 정수 나눗셈: 몫이 곧 정수 부분
+    int answer = num1 * 1000 / num2;
+    return answer;
+}</code></pre>
+<p>7 × 1000 / 3 = 7000 / 3 = 2333입니다. 양수의 정수 나눗셈은 '정수 부분'을 그대로 주기 때문에 같은 답이 됩니다. <code>num1 * 1000</code>은 최대 100,000이라 <code>int</code>로 충분합니다. 12절에서 본 대로 실수를 버림하는 계산은 오차 때문에 1이 틀릴 위험이 있으므로, 정수만으로 계산할 수 있으면 이 방법이 더 안전합니다. 참고로 이 문제의 범위(1 ~ 100)에서는 가능한 입력 100 × 100 = 10,000가지를 별도 프로그램으로 모두 검사해서, 두 풀이가 모든 경우에 같은 답을 낸다는 것을 확인했습니다.</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="120814" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120814" target="_blank" rel="noopener">피자 나눠 먹기 (1)</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">필수</span>
+  </div>
+  <p class="psum">피자 한 판을 7조각으로 자를 때, n명이 모두 한 조각 이상 먹으려면 피자가 최소 몇 판 필요한지 구하는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 올림 나눗셈 <code>(a + b - 1) / b</code>(3절)와 그 원리.</p>
+  <details><summary>힌트 1</summary><div><p><code>n / 7</code>이 정답인 경우와 아닌 경우를 예제로 비교해 보세요. n = 7이면? n = 15면?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>15명이면 2판(14조각)으로는 1명이 모자라 3판이 필요합니다. 나머지가 조금이라도 있으면 한 판을 더하는 '올림'입니다. 3절의 공식에 b = 7을 넣으세요.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int n) {
+    // n명을 7조각짜리 피자로: n / 7을 올림
+    int answer = (n + 6) / 7;
+    return answer;
+}</code></pre>
+<p><code>(n + 7 - 1) / 7</code>을 미리 계산해 <code>(n + 6) / 7</code>로 썼습니다. 예제 n = 7 → 13 / 7 = 1, n = 1 → 7 / 7 = 1, n = 15 → 21 / 7 = 3으로 모두 통과합니다. n이 1 이상이라 양수 조건도 만족합니다. 같은 뜻을 다르게 쓸 수도 있습니다.</p>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int n) {
+    // 나머지가 있으면 (n % 7 != 0)이 true → 1이 더해진다
+    int answer = n / 7 + (n % 7 != 0);
+    return answer;
+}</code></pre>
+<p><code>(n % 7 != 0)</code>은 <code>bool</code>이고, 정수와 더하면 12절 규칙 3에 따라 <code>true</code>는 1, <code>false</code>는 0이 됩니다. '몫에, 나머지가 있으면 1판 추가'를 그대로 옮긴 식입니다. 두 풀이는 n = 1 ~ 100 전체에서 같은 답을 내는 것을 확인했습니다. 흔한 오답은 이렇습니다.</p>
+<ul>
+<li><code>n / 7 + 1</code>: n = 7처럼 나누어떨어질 때 2가 나와 틀립니다. 예제 1이 바로 이 경우를 잡아 줍니다.</li>
+<li><code>ceil(n / 7)</code>: 9절의 함정입니다. <code>n / 7</code>이 정수 나눗셈이라 n = 15에서 이미 2가 되고, <code>ceil(2)</code>는 2입니다.</li>
+</ul>
+  </div></details>
+</div>
+
+<h4>더 풀어 보기</h4>
+
+<div class="prob" data-pid="181917" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/181917" target="_blank" rel="noopener">간단한 논리 연산</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">추가</span>
+  </div>
+  <p class="psum"><code>bool</code> 값 <code>x1</code>, <code>x2</code>, <code>x3</code>, <code>x4</code>가 주어질 때, 논리식 (x1 ∨ x2) ∧ (x3 ∨ x4)의 결과를 돌려주는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 수학 기호 ∨(OR), ∧(AND)를 C++의 <code>||</code>, <code>&amp;&amp;</code>로 옮기기. 괄호의 역할(7절).</p>
+  <details><summary>힌트 1</summary><div><p>∨는 '또는', ∧는 '그리고'입니다. 7절의 어떤 연산자에 해당할까요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>식을 그대로 옮기되 괄호를 살립니다. 반환 타입이 <code>bool</code>이므로 그 식의 결과를 그대로 <code>return</code>하면 됩니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+bool solution(bool x1, bool x2, bool x3, bool x4) {
+    bool answer = (x1 || x2) &amp;&amp; (x3 || x4);
+    return answer;
+}</code></pre>
+<p>예제 (false, true, true, true) → true, (true, false, false, false) → false를 통과하고, 16가지 입력 조합 전부에서도 식과 같은 값을 내는 것을 확인했습니다. 이 문제의 함정은 괄호입니다. 괄호를 빼고 <code>x1 || x2 &amp;&amp; x3 || x4</code>라고 쓰면 <code>&amp;&amp;</code>가 먼저 묶여 <code>x1 || (x2 &amp;&amp; x3) || x4</code>가 됩니다. 예제 2에 넣어 보면 괄호가 있을 때는 (T ∨ F) ∧ (F ∨ F) = T ∧ F = F로 정답이지만, 괄호가 없으면 x1이 참이라 바로 T가 되어 틀립니다. 비트 연산자로 <code>(x1 | x2) &amp; (x3 | x4)</code>라고 써도 <code>bool</code>에서는 값이 같지만, 단축 평가가 없고 의도가 흐려지므로 논리 연산은 논리 연산자로 씁니다.</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="120830" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120830" target="_blank" rel="noopener">양꼬치</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">추가</span>
+  </div>
+  <p class="psum">양꼬치 1인분은 12,000원, 음료수는 2,000원이고 10인분마다 음료수 하나가 무료일 때, 양꼬치 n인분과 음료수 k개의 총 금액을 구하는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 몫으로 '몇 번 묶이는가' 세기, 문장을 식으로 옮기기, 오버플로 범위 점검(11절).</p>
+  <details><summary>힌트 1</summary><div><p>무료 음료수는 몇 개일까요? 10인분마다 1개입니다. n = 64면 몇 개일까요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>무료 개수 = <code>n / 10</code>. 돈을 내는 음료수는 <code>k - n / 10</code>개입니다. 총액 = 양꼬치 값 + 돈 내는 음료수 값.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int n, int k) {
+    int service = n / 10;  // 10인분마다 음료수 1개 무료
+    int answer = n * 12000 + (k - service) * 2000;
+    return answer;
+}</code></pre>
+<p>예제 1: 무료 1개, 10 × 12000 + (3 − 1) × 2000 = 124000. 예제 2: 무료 6개, 64 × 12000 + 0 × 2000 = 768000. 둘 다 통과합니다. 결과 예시에 쓰인 <code>124,000</code>의 쉼표는 보기 좋게 쓴 것일 뿐이고, 실제로는 정수 <code>124000</code>을 <code>return</code>합니다.</p>
+<p>제한사항 <code>n / 10 ≤ k</code>는 '무료로 받은 음료수는 모두 마신다'는 뜻이라 <code>k - service</code>가 음수가 되지 않습니다. 금액의 최댓값은 1,400만 원 정도(n = 999, k = 999일 때 13,788,000)라 <code>int</code>로 충분합니다. 11절의 표처럼 제한사항으로 최댓값을 계산해 보는 습관을 이 문제에서 연습하세요.</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="120819" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120819" target="_blank" rel="noopener">아이스 아메리카노</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">추가</span>
+  </div>
+  <p class="psum">아메리카노 한 잔이 5,500원일 때, 가진 돈 <code>money</code>로 최대 몇 잔을 살 수 있는지와 남는 돈을 순서대로 담아 돌려주는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 몫과 나머지를 함께 쓰기. 값 두 개를 돌려주는 <code>vector</code> 반환을 처음 맛보기.</p>
+  <details><summary>힌트 1</summary><div><p>15,000원으로 5,500원짜리를 몇 잔 살 수 있고 얼마가 남나요? 각각 어떤 연산인가요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>잔 수 = <code>money / 5500</code>, 남는 돈 = <code>money % 5500</code>. 반환 타입이 <code>vector&lt;int&gt;</code>이므로 <code>return {잔 수, 남는 돈};</code> 모양으로 돌려줍니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+vector&lt;int&gt; solution(int money) {
+    int cups = money / 5500;    // 살 수 있는 잔 수
+    int change = money % 5500;  // 남는 돈
+    return {cups, change};      // 지금은 이 모양 그대로(6장)
+}</code></pre>
+<p>15000 / 5500 = 2잔, 15000 % 5500 = 4000원이 남습니다(5,500 × 2 = 11,000). 예제 5500 → [1, 0], 15000 → [2, 4000]을 통과합니다.</p>
+<p>반환 타입 <code>vector&lt;int&gt;</code>는 정수 여러 개를 순서대로 담는 상자입니다. 6장에서 제대로 배우고, 지금은 <code>return {cups, change};</code>가 '이 두 값을 이 순서로 담아 돌려준다'는 뜻이라는 것만 알아 두세요. 템플릿에 있는 <code>vector&lt;int&gt; answer;</code>와 <code>return answer;</code>를 이 한 줄로 바꾸면 됩니다. 순서를 바꿔 <code>{change, cups}</code>로 돌려주면 틀립니다. money는 최대 1,000,000이라 계산 범위도 안전합니다(181잔, 4,500원).</p>
+  </div></details>
+</div>
+
+<div class="prob" data-pid="120837" data-lv="0">
+  <div class="ph">
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/120837" target="_blank" rel="noopener">개미 군단</a>
+    <span class="lv">Lv.0</span><span class="ptype">함수형</span><span class="pcore">추가</span>
+  </div>
+  <p class="psum">공격력이 5, 3, 1인 개미를 조합해 사냥감의 체력 <code>hp</code>를 정확히 맞출 때, 필요한 개미의 최소 마릿수를 구하는 문제입니다.</p>
+  <p class="pwhy"><b>연습 포인트:</b> 몫과 나머지를 다음 단계로 넘기기(3절 시간 변환과 같은 구조). '큰 것부터 쓰기'가 왜 맞는지 따져 보기.</p>
+  <details><summary>힌트 1</summary><div><p>마릿수를 줄이려면 공격력이 큰 개미를 최대한 많이 쓰는 것이 유리해 보입니다. hp = 23이면 장군개미 몇 마리를 쓰고, 남는 체력은 얼마인가요?</p></div></details>
+  <details><summary>힌트 2</summary><div><p>장군개미 = <code>hp / 5</code>, 남은 체력 = <code>hp % 5</code>. 남은 체력(0 ~ 4)에서 병정개미 = 남은 체력 / 3, 일개미 = 남은 체력 % 3. 세 수를 더합니다. 3절의 '시간, 분, 초'와 같은 구조입니다.</p></div></details>
+  <details class="sol"><summary>풀이 코드와 해설</summary><div>
+<pre class="code" data-check="sol"><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int solution(int hp) {
+    int general = hp / 5;    // 장군개미(5)를 최대한
+    int rest = hp % 5;       // 남은 체력: 0~4
+    int soldier = rest / 3;  // 병정개미(3)
+    int worker = rest % 3;   // 일개미(1)
+    int answer = general + soldier + worker;
+    return answer;
+}</code></pre>
+<div class="tbl narrow"><table class="trace">
+<tr><th>hp</th><th>general</th><th>rest</th><th>soldier</th><th>worker</th><th>answer</th></tr>
+<tr><td class="mono">23</td><td class="mono">4</td><td class="mono">3</td><td class="mono">1</td><td class="mono">0</td><td class="mono">5</td></tr>
+<tr><td class="mono">24</td><td class="mono">4</td><td class="mono">4</td><td class="mono">1</td><td class="mono">1</td><td class="mono">6</td></tr>
+<tr><td class="mono">999</td><td class="mono">199</td><td class="mono">4</td><td class="mono">1</td><td class="mono">1</td><td class="mono">201</td></tr>
+<tr><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td></tr>
+</table></div>
+<p>예제 세 개를 모두 통과하고, 제한사항이 허용하는 hp = 0에서도 0을 돌려줍니다. 큰 것부터 최대한 쓰는 방법을 <b>그리디(greedy)</b>라고 하고, 24장에서 본격적으로 다룹니다. 그리디는 항상 맞는 방법이 아니라서, 쓸 때마다 '왜 맞는지'를 따져야 합니다. 이 문제에서는 다음과 같이 확인할 수 있습니다.</p>
+<ul>
+<li>최소 구성에 일개미가 3마리 이상 있을 수 없습니다. 일개미 3마리를 병정개미 1마리로 바꾸면 마릿수가 줄기 때문입니다.</li>
+<li>병정개미가 2마리 이상이면 장군개미 1 + 일개미 1(합 6)로 바꿀 수 있고, 마릿수는 같습니다. 그러니 병정개미는 1마리 이하라고 봐도 됩니다.</li>
+<li>병정개미 1 + 일개미 2(합 5)는 장군개미 1마리로 바꾸면 마릿수가 줄어듭니다.</li>
+<li>따라서 병정개미와 일개미가 맡는 체력은 최대 3 + 1 = 4로 5 미만이고, 장군개미 수는 정확히 <code>hp / 5</code>가 됩니다. 남은 0 ~ 4를 3과 1로 나누는 방법도 위 조건에서는 <code>rest / 3</code>, <code>rest % 3</code> 하나뿐입니다.</li>
+</ul>
+<p>모든 경우에 '큰 것부터'가 정답인 것은 아닙니다. 공격력이 1, 3, 4라면 6을 만들 때 큰 것부터는 4 + 1 + 1로 3마리지만, 3 + 3이면 2마리입니다. 그래서 이 풀이는 hp = 0부터 1000까지 모든 값에 대해, 가능한 모든 조합 중 최솟값을 구하는 별도 프로그램과 비교해서 같은 답이 나오는 것도 확인했습니다.</p>
+  </div></details>
+</div>
+
+<h3><span class="no">15</span>끝났는지 확인</h3>
+<ul class="chk">
+<li><label><input type="checkbox" id="c03-chk-1"><span><code>7 / 2</code>, <code>7 / 2.0</code>, <code>-7 / 2</code>, <code>-7 % 2</code>의 값을 바로 말하고, 음수 나머지의 부호 규칙을 설명할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-2"><span>자릿수 떼기, 초 → 시·분·초, 올림 나눗셈, 음수까지 처리하는 순환 식을 보지 않고 쓸 수 있고, 올림 공식이 음수에서 틀리는 예를 들 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-3"><span><code>int b = a++;</code>와 <code>int b = ++a;</code>의 차이를 trace 표로 설명하고, <code>j++ + j++</code>를 쓰면 안 되는 이유를 말할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-4"><span>단축 평가를 이용해 0으로 나누기를 피하는 식을 쓸 수 있고, 두 조건의 순서를 바꾸면 왜 위험한지 설명할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-5"><span><code>x &amp; 1 == 0</code>, <code>2 ^ 3</code>, <code>!a == b</code>, <code>20 &lt;= age &lt;= 29</code>가 각각 왜 의도와 다르게 계산되는지 설명할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-6"><span><code>long long x = 1000000 * 1000000;</code>이 틀리는 이유를 설명하고, 곱하기 전에 변환하는 코드를 두 가지 방법으로 쓸 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-7"><span><code>sqrt</code>·<code>pow</code>가 <code>double</code>을 돌려줘서 생기는 문제와 <code>max(1, 2LL)</code>이 컴파일되지 않는 이유를 설명할 수 있다</span></label></li>
+<li><label><input type="checkbox" id="c03-chk-8"><span>필수 문제 6개를 힌트 없이 풀었고, 그중 하나를 2~3일 뒤 빈 화면에서 다시 풀었다</span></label></li>
+</ul>
+
+<div class="out"><span class="lbl">다음 챕터로</span> 4장 <a class="go" href="#c04" data-go>조건문: if와 switch</a>에서는 이 챕터에서 <code>cout</code>으로 1과 0만 찍어 보던 비교·논리 식이 드디어 프로그램의 흐름을 바꿉니다. <code>n % 2 == 0</code>이 참이면 "짝수"를, 아니면 "홀수"를 출력하는 식입니다. 3장에서 가져갈 것은 네 가지입니다. 비교와 논리 연산의 결과는 <code>bool</code>이고 그것이 그대로 <code>if</code>의 조건이 된다는 것, <code>=</code>와 <code>==</code>를 구분하는 것, <code>20 &lt;= age &lt;= 29</code> 대신 <code>&amp;&amp;</code>로 범위를 쓰는 것, 그리고 단축 평가로 위험한 계산을 막는 것입니다. 4장의 첫 문제들(홀짝 구분하기, n의 배수, 공배수)은 이 챕터의 <code>%</code>만으로 조건을 만들 수 있습니다.</div>
+</section>

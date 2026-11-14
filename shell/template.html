@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>C/C++ 코딩 노트</title>
+<meta name="description" content="C/C++를 처음부터 배워 프로그래머스 Lv.3까지: 챕터별 설명, 빨간펜 주의점, 확인 문제, 엄선한 프로그래머스 문제와 풀이, 임베디드 C 심화">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: graph-paper study notebook — sticky chapter rail, one chapter at a time in a ~70ch column,
+   blue concept boxes, red-pen pitfalls, teal embedded notes, dark run output, folded answers, problem cards */
+:root{
+  --bg:#f4f7f6; --paper:#ffffff; --fg:#1c272b; --muted:#5b6b70; --line:#d6e0de; --line2:#b9c8c5; --grid:rgba(31,78,140,.06);
+  --ink:#1f4e8c; --ink-soft:#e6eef9; --pen:#c4372c; --pen-soft:#fbeceb; --marker:#fff0a3; --ok:#2e7d4f; --ok-soft:#e5f3ea;
+  --emb:#0f7268; --emb-soft:#e1f2ef; --warn:#a86400; --warn-soft:#fdf1dc; --lv3:#c0266f; --lv3-soft:#fbe6f1;
+  --code-bg:#f5f7fa; --code-line:#dfe6ee; --term-bg:#1d2529; --term-fg:#e3eaeb; --term-mut:#9fb0b5;
+  --t-kw:#1f4e8c; --t-str:#2b7a4b; --t-num:#a35f00; --t-com:#6f8084; --t-fn:#7b3db3; --t-mac:#b8352b; --t-cls:#0f7268; --t-op:#46565c;
+  --display:"Do Hyeon","IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,"D2Coding",monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11171a; --paper:#182024; --fg:#e2e9ea; --muted:#9aabb0; --line:#2b383d; --line2:#3c4c52; --grid:rgba(127,176,255,.05);
+  --ink:#86b4ff; --ink-soft:#1c2a40; --pen:#ff8073; --pen-soft:#3a201e; --marker:#4d4420; --ok:#6fcf97; --ok-soft:#173226;
+  --emb:#5fd0c2; --emb-soft:#14302d; --warn:#f0b35a; --warn-soft:#3a2b14; --lv3:#ff7cc0; --lv3-soft:#3a1a2c;
+  --code-bg:#141b1f; --code-line:#26333a; --term-bg:#0b1013; --term-fg:#dfe7e8; --term-mut:#8a9ba0;
+  --t-kw:#8cb8ff; --t-str:#86d6a2; --t-num:#f2b766; --t-com:#7f9196; --t-fn:#c9a2ff; --t-mac:#ff8f84; --t-cls:#6fd8ca; --t-op:#b5c4c8;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11171a; --paper:#182024; --fg:#e2e9ea; --muted:#9aabb0; --line:#2b383d; --line2:#3c4c52; --grid:rgba(127,176,255,.05);
+  --ink:#86b4ff; --ink-soft:#1c2a40; --pen:#ff8073; --pen-soft:#3a201e; --marker:#4d4420; --ok:#6fcf97; --ok-soft:#173226;
+  --emb:#5fd0c2; --emb-soft:#14302d; --warn:#f0b35a; --warn-soft:#3a2b14; --lv3:#ff7cc0; --lv3-soft:#3a1a2c;
+  --code-bg:#141b1f; --code-line:#26333a; --term-bg:#0b1013; --term-fg:#dfe7e8; --term-mut:#8a9ba0;
+  --t-kw:#8cb8ff; --t-str:#86d6a2; --t-num:#f2b766; --t-com:#7f9196; --t-fn:#c9a2ff; --t-mac:#ff8f84; --t-cls:#6fd8ca; --t-op:#b5c4c8;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.75;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+[hidden]{display:none!important}
+img{max-width:100%}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{max-width:880px;margin:0 auto;padding-block:28px 12px}
+header.top .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+header.top h1{font-family:var(--display);font-weight:400;font-size:clamp(32px,6vw,46px);line-height:1.15;margin:4px 0 6px;text-wrap:balance}
+header.top p{margin:0;color:var(--muted);max-width:68ch}
+.stats{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font:500 13px/1.4 var(--mono);color:var(--muted)}
+.stats b{color:var(--fg);font-variant-numeric:tabular-nums}
+.stats .bar{flex:1 1 180px;min-width:160px;height:8px;border-radius:99px;background:var(--line);overflow:hidden;align-self:center}
+.stats .bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:inherit}
+
+nav.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.rail .inner{max-width:880px;margin:0 auto;display:flex;gap:8px;align-items:center;padding-block:9px}
+nav.rail select{flex:0 0 auto;font:600 13px var(--body);padding:7px 8px;border-radius:6px;border:1px solid var(--line2);background:var(--paper);color:var(--fg);max-width:42vw}
+#rail{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;flex:1 1 auto;padding-bottom:2px;align-items:center}
+#rail button{flex:0 0 auto;font:600 13px/1 var(--body);padding:8px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--fg);cursor:pointer;white-space:nowrap}
+#rail button .n{font-family:var(--mono);color:var(--muted);margin-right:4px}
+#rail button[aria-current="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+#rail button[aria-current="true"] .n{color:inherit;opacity:.8}
+#rail button.done::after{content:" ✓";color:var(--ok)}
+#rail button[aria-current="true"].done::after{color:inherit}
+#rail .part{flex:0 0 auto;font:600 11px/1 var(--mono);letter-spacing:.06em;color:var(--muted);padding:0 2px 0 6px;border-left:2px solid var(--line2);text-transform:uppercase}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--pen);outline-offset:2px}
+
+main{max-width:880px;margin:0 auto;padding-block:20px 80px}
+section.lesson{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:clamp(18px,4vw,40px);scroll-margin-top:72px;min-width:0}
+.lesson .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--pen);text-transform:uppercase}
+.lesson h2{font-family:var(--display);font-weight:400;font-size:clamp(26px,5vw,36px);line-height:1.2;margin:2px 0 6px;text-wrap:balance}
+.lesson h2 .en-t{display:block;font-family:var(--mono);font-size:14px;color:var(--muted);letter-spacing:.02em}
+.lesson h3{font-size:19px;line-height:1.45;margin:38px 0 8px;padding-top:14px;border-top:1px dashed var(--line);text-wrap:balance;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.lesson h3 .no{font:600 13px/1 var(--mono);color:var(--paper);background:var(--ink);border-radius:999px;padding:5px 8px;flex:0 0 auto}
+.lesson h4{font-size:16.5px;margin:24px 0 6px;text-wrap:balance}
+.lesson p{margin:10px 0}
+.lesson ul,.lesson ol{padding-left:22px;margin:10px 0}
+.lesson li{margin:4px 0}
+.lesson a{color:var(--ink);text-underline-offset:2px}
+.lesson a.go{font-weight:600}
+.lesson code{font-family:var(--mono);font-size:.88em;background:var(--ink-soft);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+.lesson b{font-weight:700}
+mark{background:var(--marker);color:inherit;padding:0 2px;border-radius:2px}
+.goal{background:var(--ink-soft);border-radius:4px;padding:12px 16px;margin:16px 0}
+.goal b{color:var(--ink)}
+.box{border:2px solid var(--ink);border-radius:4px;padding:12px 16px;margin:16px 0;overflow-x:auto}
+.box .lbl,.out .lbl,.run .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.box .lbl{color:var(--ink)}
+.pen,.why,.emb,.tip{padding:10px 14px;margin:16px 0;border-radius:0 4px 4px 0;overflow-x:auto}
+.pen{border-left:4px solid var(--pen);background:var(--pen-soft)}
+.pen::before{content:"빨간펜 ✎ ";font-weight:700;color:var(--pen)}
+.why{border-left:4px solid var(--ink);background:color-mix(in srgb,var(--ink-soft) 70%,var(--paper))}
+.emb{border-left:4px solid var(--emb);background:var(--emb-soft)}
+.emb::before{content:"임베디드 연결 ⚙ ";font-weight:700;color:var(--emb)}
+.tip{border-left:4px solid var(--warn);background:var(--warn-soft)}
+.tip::before{content:"팁 ✦ ";font-weight:700;color:var(--warn)}
+.pen>p:first-child,.why>p:first-child,.emb>p:first-child,.tip>p:first-child{display:inline}
+.out{border:2px solid var(--ok);background:var(--ok-soft);border-radius:4px;padding:10px 14px;margin:22px 0 4px;overflow-x:auto}
+.out .lbl{color:var(--ok);font-weight:600}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:12px 0}
+ol.steps>li{counter-increment:s;position:relative;padding:4px 0 8px 40px;margin:0}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font:600 14px/28px var(--mono);text-align:center}
+
+/* code */
+pre.code{position:relative;font:500 13.5px/1.6 var(--mono);white-space:pre;overflow-x:auto;background:var(--code-bg);color:var(--fg);border:1px solid var(--code-line);border-radius:6px;padding:12px 14px;margin:12px 0;max-width:100%;tab-size:4}
+pre.code code{font:inherit;background:none;padding:0;border-radius:0;overflow-wrap:normal;white-space:pre;color:inherit}
+pre.code .cp{position:absolute;top:6px;right:6px;font:600 11px/1 var(--body);padding:5px 7px;border-radius:4px;border:1px solid var(--line2);background:var(--paper);color:var(--muted);cursor:pointer;opacity:.85}
+pre.code .cp:hover{opacity:1;color:var(--fg)}
+pre.code[data-os]{padding-top:32px}
+pre.code[data-os]::before{position:absolute;top:7px;left:10px;font:600 11px/1 var(--body);letter-spacing:.03em;padding:4px 7px;border-radius:4px;border:1px solid}
+pre.code[data-os="linux"]::before{content:"Linux · 터미널";color:var(--emb);border-color:var(--emb);background:var(--emb-soft)}
+pre.code[data-os="win"]::before{content:"Windows · PowerShell";color:var(--ink);border-color:var(--ink);background:var(--ink-soft)}
+pre.code[data-os="both"]::before{content:"Linux · Windows 공통";color:var(--muted);border-color:var(--line2);background:var(--paper)}
+pre.code[data-check="error"]{border-color:color-mix(in srgb,var(--pen) 45%,var(--code-line))}
+pre.code[data-check="ub"]{border-style:dashed}
+.token.comment,.token.prolog{color:var(--t-com);font-style:italic}
+.token.keyword,.token.boolean{color:var(--t-kw);font-weight:600}
+.token.string,.token.char{color:var(--t-str)}
+.token.number{color:var(--t-num)}
+.token.function{color:var(--t-fn)}
+.token.macro,.token.directive,.token.property.macro{color:var(--t-mac)}
+.token.class-name{color:var(--t-cls)}
+.token.operator,.token.punctuation{color:var(--t-op)}
+.run{background:var(--term-bg);color:var(--term-fg);border-radius:6px;padding:8px 14px 10px;margin:-4px 0 14px;overflow-x:auto}
+.run .lbl{color:var(--term-mut);margin:0 0 2px}
+.run pre{margin:0;font:500 13.5px/1.55 var(--mono);white-space:pre;color:inherit}
+.run.in{background:color-mix(in srgb,var(--term-bg) 82%,var(--ink));margin:12px 0 8px}
+.run.err{background:color-mix(in srgb,var(--term-bg) 78%,var(--pen))}
+.run.err .lbl{color:#ffb4ab}
+
+/* quiz, answers */
+details{border:1px solid var(--line);border-radius:4px;margin:10px 0;background:var(--paper)}
+details>summary{cursor:pointer;padding:9px 14px;font-weight:600;color:var(--ok);list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ "}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:6px 16px 12px;border-top:1px solid var(--line);background:var(--ok-soft);overflow-x:auto;min-width:0}
+details.sol>summary{color:var(--ink)}
+details.sol>div{background:color-mix(in srgb,var(--ink-soft) 55%,var(--paper))}
+.q{border:1px solid var(--line2);border-radius:4px;padding:10px 14px;margin:16px 0 6px;background:color-mix(in srgb,var(--marker) 30%,var(--paper));overflow-x:auto}
+.q::before{content:"확인 문제 ";font:600 12px var(--mono);color:var(--pen);letter-spacing:.06em}
+.q+details{margin-top:0}
+
+/* tables */
+.tbl{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+.tbl.narrow table{min-width:0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--ink-soft);font-weight:600}
+td.mono,th.mono,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+td.c,th.c{text-align:center}
+tr.hl td{background:var(--marker)}
+table.trace td,table.trace th{font-family:var(--mono);font-size:14px;text-align:center;font-variant-numeric:tabular-nums}
+table.trace td:first-child,table.trace th:first-child{text-align:left;font-family:var(--body)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0}
+.two>div{border:1px solid var(--line);border-radius:4px;padding:8px 12px;min-width:0;overflow-x:auto}
+.two>div pre.code{margin:8px 0}
+
+/* memory diagram */
+.mem{display:flex;flex-wrap:wrap;gap:0;margin:14px 0 4px;font-family:var(--mono)}
+.mem .cell{display:grid;grid-template-rows:auto auto auto;min-width:76px;border:1.5px solid var(--line2);margin:0 -1.5px -1.5px 0;background:var(--paper);text-align:center}
+.mem .cell .addr{font-size:11px;color:var(--muted);padding:2px 6px;border-bottom:1px dashed var(--line)}
+.mem .cell .val{font-size:15px;font-weight:600;padding:6px 8px}
+.mem .cell .name{font-size:12px;color:var(--ink);padding:2px 6px;border-top:1px dashed var(--line);font-family:var(--body);font-weight:600}
+.mem .cell.hl{border-color:var(--pen);background:var(--pen-soft);position:relative;z-index:1}
+.mem .cell.ok{border-color:var(--ok);background:var(--ok-soft);position:relative;z-index:1}
+.mem .gap{align-self:center;padding:0 8px;color:var(--muted)}
+p.cap,.cap{font-size:14px;color:var(--muted);margin:4px 0 14px}
+svg.fig{display:block;max-width:100%;height:auto;margin:12px 0;color:var(--fg)}
+svg.fig .st{stroke:currentColor;fill:none;stroke-width:1.5}
+svg.fig .fl{fill:var(--ink-soft);stroke:var(--ink);stroke-width:1.5}
+svg.fig .hl{stroke:var(--pen);fill:none;stroke-width:2}
+svg.fig text{fill:currentColor;font-family:var(--body);font-size:13px}
+
+/* problem cards */
+.prob{border:1px solid var(--line2);border-left:5px solid var(--ink);border-radius:6px;padding:12px 14px 6px;margin:16px 0;background:var(--paper);min-width:0}
+.prob[data-lv="0"]{border-left-color:var(--muted)}
+.prob[data-lv="1"]{border-left-color:var(--ok)}
+.prob[data-lv="2"]{border-left-color:var(--ink)}
+.prob[data-lv="3"],.prob[data-lv="4"]{border-left-color:var(--lv3)}
+.prob .ph{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.prob .ph a{font-weight:700;font-size:16.5px;margin-right:2px}
+.prob .ph a::after{content:" ↗";font-weight:400;font-size:13px;color:var(--muted)}
+.prob .lv,.prob .ptype,.prob .pcore,.prob .pnum{display:inline-block;font:600 12px/1 var(--body);padding:5px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
+.prob .lv{font-family:var(--mono)}
+.prob[data-lv="1"] .lv{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.prob[data-lv="2"] .lv{color:var(--ink);border-color:var(--ink);background:var(--ink-soft)}
+.prob[data-lv="3"] .lv,.prob[data-lv="4"] .lv{color:var(--lv3);border-color:var(--lv3);background:var(--lv3-soft)}
+.prob .pcore{background:var(--marker);color:var(--fg);border-color:transparent}
+.prob .solved{margin-left:auto;display:flex;align-items:center;gap:6px;font:600 13px var(--body);color:var(--muted);cursor:pointer;white-space:nowrap}
+.prob .solved input{width:18px;height:18px;accent-color:var(--ok)}
+.prob.is-solved{border-color:color-mix(in srgb,var(--ok) 55%,var(--line2))}
+.prob.is-solved .solved{color:var(--ok)}
+.prob .psum{margin:8px 0 2px}
+.prob .pwhy{margin:4px 0 8px;color:var(--muted);font-size:15px}
+.prob .pwhy b{color:var(--fg)}
+
+/* checklist + pager */
+ul.chk{list-style:none;padding:0;margin:10px 0}
+ul.chk li{margin:6px 0}
+ul.chk label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ul.chk input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok);flex:0 0 auto}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:22px;flex-wrap:wrap;align-items:center}
+.pager button{font:600 15px var(--body);padding:10px 16px;border-radius:4px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pager button.primary{background:var(--ink);color:var(--paper)}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager label{display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer}
+.pager input{width:20px;height:20px;accent-color:var(--ok)}
+
+/* problem index (appendix C) */
+.pidx-tools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:10px 0 14px}
+.pidx-tools input[type="search"]{flex:1 1 220px;font:500 15px var(--body);padding:8px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--paper);color:var(--fg)}
+.pidx-tools select{font:600 14px var(--body);padding:8px;border:1px solid var(--line2);border-radius:6px;background:var(--paper);color:var(--fg)}
+.pidx-tools label{display:flex;gap:6px;align-items:center;font-weight:600;font-size:14px;cursor:pointer}
+#apxC-list table{min-width:600px}
+#apxC-list td.lvc{font-family:var(--mono);white-space:nowrap}
+#apxC-list tr.is-solved td{background:var(--ok-soft)}
+#apxC-list td.st{text-align:center}
+#apxC-list td.st input{width:18px;height:18px;accent-color:var(--ok)}
+#apxC-list h4{margin-top:22px}
+
+@media (prefers-reduced-motion:no-preference){section.lesson{animation:in .22s ease-out}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
+@media (max-width:560px){body{font-size:15.5px}
+  section.lesson{padding:16px 12px}
+  details>div{padding:4px 10px 10px}
+  .box,.goal,.pen,.why,.emb,.tip,.out,.q,.two>div,.prob{padding-left:10px;padding-right:10px}
+  .lesson ul,.lesson ol{padding-left:18px}
+  pre.code,.run pre{font-size:12.5px}
+  nav.rail select{max-width:38vw}}
+</style>
+</head>
+<body>
+<header class="top gut">
+  <div class="eyebrow">C · C++ · 프로그래머스 Lv.0 → Lv.3 · 임베디드</div>
+  <h1>C/C++ 코딩 노트</h1>
+  <p>위 챕터 버튼을 순서대로 누르며 따라가세요. 챕터마다 <b>개념 → 실행 결과 → 빨간펜 주의 → 확인 문제 → 프로그래머스 문제(힌트 → 풀이) → 체크리스트</b> 순서가 같습니다. 모든 예제 코드는 g++/gcc로 실제 컴파일하고 실행해서 출력까지 확인했습니다.</p>
+  <div class="stats" aria-live="polite"><span>챕터 <b id="stDone">0</b>/<b id="stTotal">0</b></span><span>문제 <b id="stSolved">0</b>/<b id="stProbs">0</b> 풀었음</span><span class="bar" aria-hidden="true"><i id="stBar"></i></span></div>
+</header>
+
+<nav class="rail" aria-label="챕터 목록"><div class="inner gut"><select id="jump" aria-label="챕터로 이동"></select><div id="rail"></div></div></nav>
+
+<main id="main" class="gut">
+{{SECTIONS}}
+<div class="pager">
+  <button type="button" id="prev">← 이전</button>
+  <label><input type="checkbox" id="doneBox"> 이 챕터 끝냈어요</label>
+  <button type="button" id="next" class="primary">다음 →</button>
+</div>
+</main>
+
+<script>window.Prism = window.Prism || {}; window.Prism.manual = true;</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function load(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
+  var PARTS = { '0': '시작', 'A': 'Part A', 'B': 'Part B', 'C': 'Part C', 'X': '부록' };
+  var PARTNAME = { '0': '시작', 'A': 'Part A 언어 기초', 'B': 'Part B 알고리즘', 'C': 'Part C 임베디드 C/C++', 'X': '부록' };
+
+  var lessons = $$('section.lesson');
+  var rail = $('#rail'), jump = $('#jump');
+  var done = load('cppn-done', {});
+  var solved = load('cppn-solved', {});
+  function label(sec) {
+    var id = sec.id;
+    if (id === 'start') return '0';
+    if (/^c\d+$/.test(id)) return String(parseInt(id.slice(1), 10));
+    return id.replace('apx', '부록');
+  }
+  var lastPart = null, group = null;
+  lessons.forEach(function (sec, i) {
+    var part = sec.dataset.part || '';
+    if (part !== lastPart) {
+      if (part && part !== '0') { var sp = document.createElement('span'); sp.className = 'part'; sp.textContent = PARTS[part] || part; rail.appendChild(sp); }
+      group = document.createElement('optgroup'); group.label = PARTNAME[part] || part; jump.appendChild(group);
+      lastPart = part;
+    }
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.id = sec.id;
+    b.innerHTML = '<span class="n">' + label(sec) + '</span>' + (sec.dataset.short || sec.dataset.title || sec.id);
+    b.title = sec.dataset.title || '';
+    b.addEventListener('click', function () { show(sec.id, true); });
+    rail.appendChild(b);
+    var o = document.createElement('option'); o.value = sec.id;
+    o.textContent = label(sec) + '. ' + (sec.dataset.title || sec.id);
+    group.appendChild(o);
+  });
+  jump.addEventListener('change', function () { show(jump.value, true); });
+
+  /* code: copy buttons + lazy highlighting */
+  function prep(sec) {
+    if (sec.dataset.prepped) return;
+    sec.dataset.prepped = '1';
+    $$('pre.code', sec).forEach(function (pre) {
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'cp'; btn.textContent = '복사';
+      btn.addEventListener('click', function () {
+        var code = pre.querySelector('code'); var txt = code ? code.textContent : pre.textContent;
+        try {
+          navigator.clipboard.writeText(txt).then(function () { btn.textContent = '복사됨'; setTimeout(function () { btn.textContent = '복사'; }, 1400); },
+            function () { btn.textContent = '복사 안 됨'; });
+        } catch (e) { btn.textContent = '복사 안 됨'; }
+      });
+      pre.appendChild(btn);
+    });
+    if (window.Prism && Prism.highlightElement) {
+      $$('pre.code code[class*="language-"]', sec).forEach(function (c) { try { Prism.highlightElement(c); } catch (e) { } });
+    }
+  }
+
+  var cur = 0;
+  function show(id, scroll) {
+    var idx = lessons.findIndex(function (s) { return s.id === id; });
+    if (idx < 0) idx = 0;
+    cur = idx;
+    lessons.forEach(function (s, i) { s.hidden = i !== idx; });
+    prep(lessons[idx]);
+    $$('button', rail).forEach(function (b) {
+      var on = b.dataset.id === lessons[idx].id;
+      b.setAttribute('aria-current', on ? 'true' : 'false');
+      b.classList.toggle('done', !!done[b.dataset.id]);
+      if (on) { rail.scrollLeft = Math.max(0, b.offsetLeft - rail.clientWidth / 2 + b.offsetWidth / 2); }
+    });
+    jump.value = lessons[idx].id;
+    $('#prev').disabled = idx === 0;
+    $('#next').disabled = idx === lessons.length - 1;
+    $('#doneBox').checked = !!done[lessons[idx].id];
+    if (lessons[idx].id === 'apxC') buildIndex();
+    if (scroll) {
+      try { history.replaceState(null, '', '#' + lessons[idx].id); } catch (e) { }
+      var top = $('#main').getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+    }
+  }
+  $('#prev').addEventListener('click', function () { if (cur > 0) show(lessons[cur - 1].id, true); });
+  $('#next').addEventListener('click', function () { if (cur < lessons.length - 1) show(lessons[cur + 1].id, true); });
+  $('#doneBox').addEventListener('change', function (e) {
+    done[lessons[cur].id] = e.target.checked; save('cppn-done', done);
+    $$('button', rail).forEach(function (b) { if (b.dataset.id === lessons[cur].id) b.classList.toggle('done', e.target.checked); });
+    stats();
+  });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-go]');
+    if (!a) return;
+    var h = (a.getAttribute('href') || '').replace('#', '');
+    if (!lessons.some(function (s) { return s.id === h; })) return;
+    e.preventDefault();
+    show(h, true);
+  });
+  window.addEventListener('hashchange', function () {
+    var h = (location.hash || '').replace('#', '');
+    if (lessons.some(function (s) { return s.id === h; }) && lessons[cur].id !== h) show(h, true);
+  });
+
+  /* checklists */
+  var chk = load('cppn-chk', {});
+  $$('ul.chk input[type=checkbox]').forEach(function (c) {
+    if (!c.id) return;
+    c.checked = !!chk[c.id];
+    c.addEventListener('change', function () { chk[c.id] = c.checked; save('cppn-chk', chk); });
+  });
+
+  /* problem cards: solved checkbox */
+  var cards = $$('.prob[data-pid]');
+  function key(card) { var s = card.closest('section.lesson'); return (s ? s.id : '') + ':' + card.dataset.pid; }
+  cards.forEach(function (card) {
+    var k = key(card), ph = card.querySelector('.ph');
+    var lab = document.createElement('label'); lab.className = 'solved';
+    var inp = document.createElement('input'); inp.type = 'checkbox'; inp.checked = !!solved[k];
+    lab.appendChild(inp); lab.appendChild(document.createTextNode('풀었어요'));
+    (ph || card).appendChild(lab);
+    card.classList.toggle('is-solved', inp.checked);
+    inp.addEventListener('change', function () {
+      solved[k] = inp.checked; save('cppn-solved', solved);
+      card.classList.toggle('is-solved', inp.checked);
+      stats();
+    });
+  });
+
+  function uniqueSolved() {
+    var byPid = {};
+    cards.forEach(function (c) { var p = c.dataset.pid; byPid[p] = byPid[p] || !!solved[key(c)]; });
+    var n = 0, t = 0; for (var p in byPid) { t++; if (byPid[p]) n++; }
+    return [n, t];
+  }
+  function stats() {
+    var nd = lessons.filter(function (s) { return done[s.id]; }).length;
+    var us = uniqueSolved();
+    $('#stDone').textContent = nd; $('#stTotal').textContent = lessons.length;
+    $('#stSolved').textContent = us[0]; $('#stProbs').textContent = us[1];
+    $('#stBar').style.width = (us[1] ? Math.round(100 * us[0] / us[1]) : 0) + '%';
+  }
+
+  /* appendix C: problem index built from the cards */
+  var built = false;
+  function buildIndex() {
+    var host = $('#apxC-list'); if (!host) return;
+    var rows = [];
+    cards.forEach(function (c) {
+      var sec = c.closest('section.lesson'); var a = c.querySelector('.ph a');
+      var role = c.querySelector('.pcore');
+      rows.push({ pid: c.dataset.pid, lv: c.dataset.lv || '', title: a ? a.textContent.trim() : c.dataset.pid,
+        href: a ? a.getAttribute('href') : '#', sec: sec ? sec.id : '', stitle: sec ? (sec.dataset.title || '') : '',
+        slabel: sec ? label(sec) : '', part: sec ? (sec.dataset.part || '') : '', role: role ? role.textContent.trim() : '', k: key(c) });
+    });
+    var q = ($('#apxC-q') || {}).value || '', lvf = ($('#apxC-lv') || {}).value || '', un = ($('#apxC-un') || {}).checked;
+    q = q.trim().toLowerCase();
+    var html = '', curSec = null, open = false, shown = 0;
+    rows.forEach(function (r) {
+      if (lvf !== '' && r.lv !== lvf) return;
+      if (un && solved[r.k]) return;
+      if (q && (r.title.toLowerCase().indexOf(q) < 0 && r.pid.indexOf(q) < 0 && r.stitle.toLowerCase().indexOf(q) < 0)) return;
+      if (r.sec !== curSec) {
+        if (open) html += '</table></div>';
+        html += '<h4><a class="go" href="#' + r.sec + '" data-go>' + r.slabel + '. ' + r.stitle + '</a></h4><div class="tbl"><table><tr><th>풀었음</th><th>번호</th><th>문제</th><th>레벨</th><th>구분</th></tr>';
+        open = true; curSec = r.sec;
+      }
+      shown++;
+      html += '<tr' + (solved[r.k] ? ' class="is-solved"' : '') + '><td class="st"><input type="checkbox" data-k="' + r.k + '"' + (solved[r.k] ? ' checked' : '') + ' aria-label="' + r.title.replace(/"/g, '&quot;') + ' 풀었음"></td><td class="mono">' + r.pid +
+        '</td><td><a href="' + r.href + '" target="_blank" rel="noopener">' + r.title.replace(/</g, '&lt;') + '</a></td><td class="lvc">Lv.' + r.lv + '</td><td>' + r.role + '</td></tr>';
+    });
+    if (open) html += '</table></div>';
+    if (!shown) html = '<p>조건에 맞는 문제가 없습니다. 검색어나 필터를 바꿔 보세요.</p>';
+    host.innerHTML = html;
+    $$('input[data-k]', host).forEach(function (inp) {
+      inp.addEventListener('change', function () {
+        var k = inp.dataset.k; solved[k] = inp.checked; save('cppn-solved', solved);
+        cards.forEach(function (c) { if (key(c) === k) { c.classList.toggle('is-solved', inp.checked); var ci = c.querySelector('.solved input'); if (ci) ci.checked = inp.checked; } });
+        inp.closest('tr').classList.toggle('is-solved', inp.checked);
+        stats();
+      });
+    });
+    if (!built) {
+      built = true;
+      ['apxC-q', 'apxC-lv', 'apxC-un'].forEach(function (id) { var el = $('#' + id); if (el) el.addEventListener(id === 'apxC-q' ? 'input' : 'change', buildIndex); });
+    }
+  }
+
+  stats();
+  var h = (location.hash || '').replace('#', '');
+  show(lessons.some(function (s) { return s.id === h; }) ? h : 'start', false);
+})();
+</script>
+</body>
+</html>
