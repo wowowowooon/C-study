@@ -29,7 +29,7 @@ int main() {
 <li><b>실행(run)</b>: 운영체제가 실행 파일을 메모리에 올리고 <code>main</code>부터 실행합니다.</li>
 </ol>
 <p>g++ 명령에 옵션을 주면 단계를 하나씩 끊어서 볼 수 있습니다. 아래는 64비트 리눅스의 g++ 13으로 실제로 실행한 기록입니다. <code>$</code> 뒤가 입력한 명령이고, 그 아래 줄이 결과입니다. <code>#</code> 뒤는 설명입니다.</p>
-<div class="box"><span class="lbl">명령어 블록 읽는 법</span><p>명령어 블록 왼쪽 위에 <b>Linux</b>, <b>Windows</b>, <b>공통</b> 중 하나가 붙어 있습니다. 리눅스(라즈베리파이, 젯슨, WSL)와 Windows PowerShell은 명령이 조금씩 다르니 지금 쓰는 쪽을 보세요. 줄 맨 앞의 <code>$</code>(리눅스)와 <code>PS&gt;</code>(PowerShell)는 <b>입력을 기다린다는 표시(프롬프트)</b>라서 직접 치지 않습니다. 그 뒤부터 입력하세요.</p></div>
+<div class="box"><span class="lbl">명령어 블록 읽는 법</span><p>이 노트의 명령어는 모두 <b>리눅스(Ubuntu) 터미널</b> 기준입니다. Windows에서는 WSL로 설치한 Ubuntu 터미널(또는 VS Code의 WSL 터미널)에서 그대로 입력하면 됩니다. 젯슨, 라즈베리파이에서도 같은 명령을 씁니다. 줄 맨 앞의 <code>$</code>는 <b>입력을 기다린다는 표시(프롬프트)</b>라서 직접 치지 않습니다. 그 뒤부터 입력하세요.</p></div>
 <pre class="code" data-check="none" data-os="linux"><code class="language-bash">$ wc -l hello.cpp                          # 줄 수 세기
 7 hello.cpp
 $ g++ -std=c++17 -E hello.cpp -o hello.ii  # ① 전처리만
@@ -43,15 +43,7 @@ $ file hello
 hello: ELF 64-bit LSB pie executable, x86-64, ... (뒷부분 생략)
 $ ./hello                                  # ④ 실행
 Hello, World!</code></pre>
-<div class="tip"><p>위 기록은 <b>리눅스</b> 명령입니다. <code>wc</code>(줄 수 세기)와 <code>file</code>(파일 종류 확인)은 리눅스 명령이라 Windows PowerShell에서는 "인식되지 않습니다" 에러가 납니다. 컴파일러 문제가 아니니 걱정하지 마세요. PowerShell에서는 이렇게 바꿔 쓰면 됩니다.</p>
-<div class="tbl narrow"><table>
-<tr><th>리눅스</th><th>Windows PowerShell</th></tr>
-<tr><td class="mono">wc -l hello.cpp</td><td class="mono">(Get-Content hello.cpp).Count</td></tr>
-<tr><td class="mono">wc -l hello.ii</td><td class="mono">(Get-Content hello.ii).Count</td></tr>
-<tr><td class="mono">file hello.o</td><td>대신할 기본 명령 없음(건너뛰어도 됩니다)</td></tr>
-<tr><td class="mono">./hello</td><td class="mono">.\hello</td></tr>
-</table></div>
-<p><code>g++</code> 명령(<code>-E</code>, <code>-c</code>, <code>-o</code>)은 Windows에서도 똑같이 동작합니다. 줄 수는 g++ 버전에 따라 리눅스 기록(36521)과 다르게 나올 수 있습니다. 중요한 건 7줄이 전처리 후 수만 줄로 늘어난다는 점입니다.</p></div>
+<div class="tip"><p><code>wc -l</code>은 파일의 줄 수를 세고, <code>file</code>은 파일 종류를 알려 주는 리눅스 명령입니다. 줄 수는 g++ 버전에 따라 위 기록(36521)과 다르게 나올 수 있습니다. 중요한 건 7줄이 전처리 후 수만 줄로 늘어난다는 점입니다.</p></div>
 <div class="tbl"><table>
 <tr><th>단계</th><th>결과물</th><th>결과물의 정체</th><th>이 단계에서 걸리는 실수의 예</th></tr>
 <tr><td>① 전처리</td><td class="mono">hello.ii</td><td>7줄이 36,521줄이 된 C++ 텍스트. <code>iostream</code>과, 그 안에서 다시 <code>#include</code>한 파일들이 전부 붙여 넣어졌습니다.</td><td>헤더 이름 오타 <code>#include &lt;iostrem&gt;</code> → <code>No such file or directory</code></td></tr>
@@ -60,19 +52,17 @@ Hello, World!</code></pre>
 <tr><td>④ 실행</td><td>화면 출력</td><td>-</td><td>실행 중에 나는 에러(런타임 에러)는 6·9·12장에서 다룹니다</td></tr>
 </table></div>
 <p>평소에는 단계를 나누지 않고 명령 하나로 ①~③을 한꺼번에 처리합니다. 이 노트의 모든 예제는 아래 옵션으로 컴파일해서 결과를 확인했습니다.</p>
-<div class="two"><div><pre class="code" data-check="none" data-os="linux"><code class="language-bash">$ g++ -std=c++17 -Wall -Wextra hello.cpp -o hello
+<pre class="code" data-check="none" data-os="linux"><code class="language-bash">$ g++ -std=c++17 -Wall -Wextra hello.cpp -o hello
 $ ./hello
-Hello, World!</code></pre></div><div><pre class="code" data-check="none" data-os="win"><code class="language-powershell">PS&gt; g++ -std=c++17 -Wall -Wextra hello.cpp -o hello
-PS&gt; .\hello
-Hello, World!</code></pre></div></div>
-<p>컴파일 명령(<code>g++ …</code>)은 두 곳에서 똑같고, <b>실행 명령만 다릅니다</b>. 리눅스는 <code>./hello</code>(슬래시 <code>/</code>), PowerShell은 <code>.\hello</code>(역슬래시 <code>\</code>)입니다. Windows에서는 실행 파일이 <code>hello.exe</code>로 만들어지지만 실행할 때 <code>.exe</code>는 생략해도 됩니다.</p>
+Hello, World!</code></pre>
+<p><code>./hello</code>의 <code>./</code>는 "지금 있는 폴더의"라는 뜻입니다. 리눅스는 보안상 현재 폴더의 프로그램을 이름만으로 실행하지 않아서, 직접 만든 실행 파일은 앞에 <code>./</code>를 붙여 실행합니다.</p>
 <div class="tbl narrow"><table>
 <tr><th>옵션</th><th>뜻</th></tr>
 <tr><td class="mono">-std=c++17</td><td>C++17 표준 문법으로 컴파일</td></tr>
 <tr><td class="mono">-Wall -Wextra</td><td>경고(warning)를 넓게 켬. 컴파일은 되지만 수상한 코드를 알려 줍니다</td></tr>
 <tr><td class="mono">-o hello</td><td>만들 파일(output)의 이름. 생략하면 리눅스에서는 <code>a.out</code></td></tr>
 </table></div>
-<p>Windows(MinGW)에서는 실행 파일이 <code>hello.exe</code>로 만들어지고 <code>hello.exe</code>(PowerShell에서는 <code>.\hello.exe</code>)로 실행합니다. 프로그래머스 에디터에서는 '코드 실행' 버튼 하나가 이 과정을 모두 대신해 줍니다.</p>
+<p>프로그래머스 에디터에서는 '코드 실행' 버튼 하나가 이 과정을 모두 대신해 줍니다.</p>
 
 <h4>#define: 글자 그대로 바꾸기</h4>
 <p>전처리가 정말 '붙여 넣기'와 '글자 바꾸기'인지 확인해 보겠습니다.</p>
@@ -209,15 +199,11 @@ main.cpp:8:13: error: reference to 'count' is ambiguous
 
 <h4>6줄: return 0;</h4>
 <p><code>return</code>은 '함수를 끝내고 값을 돌려준다'는 뜻입니다. <code>main</code>이 돌려준 값은 운영체제가 받는데, 관례상 <code>0</code>은 '정상 종료', 0이 아닌 값은 '무언가 잘못됐다'는 신호입니다. 리눅스 터미널에서는 방금 끝난 프로그램이 돌려준 값을 <code>echo $?</code>로 볼 수 있습니다.</p>
-<div class="two"><div><pre class="code" data-check="none" data-os="linux"><code class="language-bash">$ ./hello
+<pre class="code" data-check="none" data-os="linux"><code class="language-bash">$ ./hello
 Hello, World!
 $ echo $?
-0</code></pre></div><div><pre class="code" data-check="none" data-os="win"><code class="language-powershell">PS&gt; .\hello
-Hello, World!
-PS&gt; $LASTEXITCODE
-0</code></pre></div></div>
-<p>방금 끝난 프로그램의 <code>return</code> 값(종료 코드)은 리눅스에서는 <code>echo $?</code>, PowerShell에서는 <code>$LASTEXITCODE</code>로 봅니다.</p>
-<p><code>return 3;</code>으로 바꾸면 <code>echo $?</code>(PowerShell은 <code>$LASTEXITCODE</code>)는 <code>3</code>을 보여 줍니다. 채점 시스템에 따라 0이 아닌 값을 '비정상 종료(런타임 에러)'로 처리하기도 하니, 입출력형 문제의 <code>main</code>은 항상 <code>return 0;</code>으로 끝내세요. 참고로 <code>main</code>에 한해서는 <code>return 0;</code>을 생략해도 0을 돌려준 것으로 친다는 규칙이 표준에 있지만, 이 노트는 의도를 분명히 하려고 항상 씁니다.</p>
+0</code></pre>
+<p><code>return 3;</code>으로 바꾸면 <code>echo $?</code>는 <code>3</code>을 보여 줍니다. 채점 시스템에 따라 0이 아닌 값을 '비정상 종료(런타임 에러)'로 처리하기도 하니, 입출력형 문제의 <code>main</code>은 항상 <code>return 0;</code>으로 끝내세요. 참고로 <code>main</code>에 한해서는 <code>return 0;</code>을 생략해도 0을 돌려준 것으로 친다는 규칙이 표준에 있지만, 이 노트는 의도를 분명히 하려고 항상 씁니다.</p>
 
 <h4>세미콜론: 문장의 끝</h4>
 <p>C++에서 <b>문장(statement)</b>을 끝내는 것은 줄바꿈이 아니라 세미콜론 <code>;</code>입니다. 한국어 문장의 마침표와 같습니다. 컴파일러는 <code>;</code>를 만날 때까지를 한 문장으로 읽으므로, 한 문장을 여러 줄에 나눠 써도 되고 한 줄에 두 문장을 써도 됩니다(8절). <code>;</code>가 붙지 않는 줄도 있습니다.</p>

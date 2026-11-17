@@ -2,7 +2,7 @@
  "start": {
   "write": "done",
   "review": "running",
-  "file_kb": 65,
+  "file_kb": 64,
   "write_workflow": "wf_afa77a39-0d2",
   "write_report": {
    "id": "start",
@@ -31,7 +31,7 @@
  "c01": {
   "write": "done",
   "review": "running",
-  "file_kb": 106,
+  "file_kb": 104,
   "write_workflow": "wf_93284829-029",
   "write_report": {
    "id": "c01",
@@ -349,7 +349,7 @@
   "write_workflow": "wf_afa77a39-0d2",
   "review_workflow": "wf_afa77a39-0d2"
  },
- "_updated": "2026-11-14T23:44:27+09:00",
+ "_updated": "2026-11-17T22:12:13+09:00",
  "_backup": {
   "url": "https://claude.ai/artifact/XcDHmRkRbP7YeYiMXhDQ2h",
   "slug": "f7dcc3e1-58cc-4c41-b6ba-c7c9fc59943e",

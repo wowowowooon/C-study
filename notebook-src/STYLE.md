@@ -245,13 +245,10 @@ Forbidden: <script>, <style>, inline style attributes (except width/height on sv
 on* attributes, <img> with remote src, iframes, external CSS/JS, emoji as markers.
 
 
-### Shell commands: always mark the OS
-The learner uses Windows PowerShell now and Linux (Raspberry Pi, Jetson, WSL) later. Every shell
-block gets data-os: "linux" (class language-bash, prompt `$ `), "win" (class language-powershell,
-prompt `PS> `) or "both" (identical on both, no prompt). When the commands differ, show both
-blocks side by side in <div class="two">. Linux-only tools (wc, file, cat, grep, make, echo $?)
-must have a PowerShell equivalent next to them (e.g. (Get-Content f).Count, $LASTEXITCODE,
-.\main instead of ./main) or a note that Windows has none.
+### Shell commands: Linux only
+The learner practises in Linux (WSL Ubuntu now; Jetson / Raspberry Pi later). Every shell block is
+Linux (data-os="linux", class language-bash, prompt `$ `). Do not add Windows/PowerShell versions.
+Explain Linux commands (./prog, echo $?, wc, file, make, ls, cd) briefly on first use.
 
 ## 7. Required chapter skeleton (same order in every chapter)
 
